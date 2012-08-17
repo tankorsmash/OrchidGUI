@@ -60,7 +60,7 @@ namespace Orchid
             this.rect = rect;
         }
 
-        public virtual RenderTarget2D UpdateSurface()
+        public virtual  void UpdateSurface()
         {
 
             //change the renderTarger (pygame surface)
@@ -68,13 +68,17 @@ namespace Orchid
             //clear it, like normal
             graphicsDevice.Clear(Color.Thistle);
 
+            //make some SB draws
+            spriteBatch.Begin();
+
+            spriteBatch.End();
 
             //then reset the drawing surface to null, backbuffer.
             graphicsDevice.SetRenderTarget(null);
 
             //graphicsDevice.Clear(Color.CornflowerBlue);
 
-            return surface;
+            //return surface;
 
         }
 
@@ -111,6 +115,7 @@ namespace Orchid
 
         public void DrawMessages()
         {
+            //spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.Additive);
             spriteBatch.Begin();
             int y = 0;
             int x = 0;
@@ -120,10 +125,11 @@ namespace Orchid
                 if (writer._output[i] == "\n")
                 {
                     y += 20;
-                    x = 200;
+                    x = 0;
                     count = 0; //not 1, because it gets ++'d at the end of the loop.
                 }
-                spriteBatch.DrawString(defaultFont, writer._output[i], new Vector2((x + (12 * count)), y), Color.White);
+                spriteBatch.DrawString(defaultFont, writer._output[i],
+                            new Vector2((x + (12 * count)), y), Color.White);
                 count++;
             }
 
@@ -134,11 +140,19 @@ namespace Orchid
         {
             //draw border
             //base.Draw();
+            
+            //updates the messagearea surface, with the correct SetRenderTarget value
+            //because you need to begin the spritebatch AFTER you've set the RT to what you want
             UpdateSurface();
+
+            //draws the new surface stuff to the back buffer
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.NonPremultiplied);
+            spriteBatch.Draw(this.surface, this.rect, this.backgroundColor);
+            spriteBatch.End();
 
         }
 
-        public override RenderTarget2D UpdateSurface()
+        public override void UpdateSurface()
         {
 
             //change the renderTarger (pygame surface)
@@ -153,10 +167,8 @@ namespace Orchid
             graphicsDevice.SetRenderTarget(null);
 
             //graphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
-            spriteBatch.Draw(this.surface, this.rect, this.backgroundColor);
-            spriteBatch.End();
-            return surface;
+
+            //return surface;
         } 
     }
 
