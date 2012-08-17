@@ -83,9 +83,9 @@ namespace Orchid
             spriteBatch.Begin();
 
 
-            RenderTarget2D RT = this.UpdateSurface();
+            this.UpdateSurface();
 
-            spriteBatch.Draw(RT, this.rect, this.backgroundColor);
+            spriteBatch.Draw(this.surface, this.rect, this.backgroundColor);
             spriteBatch.End();
         }
     }
@@ -111,7 +111,7 @@ namespace Orchid
 
         public void DrawMessages()
         {
-            //spriteBatch.Begin();
+            spriteBatch.Begin();
             int y = 0;
             int x = 0;
             int count = 1;
@@ -127,14 +127,14 @@ namespace Orchid
                 count++;
             }
 
-            //spriteBatch.End();
+            spriteBatch.End();
         }
 
         public override void Draw()
         {
             //draw border
-            base.Draw();
-
+            //base.Draw();
+            UpdateSurface();
 
         }
 
@@ -153,7 +153,9 @@ namespace Orchid
             graphicsDevice.SetRenderTarget(null);
 
             //graphicsDevice.Clear(Color.CornflowerBlue);
-
+            spriteBatch.Begin();
+            spriteBatch.Draw(this.surface, this.rect, this.backgroundColor);
+            spriteBatch.End();
             return surface;
         } 
     }
