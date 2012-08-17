@@ -72,7 +72,7 @@ namespace Orchid
         SpriteBatch spriteBatch;
         Texture2D dummyTexture;
 
-        //size of inner rectangle, with the buttoncolor 
+        //rect of inner rectangle, with the buttoncolor 
         public Rectangle innerRectangle;
 
         //what the button will say on it
@@ -98,7 +98,7 @@ namespace Orchid
         {
 
             DrawOrder = 1000;
-            //the size of the entire button
+            //the rect of the entire button
             this.borderRectangle = buttonSize;
             this.BuildInnerRect();
  
@@ -111,7 +111,7 @@ namespace Orchid
             {
                 this.innerColor = innerColor;
             }
-            this.borderColor = Color.Black;
+            this.borderColor = Color.DarkBlue;
 
             this.text = text;
             this.name = text + _name;
@@ -119,7 +119,8 @@ namespace Orchid
 
             //add this new button to the list of gui elements. Only buttons for now
             game.masterGuiElementList.Add(this);
-            
+
+            this.Initialize();
 
         }
 
@@ -162,7 +163,7 @@ namespace Orchid
 
         public void BuildInnerRect()
         {
-            //the inner portion will be 90 percent the size of the button, leaving a 10 percent border
+            //the inner portion will be 90 percent the rect of the button, leaving a 10 percent border
             double innerW = borderRectangle.Width * .9;
             double innerH = borderRectangle.Height * .9;
             double innerX = borderRectangle.Center.X - (innerW / 2);
@@ -188,7 +189,7 @@ namespace Orchid
 
             
 
-            //find where to put the text. Midleft along the center of the button. '12' is half the size of the font, which is 24
+            //find where to put the text. Midleft along the center of the button. '12' is half the rect of the font, which is 24
             textPos = new Vector2(borderRectangle.Center.X - (innerRectangle.Width / 2), borderRectangle.Center.Y - 12);
             spriteBatch.DrawString(Game1.defaultFont, this.text, textPos, Color.Black);
             

@@ -9,7 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-
+using System.IO;
+using System.Text;
 using System.Net;
 
 
@@ -25,6 +26,8 @@ namespace Orchid
         Button button;
         Button button2;
 
+        MessageArea messageArea;
+
         public static  SpriteFont defaultFont;
 
         //input
@@ -35,17 +38,34 @@ namespace Orchid
         //list of gui elements
         public List<GuiElement> masterGuiElementList = new List<GuiElement>();
 
+        //screensize
+        public int width = 1024;
+        public int height = 768;
+
+        //message list
+        List<string> msgList = new List<string>();
+        public MessageWriter writer;
 
         public Game1()
         {
 
-
+            writer = new MessageWriter(msgList);
 
             this.IsMouseVisible = true;
+
+
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = height;
+            graphics.PreferredBackBufferWidth = width;
+
+
             Content.RootDirectory = "Content";
             this.inputHandler = new InputHandler(this);
         }
+
+
+        
+
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -55,14 +75,18 @@ namespace Orchid
         /// </summary>
         protected override void Initialize()
         {
+
+            
+
+            Console.SetOut(writer);
+
             // TODO: Add your initialization logic here
 
             Rectangle qwe = new Rectangle(500, 0, 210, 110);
             this.button = new Button(qwe, "NEW BUTTON", this);
-            this.button.Initialize();
 
-            button2 = new Button(new Rectangle(0, 0, 155, 122), "second", this );
-            button2.Initialize();
+            this.button2 = new Button(new Rectangle(0, 0, 155, 122), "second", this );
+
 
 
             base.Initialize();
@@ -80,6 +104,10 @@ namespace Orchid
             //load font
             defaultFont = Content.Load<SpriteFont>("DefaultFont");
 
+            int areaH = height / 4;
+            Rectangle size = new Rectangle(0, height - areaH, width, areaH);
+            messageArea = new MessageArea(GraphicsDevice, spriteBatch, size, Color.RoyalBlue, writer,defaultFont);
+
             // TODO: use this.Content to load your game content here
 
         }
@@ -94,8 +122,6 @@ namespace Orchid
         }
 
 
-
-
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -107,12 +133,16 @@ namespace Orchid
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            if (Keyboard.GetState().GetPressedKeys().Contains(Keys.Escape))
+            {
+                this.Exit();
+            }
+
+            
 
             inputHandler.CheckInput(masterGuiElementList);
 
             // TODO: Add your update logic here
-            //button.borderRectangle.Location = new Point(Mouse.GetState().X, Mouse.GetState().Y);
-            //button.BuildInnerRect();
 
             base.Update(gameTime);
         }
@@ -123,16 +153,37 @@ namespace Orchid
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            //GraphicsDevice.Clear(Color.Green);
 
             // TODO: Add your drawing code here
-            this.button.Draw(gameTime);
-            this.button2.Draw(gameTime);
 
-            
+
+            messageArea.Draw();
+    
+
+            Orchid.DrawGUI(masterGuiElementList, gameTime);
+
+
             base.Draw(gameTime);
         }
+
+
     }
+
+    public static class Orchid
+    {
+        public static void DrawGUI(List<GuiElement> elemList, GameTime gameTime)
+        {
+            foreach (GuiElement elem in elemList)
+            {
+                elem.Draw(gameTime);
+            }
+        }
+
+
+    }
+
+
         public class InputHandler
         {
 
@@ -156,6 +207,7 @@ namespace Orchid
                 //create empty element
                 emptyElement = new GuiElement(this.theGame);
                 hoveredElement = new GuiElement(this.theGame);
+                activeElement = new GuiElement(this.theGame);
             }
             
 
@@ -201,7 +253,7 @@ namespace Orchid
                 if (currentMouseState.LeftButton == ButtonState.Released &&
                     currentMouseState.RightButton == ButtonState.Released)
                 {
-
+                    
                     if (!hoveredElement.borderRectangle.Contains(mousePos))
                     {
                         hoveredElement.OffMouseHover();
