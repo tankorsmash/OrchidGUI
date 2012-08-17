@@ -102,13 +102,15 @@ namespace Orchid
 
         public MessageWriter writer;
         public SpriteFont defaultFont;
+        public Color gameBG;
 
-        public MessageArea(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, Rectangle rect, Color colorBG, MessageWriter writer, SpriteFont defaultFont)
+        public MessageArea(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, Rectangle rect, Color colorBG, MessageWriter writer, SpriteFont defaultFont, Color gameBG)
             : base(graphicsDevice, spriteBatch, rect, colorBG)
         {
 
             this.writer = writer;
             this.defaultFont = defaultFont;
+            this.gameBG = gameBG;
 
         }
 
@@ -147,6 +149,7 @@ namespace Orchid
 
             //draws the new surface stuff to the back buffer
             spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.NonPremultiplied);
+            //spriteBatch.Begin();
             spriteBatch.Draw(this.surface, this.rect, this.backgroundColor);
             spriteBatch.End();
 
@@ -166,7 +169,7 @@ namespace Orchid
             //then reset the drawing surface to null, backbuffer.
             graphicsDevice.SetRenderTarget(null);
 
-            //graphicsDevice.Clear(Color.CornflowerBlue);
+            graphicsDevice.Clear(gameBG);
 
             //return surface;
         } 

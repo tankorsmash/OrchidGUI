@@ -42,24 +42,33 @@ namespace Orchid
         public int width = 1024;
         public int height = 768;
 
+        //colors
+        Color defaultBG;
+
         //message list
         List<string> msgList = new List<string>();
         public MessageWriter writer;
 
         public Game1()
         {
-
+            //set the stdout stream wrapper
             writer = new MessageWriter(msgList);
 
+            //set the default background color
+            defaultBG = Color.FloralWhite;
+
+            //make the mouse visible
             this.IsMouseVisible = true;
 
-
+            //create a graphicsdevice manage and set the default screen size
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
 
 
             Content.RootDirectory = "Content";
+            
+            //create an input handler
             this.inputHandler = new InputHandler(this);
         }
 
@@ -77,14 +86,15 @@ namespace Orchid
         {
 
             
-
+            //send console stdout to writer
             Console.SetOut(writer);
 
             // TODO: Add your initialization logic here
 
+            //create a button
             Rectangle qwe = new Rectangle(500, 0, 210, 110);
             this.button = new Button(qwe, "NEW BUTTON", this);
-
+            //and another button
             this.button2 = new Button(new Rectangle(0, 0, 155, 122), "second", this );
 
 
@@ -104,9 +114,12 @@ namespace Orchid
             //load font
             defaultFont = Content.Load<SpriteFont>("DefaultFont");
 
+
+            //create a message area at the bottom of the scree, 1/4 of the screen.
             int areaH = height / 4;
             Rectangle size = new Rectangle(0, height - areaH, width, areaH);
-            messageArea = new MessageArea(GraphicsDevice, spriteBatch, size, Color.RoyalBlue, writer,defaultFont);
+            messageArea = new MessageArea(GraphicsDevice, spriteBatch, size,
+                                Color.RoyalBlue, writer,defaultFont, this.defaultBG);
 
             // TODO: use this.Content to load your game content here
 
@@ -132,14 +145,14 @@ namespace Orchid
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
+            //if you hit espace exit 
             if (Keyboard.GetState().GetPressedKeys().Contains(Keys.Escape))
             {
                 this.Exit();
             }
 
             
-
+            //test the input against all the elements of the gui
             inputHandler.CheckInput(masterGuiElementList);
 
             // TODO: Add your update logic here
@@ -154,13 +167,16 @@ namespace Orchid
         protected override void Draw(GameTime gameTime)
         {
             //GraphicsDevice.Clear(Color.Green);
-
+            GraphicsDevice.SetRenderTarget(null);
+            GraphicsDevice.Clear(Color.Gainsboro);
             // TODO: Add your drawing code here
 
-
+            //draw the message area.
             messageArea.Draw();
-    
 
+            //GraphicsDevice.Clear(Color.Green);
+
+            //draw the gui.
             Orchid.DrawGUI(masterGuiElementList, gameTime);
 
 
@@ -174,6 +190,7 @@ namespace Orchid
     {
         public static void DrawGUI(List<GuiElement> elemList, GameTime gameTime)
         {
+            //loop over each element in the list of GuiElements and Draw them all
             foreach (GuiElement elem in elemList)
             {
                 elem.Draw(gameTime);
@@ -202,6 +219,7 @@ namespace Orchid
 
             public  InputHandler(Game1 game)
             {
+                //save a refernce to the main game, to easily access its attributes
                 this.theGame = game;
 
                 //create empty element
@@ -220,6 +238,7 @@ namespace Orchid
                 //if mouse1 is pressed
                 if (currentMouseState.LeftButton == ButtonState.Pressed)
                 {
+                    //loop over the elements in the gui list 
                     foreach (GuiElement elem in guiElementList)
                     {
                         if (elem is Button)
@@ -263,6 +282,7 @@ namespace Orchid
                     {
                         if (elem.borderRectangle.Contains(mousePos))
                         {
+                            //called hover method and set a element that is hovered over
                             elem.OnMouseHover();
                             hoveredElement = elem;
                         }
@@ -270,7 +290,7 @@ namespace Orchid
                 }
 
 
-
+                 //cache the mouse state so you have something to compare it against next frame.
                  lastMouseState = currentMouseState;
             }
         }

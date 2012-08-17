@@ -89,14 +89,14 @@ namespace Orchid
         Color clickedButtonColor = new Color(42, 68, 128);
         Color inactiveButtonColor = new Color(70, 113, 213);
 
-
+        //name of the button
         string _name = "_Button";
         string name { get { return _name; } set { _name = value; } }
 
         public Button(Rectangle buttonSize, string text, Game1 game, Color innerColor = new Color())
             : base(buttonSize, game)
         {
-
+            //determines when the element is drawn. a higher number means it'll be drawn laster
             DrawOrder = 1000;
             //the rect of the entire button
             this.borderRectangle = buttonSize;
@@ -113,6 +113,7 @@ namespace Orchid
             }
             this.borderColor = Color.DarkBlue;
 
+            //sets the name of the button to text plus whatever the _name is
             this.text = text;
             this.name = text + _name;
 
@@ -132,16 +133,16 @@ namespace Orchid
         public override void OnMouseHover()
         {
             Console.WriteLine("{0} received mouse over", this);
-            Random rnd = new Random();
 
-
-            int r = rnd.Next(0, 255);
-            int b = rnd.Next(0, 255);
-            int g = rnd.Next(0, 255);
-            int a = rnd.Next(0, 255);
-
-            Color clr = new Color(r, g, b, a);
+            ////Randomize the color of the button when it's hovered
+            //Random rnd = new Random();
+            //int r = rnd.Next(0, 255);
+            //int b = rnd.Next(0, 255);
+            //int g = rnd.Next(0, 255);
+            //int a = rnd.Next(0, 255);
+            //Color clr = new Color(r, g, b, a);
             //this.innerColor = clr;
+
             this.innerColor = hiliteButtonColor;
         }
 
