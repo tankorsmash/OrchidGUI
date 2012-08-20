@@ -15,31 +15,31 @@ using System.Net;
 
 namespace Orchid
 {
-    public class MessageWriter : TextWriter
-    {
+    //public class MessageWriter : TextWriter
+    //{
 
-        public List<String> _output;
+    //    public List<String> _output;
 
-        public MessageWriter(List<String> output)
-        {
+    //    public MessageWriter(List<String> output)
+    //    {
 
-            this._output = output;
-        }
+    //        this._output = output;
+    //    }
 
 
 
-        public override void Write(char value)
-        {
-            base.Write(value);
-            this._output.Add(value.ToString());
+    //    public override void Write(char value)
+    //    {
+    //        base.Write(value);
+    //        this._output.Add(value.ToString());
 
-        }
+    //    }
 
-        public override Encoding Encoding
-        {
-            get { return System.Text.Encoding.UTF8; }
-        }
-    }
+    //    public override Encoding Encoding
+    //    {
+    //        get { return System.Text.Encoding.UTF8; }
+    //    }
+    //}
 
     public class Surface
     {
@@ -100,15 +100,23 @@ namespace Orchid
     public class MessageArea : Surface
     {
 
-        public MessageWriter writer;
+        //public MessageWriter writer;
         public SpriteFont defaultFont;
+        //the color of the widget's background
         public Color gameBG;
+        //the list that holds all the messages
+        public List<string> msgList;
+        //the amount of messages to be drawn.
+        public int messageLimit = 7;
 
-        public MessageArea(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, Rectangle rect, Color colorBG, MessageWriter writer, SpriteFont defaultFont, Color gameBG)
+        public MessageArea(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch,
+            Rectangle rect, Color colorBG,  SpriteFont defaultFont, Color gameBG, List<string> msgList)
             : base(graphicsDevice, spriteBatch, rect, colorBG)
         {
 
-            this.writer = writer;
+            //this.writer = writer;
+            this.msgList = msgList;
+
             this.defaultFont = defaultFont;
             this.gameBG = gameBG;
 
@@ -117,25 +125,34 @@ namespace Orchid
 
         public void DrawMessages()
         {
-            //spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.Additive);
-            spriteBatch.Begin();
+
+            //new way, with a simple list, iterate over all the most recent Items and draw those
+            int position;
+            int COUNT = msgList.Count; 
             int y = 0;
-            int x = 0;
-            int count = 1;
-            for (int i = 0; i < writer._output.Count; i++)
+
+            //if there aren't enough items in the msgList, start at index 0
+            if (COUNT < messageLimit)
             {
-                if (writer._output[i] == "\n")
-                {
-                    y += 20;
-                    x = 0;
-                    count = 0; //not 1, because it gets ++'d at the end of the loop.
-                }
-                spriteBatch.DrawString(defaultFont, writer._output[i],
-                            new Vector2((x + (12 * count)), y), Color.White);
-                count++;
+                position = 0;
+            }
+            //otherwise, start at the COUNT - limit
+            else
+            {
+                position = COUNT - this.messageLimit;
             }
 
-            spriteBatch.End();
+            
+            for (int i = position; i < msgList.Count; i++)
+            {
+                spriteBatch.Begin();
+
+                //draw a string that goes lower as the amount of lines get drawn ~BC~
+                spriteBatch.DrawString(defaultFont, msgList[i], new Vector2(0, (y * 24)), Color.Black);
+                spriteBatch.End();
+                //increment y so that the next string gets printed below current line
+                y++;
+            }
         }
 
         public override void Draw()

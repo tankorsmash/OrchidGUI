@@ -46,16 +46,16 @@ namespace Orchid
         Color defaultBG;
 
         //message list
-        List<string> msgList = new List<string>();
-        public MessageWriter writer;
+        public List<string> msgList = new List<string>();
+        //public MessageWriter writer;
 
         public Game1()
         {
             //set the stdout stream wrapper
-            writer = new MessageWriter(msgList);
+            //writer = new MessageWriter(msgList);
 
             //set the default background color
-            defaultBG = Color.FloralWhite;
+            defaultBG = Color.RoyalBlue;
 
             //make the mouse visible
             this.IsMouseVisible = true;
@@ -70,6 +70,10 @@ namespace Orchid
             
             //create an input handler
             this.inputHandler = new InputHandler(this);
+
+            msgList.Add("game init");
+
+
         }
 
 
@@ -87,7 +91,7 @@ namespace Orchid
 
             
             //send console stdout to writer
-            Console.SetOut(writer);
+            //Console.SetOut(writer);
 
             // TODO: Add your initialization logic here
 
@@ -119,7 +123,7 @@ namespace Orchid
             int areaH = height / 4;
             Rectangle size = new Rectangle(0, height - areaH, width, areaH);
             messageArea = new MessageArea(GraphicsDevice, spriteBatch, size,
-                                Color.RoyalBlue, writer,defaultFont, this.defaultBG);
+                                Color.RoyalBlue, defaultFont, this.defaultBG, msgList);
 
             // TODO: use this.Content to load your game content here
 

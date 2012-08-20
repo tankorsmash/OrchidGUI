@@ -155,6 +155,8 @@ namespace Orchid
         {
             this.innerColor = clickedButtonColor;
             Console.WriteLine("{0} received mouse down", this);
+            this.game.msgList.Add("button click");
+            
         }
 
         public override void OnMouseUp()
