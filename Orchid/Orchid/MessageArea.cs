@@ -108,6 +108,11 @@ namespace Orchid
         public List<string> msgList;
         //the amount of messages to be drawn.
         public int messageLimit = 7;
+        //the current index messages to draw
+        public int[] activeMessages;
+
+        //whether or not the message area display is showing the current messages or not
+        public bool realtimeMsgs = true;
 
         public MessageArea(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch,
             Rectangle rect, Color colorBG,  SpriteFont defaultFont, Color gameBG, List<string> msgList)
@@ -126,24 +131,8 @@ namespace Orchid
         public void DrawMessages()
         {
 
-            //new way, with a simple list, iterate over all the most recent Items and draw those
-            int position;
-            int COUNT = msgList.Count; 
             int y = 0;
-
-            //if there aren't enough items in the msgList, start at index 0
-            if (COUNT < messageLimit)
-            {
-                position = 0;
-            }
-            //otherwise, start at the COUNT - limit
-            else
-            {
-                position = COUNT - this.messageLimit;
-            }
-
-            
-            for (int i = position; i < msgList.Count; i++)
+            foreach (int i in activeMessages)
             {
                 spriteBatch.Begin();
 
@@ -172,6 +161,71 @@ namespace Orchid
 
         }
 
+        /// <summary>
+        /// starts or stops the messages in the message area, live for pause
+        /// </summary>
+        /// <param name="startRealtime">whether or not the messages are live or not</param>
+        /// <returns>true is messages are in realtime</returns>
+        public bool PauseMessageArea(bool startRealtime = false)
+        {
+            if (!startRealtime)
+            {
+                realtimeMsgs = false;
+
+                Console.WriteLine("Messages are now paused.");
+
+                return realtimeMsgs;
+            }
+            else
+            {
+                realtimeMsgs = true;
+
+                Console.WriteLine("Messages are now live.");
+                return realtimeMsgs;
+            }
+        }
+
+        public void UpdateActiveMessages()
+        {
+            //new way, with a simple list, iterate over all the most recent Items and draw those
+            int position;
+            int COUNT = msgList.Count;
+
+            
+            //if there aren't enough items in the msgList, start at index 0
+            if (COUNT < messageLimit)
+            {
+                position = 0;
+            }
+            //otherwise, start at the COUNT - limit
+            else
+            {
+                position = COUNT - this.messageLimit;
+            }
+            
+            //whether or not to update the messages on the fly or not
+            if (realtimeMsgs)
+            {
+                //create an empty array the size of the messageLimit
+                activeMessages = new int[messageLimit];
+
+
+
+                //use the array to populate the messagearea item.
+                int index = 0;
+                for (int i = position; i < msgList.Count; i++)
+                {
+                    activeMessages[index] = i;
+                    index++;
+                }
+            }
+            //else: use activeMessages from elsewhere
+            else
+            {
+                // use current activemessages, as if the stream is paused
+            }
+        }
+
         public override void UpdateSurface()
         {
 
@@ -179,6 +233,9 @@ namespace Orchid
             graphicsDevice.SetRenderTarget(surface);
             //clear it, like normal
             graphicsDevice.Clear(Color.Thistle);
+
+            //updates the int[] for the indexes of the messages to draw
+            UpdateActiveMessages();
 
             //draw messages on surface
             DrawMessages();

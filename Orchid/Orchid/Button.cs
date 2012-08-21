@@ -154,14 +154,18 @@ namespace Orchid
         public override void OnMouseDown() 
         {
             this.innerColor = clickedButtonColor;
-            Console.WriteLine("{0} received mouse down", this);
-            this.game.msgList.Add("button click");
+
+            string text = string.Format("{0} received mouse down", this);
+            Console.WriteLine(text);
+            this.game.msgList.Add(text);
             
         }
 
         public override void OnMouseUp()
         {
             this.innerColor = buttonColor;
+            string text = string.Format("{0} received mouse up", this);
+            this.game.msgList.Add(text);
         }
 
         public void BuildInnerRect()

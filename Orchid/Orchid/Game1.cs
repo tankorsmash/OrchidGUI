@@ -37,7 +37,7 @@ namespace Orchid
 
         //list of gui elements
         public List<GuiElement> masterGuiElementList = new List<GuiElement>();
-
+        
         //screensize
         public int width = 1024;
         public int height = 768;
@@ -70,6 +70,12 @@ namespace Orchid
             
             //create an input handler
             this.inputHandler = new InputHandler(this);
+
+            string[] temp = { "blank1", "blank2", "blank3", "blank4", "blank5", "blank6", "blank7", "blank8" };
+            foreach (string item in temp)
+            {
+                msgList.Add(item);
+            }
 
             msgList.Add("game init");
 
@@ -127,6 +133,7 @@ namespace Orchid
 
             // TODO: use this.Content to load your game content here
 
+
         }
 
         /// <summary>
@@ -154,8 +161,18 @@ namespace Orchid
             {
                 this.Exit();
             }
-
             
+            if (Keyboard.GetState().GetPressedKeys().Contains(Keys.D))
+            {
+                messageArea.PauseMessageArea();
+                //messageArea.activeMessages = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+            }
+
+            if (Keyboard.GetState().GetPressedKeys().Contains(Keys.W))
+            {
+                messageArea.realtimeMsgs = false;
+                //messageArea.activeMessages = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+            }
             //test the input against all the elements of the gui
             inputHandler.CheckInput(masterGuiElementList);
 
