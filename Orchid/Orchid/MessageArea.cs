@@ -226,6 +226,42 @@ namespace Orchid
             }
         }
 
+
+        public void ScrollMessageArea(int distance)
+        {
+            if (!realtimeMsgs)
+            {
+                //pause realtimeMsgs
+                realtimeMsgs = false;
+
+
+                //copies the activeMsgs array to origArray, just in case
+                int[] originalActive = new int[messageLimit];
+                activeMessages.CopyTo(originalActive, 0);
+
+                //make sure the distance isn't too big or small
+                while (activeMessages[0] + distance < 0)
+                {
+                    distance += 1;
+                }
+                while (activeMessages[messageLimit - 1] + distance >= msgList.Count)
+                {
+                    distance -= 1;
+                }
+
+                //scroll the ints in activemessages by arg.distance or closest number.
+                int index = 0;
+                foreach (int item in originalActive)
+                {
+                    activeMessages[index] = item + distance;
+                    index++;
+                }
+            }
+        }
+
+
+
+
         public override void UpdateSurface()
         {
 

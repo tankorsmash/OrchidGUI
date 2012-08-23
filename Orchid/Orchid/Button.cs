@@ -78,6 +78,10 @@ namespace Orchid
         //what the button will say on it
         string text;
 
+
+        //a delegate for commands
+        delegate void ADelegate();
+
         //colors
         Color borderColor;
         Color innerColor;
@@ -89,11 +93,14 @@ namespace Orchid
         Color clickedButtonColor = new Color(42, 68, 128);
         Color inactiveButtonColor = new Color(70, 113, 213);
 
+        Color defaultTextColor = Color.White;
+
         //name of the button
         string _name = "_Button";
         string name { get { return _name; } set { _name = value; } }
 
-        public Button(Rectangle buttonSize, string text, Game1 game, Color innerColor = new Color())
+        public Button(Rectangle buttonSize, string text, Game1 game,
+               Color innerColor = new Color(), Color? textColor= null)
             : base(buttonSize, game)
         {
             //determines when the element is drawn. a higher number means it'll be drawn laster
@@ -116,6 +123,12 @@ namespace Orchid
             //sets the name of the button to text plus whatever the _name is
             this.text = text;
             this.name = text + _name;
+
+            //set the msgArea color to default or use given color
+            if (textColor == null)
+            {
+                textColor = defaultTextColor;
+            }
 
 
             //add this new button to the list of gui elements. Only buttons for now
