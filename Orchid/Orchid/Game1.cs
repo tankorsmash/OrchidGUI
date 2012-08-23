@@ -26,7 +26,7 @@ namespace Orchid
         Button button;
         Button button2;
 
-        MessageArea messageArea;
+        public MessageArea messageArea;
 
         public static  SpriteFont defaultFont;
 
@@ -83,7 +83,8 @@ namespace Orchid
         }
 
 
-        
+
+        public int Qwe() { return 1; }
 
 
         /// <summary>
@@ -105,9 +106,9 @@ namespace Orchid
             Rectangle qwe = new Rectangle(500, 0, 210, 110);
             this.button = new Button(qwe, "NEW BUTTON", this);
             //and another button
-            this.button2 = new Button(new Rectangle(0, 0, 155, 122), "second", this );
+            this.button2 = new Button(new Rectangle(0, 0, 155, 122), "second", this);
 
-            Button button3 = new Button(new Rectangle(this.width - 100, 477, 25, 25), "up", this);
+            Button button3 = new Button(new Rectangle(this.width - 100, 477, 25, 25), "up", this, new Func<int>(Qwe));
             Button button4 = new Button(new Rectangle(this.width - 100, 517, 25, 25), "down", this);
 
             base.Initialize();
@@ -157,38 +158,11 @@ namespace Orchid
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            //if you hit espace exit 
-            if (Keyboard.GetState().GetPressedKeys().Contains(Keys.Escape))
-            {
-                this.Exit();
-            }
-            
-            if (Keyboard.GetState().GetPressedKeys().Contains(Keys.Space))
-            {
-                messageArea.PauseMessageArea();
-            }
-            if (Keyboard.GetState().GetPressedKeys().Contains(Keys.Z))
-            {
-                messageArea.PauseMessageArea(true);
-            }
-
-            //scroll messages back  5 lines
-            if (Keyboard.GetState().GetPressedKeys().Contains(Keys.W))
-            {
-                messageArea.ScrollMessageArea(-5);
-            }
-            //scroll messages forward 5 lines
-            if (Keyboard.GetState().GetPressedKeys().Contains(Keys.S))
-            {
-                messageArea.ScrollMessageArea(5);
-            }
-
-
 
 
             //test the input against all the elements of the gui
             inputHandler.CheckMouseAgainstElements(masterGuiElementList);
-
+            inputHandler.HandleKeys(this);
             // TODO: Add your update logic here
 
             base.Update(gameTime);

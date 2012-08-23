@@ -80,7 +80,8 @@ namespace Orchid
 
 
         //a delegate for commands
-        delegate void ADelegate();
+        //public Func<int> ADelegate();
+        Func<int> command;
 
         //colors
         Color borderColor;
@@ -99,8 +100,9 @@ namespace Orchid
         string _name = "_Button";
         string name { get { return _name; } set { _name = value; } }
 
-        public Button(Rectangle buttonSize, string text, Game1 game,
-               Color innerColor = new Color(), Color? textColor= null)
+
+
+        public Button(Rectangle buttonSize, string text, Game1 game, Func<int> command = null , Color innerColor = new Color(), Color? textColor = null)
             : base(buttonSize, game)
         {
             //determines when the element is drawn. a higher number means it'll be drawn laster
@@ -130,12 +132,25 @@ namespace Orchid
                 textColor = defaultTextColor;
             }
 
+            if (command != null) { this.command = command; }
+            else { this.command = (defaultCommand); }
+
 
             //add this new button to the list of gui elements. Only buttons for now
             game.masterGuiElementList.Add(this);
 
             this.Initialize();
 
+        }
+
+        public int defaultCommand()
+        {
+            string text = string.Format("{0} received mouse down", this);
+            Console.WriteLine(text);
+            this.game.msgList.Add(text);
+
+            return 4;
+            
         }
 
         public override string ToString()
@@ -166,12 +181,11 @@ namespace Orchid
 
         public override void OnMouseDown() 
         {
+            this.command();
+
             this.innerColor = clickedButtonColor;
 
-            string text = string.Format("{0} received mouse down", this);
-            Console.WriteLine(text);
-            this.game.msgList.Add(text);
-            
+
         }
 
         public override void OnMouseUp()

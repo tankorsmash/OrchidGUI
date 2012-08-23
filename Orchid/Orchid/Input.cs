@@ -30,6 +30,9 @@ namespace Orchid
         //MouseStates cache
         MouseState currentMouseState = Mouse.GetState();
         MouseState lastMouseState = Mouse.GetState();
+        //KeyboardStates cache
+        KeyboardState currentKeyState = Keyboard.GetState();
+        KeyboardState lastKeyState = Keyboard.GetState();
 
         public InputHandler(Game1 game)
         {
@@ -106,6 +109,55 @@ namespace Orchid
 
             //cache the mouse state so you have something to compare it against next frame.
             lastMouseState = currentMouseState;
+        }
+
+        public void HandleKeys(Game1 game)
+        {
+            //update current key state
+            currentKeyState = Keyboard.GetState();
+
+            if (KeyPressed(Keys.S))
+            {
+
+            }
+
+            //if you hit espace exit 
+            if (KeyPressed(Keys.Escape))
+            {
+                game.Exit();
+            }
+
+            if (KeyPressed(Keys.P))
+            {
+                game.messageArea.PauseMessageArea();
+            }
+            if (KeyPressed(Keys.U))
+            {
+                game.messageArea.PauseMessageArea(true);
+            }
+
+            //scroll messages back  5 lines
+            if (KeyPressed(Keys.W))
+            {
+                game.messageArea.ScrollMessageArea(-5);
+            }
+            //scroll messages forward 5 lines
+            if (KeyPressed(Keys.S))
+            {
+                game.messageArea.ScrollMessageArea(5);
+            }
+
+            //save the current keystate as last keystate for next loop
+            lastKeyState = currentKeyState;
+        }
+
+        public bool KeyPressed(Keys key)
+        {
+            if (currentKeyState.IsKeyUp(key) && lastKeyState.IsKeyDown(key))
+            {
+                return true;
+            }
+            else { return false; }
         }
     }
 
