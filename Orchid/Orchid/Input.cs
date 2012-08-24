@@ -52,6 +52,8 @@ namespace Orchid
             Point mousePos = new Point(Mouse.GetState().X, Mouse.GetState().Y);
             currentMouseState = Mouse.GetState();
 
+            //this.theGame.testArea.Drag(currentMouseState, lastMouseState);
+
             //if mouse1 is pressed
             if (currentMouseState.LeftButton == ButtonState.Pressed)
             {
@@ -84,6 +86,19 @@ namespace Orchid
 
 
             }
+
+
+            if  (lastMouseState.RightButton == ButtonState.Pressed)
+            {
+                //Console.WriteLine("trying for a mouse up");
+                //activeElement.OnMouseUp();
+
+                //activeElement = emptyElement;
+
+                theGame.testArea.Drag(currentMouseState, lastMouseState);
+
+            }
+
 
             //if the mouse is just chilling, hovering
             if (currentMouseState.LeftButton == ButtonState.Released &&

@@ -143,13 +143,19 @@ namespace Orchid
             //test message area
             messageArea = new MessageArea(GraphicsDevice, spriteBatch, size,
                                 Color.RoyalBlue, defaultFont, this.defaultBG, msgList);
+            //fill a blank list to use inside testarea
             List<string> testList = new List<string>();
             string[] temp = { "blank1", "blank2", "blank3", "blank4", "blank5", "blank6", "blank7", "blank8" };
             foreach (string item in temp)
             {
                 testList.Add(item);
             }
-            testArea = new MessageArea(GraphicsDevice, spriteBatch, new Rectangle(100, 100, 255,255), Color.AliceBlue, defaultFont, this.defaultBG, testList);
+
+            testList.Clear();
+            testList.Add("Hellosdsdsdsddsdsdsdsdsdsdsdsdsdsdsds");
+            testArea = new MessageArea(GraphicsDevice, spriteBatch,
+                            new Rectangle(100, 100, 255,255), Color.AliceBlue, 
+                            defaultFont, this.defaultBG, testList);
 
             // TODO: use this.Content to load your game content here
 
@@ -218,7 +224,7 @@ namespace Orchid
             //GraphicsDevice.Clear(Color.Green);
 
             //draw the gui.
-            //Orchid.DrawGUI(masterGuiElementList, gameTime);
+            Orchid.DrawGUI(masterGuiElementList, gameTime);
 
 
             base.Draw(gameTime);

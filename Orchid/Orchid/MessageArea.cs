@@ -111,6 +111,11 @@ namespace Orchid
         //the current index messages to draw
         public int[] activeMessages;
 
+        //Whether or not it is being dragged or not
+        public bool isbBeingDragged = false;
+        //Whether is can be moved or not
+        public bool isMoveLocked = false;
+
         //whether or not the message area display is showing the current messages or not
         public bool realtimeMsgs = true;
 
@@ -127,20 +132,29 @@ namespace Orchid
 
         }
 
+        public void Drag(MouseState currentMouseState, MouseState lastMouseState)
+        {
+            this.rect.X -= lastMouseState.X - currentMouseState.X;
+            this.rect.Y -= lastMouseState.Y - currentMouseState.Y;
+        }
 
         public void DrawMessages()
         {
-
-            int y = 0;
-            foreach (int i in activeMessages)
+            //make sure there's at least one item inside 
+            if (this.msgList.Count >= 1)
             {
-                spriteBatch.Begin();
+                int y = 0;
+                foreach (int i in activeMessages)
+                {
+                    spriteBatch.Begin();
 
-                //draw a string that goes lower as the amount of lines get drawn ~BC~
-                spriteBatch.DrawString(defaultFont, msgList[i], new Vector2(0, (y * 24)), Color.Black);
-                spriteBatch.End();
-                //increment y so that the next string gets printed below current line
-                y++;
+                    //draw a string that goes lower as the amount of lines get drawn ~BC~
+                    spriteBatch.DrawString(defaultFont, msgList[i], new Vector2(0, (y * 24)), Color.Black);
+                    
+                    spriteBatch.End();
+                    //increment y so that the next string gets printed below current line
+                    y++;
+                }
             }
         }
 
