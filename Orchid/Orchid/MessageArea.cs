@@ -154,8 +154,8 @@ namespace Orchid
             UpdateSurface();
 
             //draws the new surface stuff to the back buffer
-            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.NonPremultiplied);
-            //spriteBatch.Begin();
+            //spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+            spriteBatch.Begin();
             spriteBatch.Draw(this.surface, this.rect, this.backgroundColor);
             spriteBatch.End();
 
@@ -268,20 +268,20 @@ namespace Orchid
         {
 
             //change the renderTarger (pygame surface)
-            graphicsDevice.SetRenderTarget(surface);
+            graphicsDevice.SetRenderTarget(this.surface);
             //clear it, like normal
             graphicsDevice.Clear(Color.Thistle);
 
             //updates the int[] for the indexes of the messages to draw
-            UpdateActiveMessages();
+            //UpdateActiveMessages();
 
             //draw messages on surface
-            DrawMessages();
+            //DrawMessages();
 
             //then reset the drawing surface to null, backbuffer.
             graphicsDevice.SetRenderTarget(null);
 
-            graphicsDevice.Clear(gameBG);
+            //graphicsDevice.Clear(gameBG);
 
             //return surface;
         } 

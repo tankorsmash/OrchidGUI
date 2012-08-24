@@ -27,6 +27,7 @@ namespace Orchid
         Button button2;
 
         public MessageArea messageArea;
+        public MessageArea testArea;
 
         public static  SpriteFont defaultFont;
 
@@ -84,7 +85,7 @@ namespace Orchid
 
 
 
-        public int Qwe() { return 1; }
+        //public int Qwe() { return 1; }
 
 
         /// <summary>
@@ -111,9 +112,9 @@ namespace Orchid
 
             //message area buttons, up and down message scroll
             Button msgAreaScrlUp = new Button(new Rectangle(this.width - 100, this.height - 150,
-                                                25, 25), "up", this, new Func<int>(Qwe));
-            Button msgAreaScrlDown = new Button(new Rectangle(this.width - 100, this.height - 50
-                , 25, 25), "down", this);
+                                                25, 25), "up", this);
+            Button msgAreaScrlDown = new Button(new Rectangle(this.width - 100, this.height - 50,
+                                                25, 25), "down", this);
             //binding the commands using lambdas.
             msgAreaScrlUp.command = () => messageArea.ScrollMessageArea(-5);
             msgAreaScrlDown.command = () => messageArea.ScrollMessageArea(5);
@@ -138,8 +139,17 @@ namespace Orchid
             //create a message area at the bottom of the scree, 1/4 of the screen.
             int areaH = height / 4;
             Rectangle size = new Rectangle(0, height - areaH, width, areaH);
+
+            //test message area
             messageArea = new MessageArea(GraphicsDevice, spriteBatch, size,
                                 Color.RoyalBlue, defaultFont, this.defaultBG, msgList);
+            List<string> testList = new List<string>();
+            string[] temp = { "blank1", "blank2", "blank3", "blank4", "blank5", "blank6", "blank7", "blank8" };
+            foreach (string item in temp)
+            {
+                testList.Add(item);
+            }
+            testArea = new MessageArea(GraphicsDevice, spriteBatch, new Rectangle(100, 100, 255,255), Color.AliceBlue, defaultFont, this.defaultBG, testList);
 
             // TODO: use this.Content to load your game content here
 
@@ -184,16 +194,22 @@ namespace Orchid
         {
             //GraphicsDevice.Clear(Color.Green);
             GraphicsDevice.SetRenderTarget(null);
-            GraphicsDevice.Clear(Color.Gainsboro);
+            GraphicsDevice.Clear(Color.Green);
             // TODO: Add your drawing code here
+
+            //COLE: comment either of the areas out to not draw one or the other.
+            // The flow of Draw() goes Draw > UpdateSurface >  then finishes Draw.
+            // A few things in there are commented out, for your convenience, they just drew strings
 
             //draw the message area.
             messageArea.Draw();
+            //draw the testArea
+            testArea.Draw();
 
             //GraphicsDevice.Clear(Color.Green);
 
             //draw the gui.
-            Orchid.DrawGUI(masterGuiElementList, gameTime);
+            //Orchid.DrawGUI(masterGuiElementList, gameTime);
 
 
             base.Draw(gameTime);
