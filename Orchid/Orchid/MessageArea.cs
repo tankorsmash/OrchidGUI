@@ -227,7 +227,7 @@ namespace Orchid
         }
 
 
-        public void ScrollMessageArea(int distance)
+        public int  ScrollMessageArea(int distance = -1)
         {
             if (!realtimeMsgs)
             {
@@ -257,6 +257,8 @@ namespace Orchid
                     index++;
                 }
             }
+
+            return 0;
         }
 
 

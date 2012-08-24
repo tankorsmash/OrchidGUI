@@ -108,8 +108,16 @@ namespace Orchid
             //and another button
             this.button2 = new Button(new Rectangle(0, 0, 155, 122), "second", this);
 
-            Button button3 = new Button(new Rectangle(this.width - 100, 477, 25, 25), "up", this, new Func<int>(Qwe));
-            Button button4 = new Button(new Rectangle(this.width - 100, 517, 25, 25), "down", this);
+
+            //message area buttons, up and down message scroll
+            Button msgAreaScrlUp = new Button(new Rectangle(this.width - 100, this.height - 150,
+                                                25, 25), "up", this, new Func<int>(Qwe));
+            Button msgAreaScrlDown = new Button(new Rectangle(this.width - 100, this.height - 50
+                , 25, 25), "down", this);
+            //binding the commands using lambdas.
+            msgAreaScrlUp.command = () => messageArea.ScrollMessageArea(-5);
+            msgAreaScrlDown.command = () => messageArea.ScrollMessageArea(5);
+             
 
             base.Initialize();
         }

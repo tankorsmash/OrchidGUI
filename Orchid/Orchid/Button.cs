@@ -81,7 +81,8 @@ namespace Orchid
 
         //a delegate for commands
         //public Func<int> ADelegate();
-        Func<int> command;
+        public Func<int> command;
+        //public Action command;
 
         //colors
         Color borderColor;
