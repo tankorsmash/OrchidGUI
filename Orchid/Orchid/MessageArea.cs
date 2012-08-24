@@ -151,13 +151,13 @@ namespace Orchid
             
             //updates the messagearea surface, with the correct SetRenderTarget value
             //because you need to begin the spritebatch AFTER you've set the RT to what you want
-            UpdateSurface();
+            //UpdateSurface();
 
             //draws the new surface stuff to the back buffer
             //spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
-            spriteBatch.Begin();
+            //spriteBatch.Begin();
             spriteBatch.Draw(this.surface, this.rect, this.backgroundColor);
-            spriteBatch.End();
+            //spriteBatch.End();
 
         }
 
@@ -273,13 +273,14 @@ namespace Orchid
             graphicsDevice.Clear(Color.Thistle);
 
             //updates the int[] for the indexes of the messages to draw
-            //UpdateActiveMessages();
+            UpdateActiveMessages();
 
             //draw messages on surface
-            //DrawMessages();
+            DrawMessages();
 
             //then reset the drawing surface to null, backbuffer.
-            graphicsDevice.SetRenderTarget(null);
+            //#### DON'T DRAW TO BackBuffer, it clears it.
+            //graphicsDevice.SetRenderTarget(null);
 
             //graphicsDevice.Clear(gameBG);
 

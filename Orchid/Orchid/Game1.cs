@@ -194,17 +194,26 @@ namespace Orchid
         {
             //GraphicsDevice.Clear(Color.Green);
             GraphicsDevice.SetRenderTarget(null);
-            GraphicsDevice.Clear(Color.Green);
+            GraphicsDevice.Clear(defaultBG);
             // TODO: Add your drawing code here
 
-            //COLE: comment either of the areas out to not draw one or the other.
-            // The flow of Draw() goes Draw > UpdateSurface >  then finishes Draw.
-            // A few things in there are commented out, for your convenience, they just drew strings
 
-            //draw the message area.
-            messageArea.Draw();
+            //draw the message area textures,
+            //messageArea.Draw();
+            messageArea.UpdateSurface();
             //draw the testArea
+            //testArea.Draw();
+            testArea.UpdateSurface();
+
+            //reset the RenderTarget to the backbuffer
+            GraphicsDevice.SetRenderTarget(null);
+
+
+            //draw the rendertargets to the backbuffer
+            spriteBatch.Begin();
+            messageArea.Draw();
             testArea.Draw();
+            spriteBatch.End();
 
             //GraphicsDevice.Clear(Color.Green);
 
