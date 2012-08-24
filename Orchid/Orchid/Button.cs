@@ -14,7 +14,7 @@ namespace Orchid
     public class GuiElement : DrawableGameComponent
     {
         public Game1 game;
-        public Rectangle borderRectangle;
+        public Rectangle rect;
 
 
 
@@ -109,7 +109,7 @@ namespace Orchid
             //determines when the element is drawn. a higher number means it'll be drawn laster
             DrawOrder = 1000;
             //the rect of the entire button
-            this.borderRectangle = buttonSize;
+            this.rect = buttonSize;
             this.BuildInnerRect();
  
             //colors
@@ -138,7 +138,7 @@ namespace Orchid
 
 
             //add this new button to the list of gui elements. Only buttons for now
-            game.masterGuiElementList.Add(this);
+            Orchid.masterGuiElementList.Add(this);
 
             this.Initialize();
 
@@ -199,10 +199,10 @@ namespace Orchid
         public void BuildInnerRect()
         {
             //the inner portion will be 90 percent the rect of the button, leaving a 10 percent border
-            double innerW = borderRectangle.Width * .9;
-            double innerH = borderRectangle.Height * .9;
-            double innerX = borderRectangle.Center.X - (innerW / 2);
-            double innerY = borderRectangle.Center.Y - (innerH / 2);
+            double innerW = rect.Width * .9;
+            double innerH = rect.Height * .9;
+            double innerX = rect.Center.X - (innerW / 2);
+            double innerY = rect.Center.Y - (innerH / 2);
             //it'll be set to having the same center point as the borderRect            
             this.innerRectangle = new Rectangle((int)innerX, (int)innerY, (int)innerW, (int)innerH);
 
@@ -219,13 +219,13 @@ namespace Orchid
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(dummyTexture, borderRectangle, borderColor);
+            spriteBatch.Draw(dummyTexture, rect, borderColor);
             spriteBatch.Draw(dummyTexture, innerRectangle, innerColor);
 
             
 
             //find where to put the text. Midleft along the center of the button. '12' is half the rect of the font, which is 24
-            textPos = new Vector2(borderRectangle.Center.X - (innerRectangle.Width / 2), borderRectangle.Center.Y - 12);
+            textPos = new Vector2(rect.Center.X - (innerRectangle.Width / 2), rect.Center.Y - 12);
             spriteBatch.DrawString(Game1.defaultFont, this.text, textPos, Color.Black);
             
             spriteBatch.End();

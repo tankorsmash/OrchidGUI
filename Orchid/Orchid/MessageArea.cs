@@ -41,7 +41,7 @@ namespace Orchid
     //    }
     //}
 
-    public class Surface
+    public class Surface : GuiElement
     {
         protected GraphicsDevice graphicsDevice;
         protected SpriteBatch spriteBatch;
@@ -51,7 +51,7 @@ namespace Orchid
         public RenderTarget2D surface;
         public Rectangle rect;
 
-        public Surface(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, Rectangle rect, Color colorBG)
+        public Surface(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, Rectangle rect, Color colorBG) :base(game)
         {
             this.backgroundColor = colorBG;
             this.graphicsDevice = graphicsDevice;
@@ -97,7 +97,7 @@ namespace Orchid
 
 
 
-    public class MessageArea : Surface
+    public class MessageBox : Surface
     {
 
         //public MessageWriter writer;
@@ -119,9 +119,10 @@ namespace Orchid
         //whether or not the message area display is showing the current messages or not
         public bool realtimeMsgs = true;
 
-        public MessageArea(GraphicsDevice graphicsDevice, SpriteBatch spriteBatch,
-            Rectangle rect, Color colorBG,  SpriteFont defaultFont, Color gameBG, List<string> msgList)
-            : base(graphicsDevice, spriteBatch, rect, colorBG)
+        public MessageBox(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch,
+                    Rectangle rect, Color colorBG,  SpriteFont defaultFont, 
+                    Color gameBG, List<string> msgList, bool moveLocked = false)
+            : base(game, graphicsDevice, spriteBatch, rect, colorBG)
         {
 
             //this.writer = writer;
@@ -129,6 +130,16 @@ namespace Orchid
 
             this.defaultFont = defaultFont;
             this.gameBG = gameBG;
+
+            if (moveLocked)
+            {
+                //do nothing
+            }
+            else
+            {
+                Orchid.masterGuiElementList.Add(this);
+                Console.WriteLine("added a msgbox to list");
+            }
 
         }
 

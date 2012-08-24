@@ -65,7 +65,7 @@ namespace Orchid
 
                         Button elem2 = elem as Button;
                         //elem = elem as Button;
-                        if (elem2.borderRectangle.Contains(mousePos))
+                        if (elem2.rect.Contains(mousePos))
                         {
                             activeElement = elem;
                             elem2.OnMouseDown();
@@ -92,10 +92,22 @@ namespace Orchid
             {
                 //Console.WriteLine("trying for a mouse up");
                 //activeElement.OnMouseUp();
-
                 //activeElement = emptyElement;
 
-                theGame.testArea.Drag(currentMouseState, lastMouseState);
+                foreach (GuiElement elem in Orchid.masterGuiElementList)
+                {
+                    if (elem.rect.Contains(mousePos))
+                    {
+                        if (elem is MessageBox)
+                        {
+                            MessageBox msgbox = (MessageBox)elem;
+                            msgbox.Drag(currentMouseState, lastMouseState);
+                            Console.WriteLine("dragiging");
+                        }
+
+                        else { Console.WriteLine("is not message box"); }
+                    }
+                }
 
             }
 
@@ -105,14 +117,14 @@ namespace Orchid
                 currentMouseState.RightButton == ButtonState.Released)
             {
 
-                if (!hoveredElement.borderRectangle.Contains(mousePos))
+                if (!hoveredElement.rect.Contains(mousePos))
                 {
                     hoveredElement.OffMouseHover();
                 }
 
                 foreach (GuiElement elem in guiElementList)
                 {
-                    if (elem.borderRectangle.Contains(mousePos))
+                    if (elem.rect.Contains(mousePos))
                     {
                         //called hover method and set a element that is hovered over
                         elem.OnMouseHover();

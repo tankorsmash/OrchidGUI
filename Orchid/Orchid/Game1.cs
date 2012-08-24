@@ -26,8 +26,8 @@ namespace Orchid
         Button button;
         Button button2;
 
-        public MessageArea messageArea;
-        public MessageArea testArea;
+        public MessageBox messageArea;
+        public MessageBox testArea;
 
         public static  SpriteFont defaultFont;
 
@@ -36,8 +36,6 @@ namespace Orchid
         MouseState currentMouseState = Mouse.GetState();
         MouseState lastMouseState = Mouse.GetState();
 
-        //list of gui elements
-        public List<GuiElement> masterGuiElementList = new List<GuiElement>();
         
         //screensize
         public int width = 1024;
@@ -141,7 +139,7 @@ namespace Orchid
             Rectangle size = new Rectangle(0, height - areaH, width, areaH);
 
             //test message area
-            messageArea = new MessageArea(GraphicsDevice, spriteBatch, size,
+            messageArea = new MessageBox(this, GraphicsDevice, spriteBatch, size,
                                 Color.RoyalBlue, defaultFont, this.defaultBG, msgList);
             //fill a blank list to use inside testarea
             List<string> testList = new List<string>();
@@ -153,7 +151,7 @@ namespace Orchid
 
             testList.Clear();
             testList.Add("Hellosdsdsdsddsdsdsdsdsdsdsdsdsdsdsds");
-            testArea = new MessageArea(GraphicsDevice, spriteBatch,
+            testArea = new MessageBox(this, GraphicsDevice, spriteBatch,
                             new Rectangle(100, 100, 255,255), Color.AliceBlue, 
                             defaultFont, this.defaultBG, testList);
 
@@ -185,7 +183,7 @@ namespace Orchid
 
 
             //test the input against all the elements of the gui
-            inputHandler.CheckMouseAgainstElements(masterGuiElementList);
+            inputHandler.CheckMouseAgainstElements(Orchid.masterGuiElementList);
             inputHandler.HandleKeys(this);
             // TODO: Add your update logic here
 
@@ -213,7 +211,7 @@ namespace Orchid
 
             //reset the RenderTarget to the backbuffer
             GraphicsDevice.SetRenderTarget(null);
-
+            GraphicsDevice.Clear(defaultBG);
 
             //draw the rendertargets to the backbuffer
             spriteBatch.Begin();
@@ -224,7 +222,7 @@ namespace Orchid
             //GraphicsDevice.Clear(Color.Green);
 
             //draw the gui.
-            Orchid.DrawGUI(masterGuiElementList, gameTime);
+            Orchid.DrawGUI(Orchid.masterGuiElementList, gameTime);
 
 
             base.Draw(gameTime);

@@ -18,6 +18,9 @@ namespace Orchid
 {
     public static class Orchid
     {
+        //list of gui elements
+        public static List<GuiElement> masterGuiElementList = new List<GuiElement>();
+
         public static void DrawGUI(List<GuiElement> elemList, GameTime gameTime)
         {
             //loop over each element in the list of GuiElements and Draw them all
