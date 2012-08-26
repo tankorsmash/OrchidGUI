@@ -17,21 +17,28 @@ namespace Orchid
         public Rectangle rect;
 
 
+        //name of the button
+        //public string _name = "GuiElement";
+        protected string _name;
+        protected string name { get { return _name; } set { _name = value; } }
+
+        //protected string name = "DefaultUnchangedGUIELEMET";
+
+
 
         public GuiElement(Game1 game)
             : base(game)
         {
             this.game = game;
+
+            this.name= this.GetType().Name;
+            Console.WriteLine("GUIElement name: {0}", this.name);
         }
 
-        public GuiElement(Rectangle size, Game1 game): base(game)
-        {
-            this.game = game;
-        }
 
         public virtual void OffMouseHover()
         {
-            Console.WriteLine("{0} lost mouse over", this);
+            //Console.WriteLine("{0} lost mouse over", this);
         }
         public virtual void OnMouseHover()
         {
@@ -40,12 +47,18 @@ namespace Orchid
 
         public virtual void OnMouseDown()
         {
-            Console.WriteLine("{0} received mouse down", this);
+            //Console.WriteLine("{0} received mouse down", this);
         }
 
         public virtual void OnMouseUp()
         {
-            Console.WriteLine("{0} received mouse up", this);
+            //Console.WriteLine("{0} received mouse up", this);
+        }
+
+
+        public override string ToString()
+        {
+            return name;
         }
     }
 
@@ -98,10 +111,6 @@ namespace Orchid
 
         Color defaultTextColor = Color.White;
 
-        //name of the button
-        string _name = "_Button";
-        string name { get { return _name; } set { _name = value; } }
-
 
         /// <summary>
         /// The constructor for the button class
@@ -112,8 +121,10 @@ namespace Orchid
         /// <param name="command">the function that will be called when the button gets clicked</param>
         /// <param name="innerColor">the inner button color</param>
         /// <param name="textColor"></param>
-        public Button(Rectangle buttonSize, string text, Game1 game, Func<int> command = null , Color innerColor = new Color(), Color? textColor = null)
-            : base(buttonSize, game)
+        public Button(Rectangle buttonSize, string text, Game1 game, Func<int> command = null ,
+            Color innerColor = new Color(), Color? textColor = null)
+            //: base(buttonSize, game)
+            : base(game)
         {
             //determines when the element is drawn. a higher number means it'll be drawn laster
             DrawOrder = 1000;
@@ -134,7 +145,9 @@ namespace Orchid
 
             //sets the name of the button to text plus whatever the _name is
             this.text = text;
-            this.name = text + _name;
+            //base.name = this.text + base.name;
+            //base.name = text + base._name;
+            this.name = text + name;
 
             //set the msgArea color to default or use given color
             if (textColor == null)
@@ -163,14 +176,14 @@ namespace Orchid
             
         }
 
-        public override string ToString()
-        {
-            return name;
-        }
+        //public override string ToString()
+        //{
+        //    return name;
+        //}
 
         public override void OnMouseHover()
         {
-            Console.WriteLine("{0} received mouse over", this);
+            Console.WriteLine("{0} !!!received mouse over", this);
 
             ////Randomize the color of the button when it's hovered
             //Random rnd = new Random();

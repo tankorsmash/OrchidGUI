@@ -14,6 +14,8 @@ using System.Text;
 using System.Net;
 
 
+
+
 namespace Orchid
 {
     /// <summary>
@@ -93,7 +95,7 @@ namespace Orchid
         /// </summary>
         protected override void Initialize()
         {
-
+            
             // TODO: Add your initialization logic here
 
             //create a button
@@ -154,7 +156,7 @@ namespace Orchid
             }
 
             testList.Clear();
-            testList.Add("Hellosdsdsdsddsdsdsdsdsdsdsdsdsdsdsds");
+            testList.Add("This is testBox");
             testArea = new MessageBox(this, GraphicsDevice, spriteBatch,
                             new Rectangle(100, 100, 255,255), Color.AliceBlue, 
                             defaultFont, this.defaultBG, testList);
