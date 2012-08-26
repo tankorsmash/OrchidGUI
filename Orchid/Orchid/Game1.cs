@@ -95,9 +95,19 @@ namespace Orchid
         /// </summary>
         protected override void Initialize()
         {
+
+            //Where to spawn the XNA game screen
+            //see here http://stackoverflow.com/questions/9726667/how-can-i-control-where-xna-positions-the-game-window-at-startup
+            var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.
+                FromHandle(this.Window.Handle);
+            form.Location = new System.Drawing.Point(800, 100);
+            //Where to spawn the Console
+            //Console.SetWindowPosition(100, 0); //Doesnt work need to manually do with
+            // with the console properties and defaults
+            
             
             // TODO: Add your initialization logic here
-
+            
             //create a button
             Rectangle qwe = new Rectangle(500, 0, 210, 110);
             this.button = new Button(qwe, "NEW BUTTON", this);
