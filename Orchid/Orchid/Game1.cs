@@ -26,9 +26,11 @@ namespace Orchid
         Button button;
         Button button2;
 
+        //message boxes. testArea's for testing.
         public MessageBox messageArea;
         public MessageBox testArea;
 
+        //font
         public static  SpriteFont defaultFont;
 
         //input
@@ -50,8 +52,6 @@ namespace Orchid
 
         public Game1()
         {
-            //set the stdout stream wrapper
-            //writer = new MessageWriter(msgList);
 
             //set the default background color
             defaultBG = Color.RoyalBlue;
@@ -64,26 +64,25 @@ namespace Orchid
             graphics.PreferredBackBufferHeight = height;
             graphics.PreferredBackBufferWidth = width;
 
-
+            //this better be a default XNA thing, because IDK what its for, beyond the obvios
             Content.RootDirectory = "Content";
             
             //create an input handler
             this.inputHandler = new InputHandler(this);
 
+            //a temp string list to make sure shit doesnt crash
             string[] temp = { "blank1", "blank2", "blank3", "blank4", "blank5", "blank6", "blank7", "blank8" };
             foreach (string item in temp)
             {
                 msgList.Add(item);
             }
 
+            //adds the first proper string  to the msgList
             msgList.Add("game init");
 
 
         }
 
-
-
-        //public int Qwe() { return 1; }
 
 
         /// <summary>
@@ -94,10 +93,6 @@ namespace Orchid
         /// </summary>
         protected override void Initialize()
         {
-
-            
-            //send console stdout to writer
-            //Console.SetOut(writer);
 
             // TODO: Add your initialization logic here
 
@@ -141,6 +136,9 @@ namespace Orchid
             //test message area
             messageArea = new MessageBox(this, GraphicsDevice, spriteBatch, size,
                                 Color.RoyalBlue, defaultFont, this.defaultBG, msgList);
+
+
+            //test testArea out a bit
             //fill a blank list to use inside testarea
             List<string> testList = new List<string>();
             string[] temp = { "blank1", "blank2", "blank3", "blank4", "blank5", "blank6", "blank7", "blank8" };
@@ -213,16 +211,17 @@ namespace Orchid
             GraphicsDevice.SetRenderTarget(null);
             GraphicsDevice.Clear(defaultBG);
 
-            //draw the rendertargets to the backbuffer
+            ////draw the rendertargets to the backbuffer
             spriteBatch.Begin();
-            messageArea.Draw();
-            testArea.Draw();
+            //draw the MessageBoxes.
+            Orchid.DrawGUIMessageBoxes(Orchid.masterGuiElementList, gameTime);
+            //draw the MBs to the backbuffer, and draw that.
             spriteBatch.End();
 
-            //GraphicsDevice.Clear(Color.Green);
-
-            //draw the gui.
-            Orchid.DrawGUI(Orchid.masterGuiElementList, gameTime);
+            //draw the buttons after, so they're on top, as well as after End()
+            //because otherwise the MSB would be draw on top, because Buttons don't need
+            //to use Spritebatches here.
+            Orchid.DrawGUIButtons(Orchid.masterGuiElementList, gameTime);
 
 
             base.Draw(gameTime);

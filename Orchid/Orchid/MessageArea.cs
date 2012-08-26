@@ -15,31 +15,7 @@ using System.Net;
 
 namespace Orchid
 {
-    //public class MessageWriter : TextWriter
-    //{
 
-    //    public List<String> _output;
-
-    //    public MessageWriter(List<String> output)
-    //    {
-
-    //        this._output = output;
-    //    }
-
-
-
-    //    public override void Write(char value)
-    //    {
-    //        base.Write(value);
-    //        this._output.Add(value.ToString());
-
-    //    }
-
-    //    public override Encoding Encoding
-    //    {
-    //        get { return System.Text.Encoding.UTF8; }
-    //    }
-    //}
 
     public class Surface : GuiElement
     {
@@ -49,15 +25,18 @@ namespace Orchid
         public Color backgroundColor;
 
         public RenderTarget2D surface;
-        public Rectangle rect;
+        //public Rectangle rect;
 
-        public Surface(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch, Rectangle rect, Color colorBG) :base(game)
+        public Surface(Game1 game, GraphicsDevice graphicsDevice, 
+            SpriteBatch spriteBatch, Rectangle rect, Color colorBG) :base(game)
         {
             this.backgroundColor = colorBG;
             this.graphicsDevice = graphicsDevice;
             this.spriteBatch = spriteBatch;
             this.surface = new RenderTarget2D(graphicsDevice, rect.Width, rect.Height);
             this.rect = rect;
+            Console.WriteLine("msgbox x {0}, y {1}, w {2} h {3} ", this.rect.X,
+                    this.rect.Y, this.rect.Width, this.rect.Height);
         }
 
         public virtual  void UpdateSurface()
@@ -119,6 +98,19 @@ namespace Orchid
         //whether or not the message area display is showing the current messages or not
         public bool realtimeMsgs = true;
 
+
+        /// <summary>
+        /// Constructor class
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="graphicsDevice"></param>
+        /// <param name="spriteBatch"></param>
+        /// <param name="rect">The rectangle that represents the size of the msgbox</param>
+        /// <param name="colorBG">color of the background</param>
+        /// <param name="defaultFont"></param>
+        /// <param name="gameBG">The game's background. This could be removed</param>
+        /// <param name="msgList"> the list of strings that the messagebox will deal with</param>
+        /// <param name="moveLocked">whether or not the MB can get dragged or not</param>
         public MessageBox(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch,
                     Rectangle rect, Color colorBG,  SpriteFont defaultFont, 
                     Color gameBG, List<string> msgList, bool moveLocked = false)
@@ -143,12 +135,19 @@ namespace Orchid
 
         }
 
+        /// <summary>
+        /// Pretty self explanatory, subtracts the difference of current mouse pos 
+        /// from the last mouse pos. Could probably switch it up to make it more clear
+        /// </summary>
         public void Drag(MouseState currentMouseState, MouseState lastMouseState)
         {
             this.rect.X -= lastMouseState.X - currentMouseState.X;
             this.rect.Y -= lastMouseState.Y - currentMouseState.Y;
         }
 
+
+        //draws the items of msgList to the surface... ActiveMessages is the list of
+        //current messages dictated etiher in UpdatedActiveMessages or scrollMsgs
         public void DrawMessages()
         {
             //make sure there's at least one item inside 
@@ -169,25 +168,20 @@ namespace Orchid
             }
         }
 
+        /// <summary>
+        /// Only thing is does is draw the surface, a RenderTarget2d to the current buffer.
+        /// Has to be the BackBuffer (setRenderTarget(null))
+        /// </summary>
         public override void Draw()
         {
-            //draw border
-            //base.Draw();
-            
-            //updates the messagearea surface, with the correct SetRenderTarget value
-            //because you need to begin the spritebatch AFTER you've set the RT to what you want
-            //UpdateSurface();
 
             //draws the new surface stuff to the back buffer
-            //spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
-            //spriteBatch.Begin();
             spriteBatch.Draw(this.surface, this.rect, this.backgroundColor);
-            //spriteBatch.End();
 
         }
 
         /// <summary>
-        /// starts or stops the messages in the message area, live for pause
+        /// starts or stops the messages in the message area, live or paused.
         /// </summary>
         /// <param name="startRealtime">whether or not the messages are live or not</param>
         /// <returns>true is messages are in realtime</returns>
@@ -210,6 +204,8 @@ namespace Orchid
             }
         }
 
+        //updates the list to the last items in the message box, or leaves the MsgList alone
+        //since somewhere else may have made it, such as scrollActiveMessages
         public void UpdateActiveMessages()
         {
             //new way, with a simple list, iterate over all the most recent Items and draw those
@@ -234,8 +230,6 @@ namespace Orchid
                 //create an empty array the size of the messageLimit
                 activeMessages = new int[messageLimit];
 
-
-
                 //use the array to populate the messagearea item.
                 int index = 0;
                 for (int i = position; i < msgList.Count; i++)
@@ -251,7 +245,12 @@ namespace Orchid
             }
         }
 
-
+        /// <summary>
+        /// MessageBoxes only draw a number of items in a range of ints, so this changes
+        /// the range, from the default last to -7 or so, to whatever distance is.
+        /// </summary>
+        /// <param name="distance"></param>
+        /// <returns></returns>
         public int  ScrollMessageArea(int distance = -1)
         {
             if (!realtimeMsgs)
@@ -288,7 +287,8 @@ namespace Orchid
 
 
 
-
+        //updates the messagearea surface, with the correct SetRenderTarget value
+        //because you need to begin the spritebatch AFTER you've set the RT to what you want
         public override void UpdateSurface()
         {
 

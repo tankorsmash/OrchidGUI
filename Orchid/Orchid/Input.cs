@@ -94,15 +94,17 @@ namespace Orchid
                 //activeElement.OnMouseUp();
                 //activeElement = emptyElement;
 
+                bool guiFound = false;
                 foreach (GuiElement elem in Orchid.masterGuiElementList)
                 {
-                    if (elem.rect.Contains(mousePos))
+                    if (elem.rect.Contains(mousePos) && !guiFound)
                     {
                         if (elem is MessageBox)
                         {
                             MessageBox msgbox = (MessageBox)elem;
                             msgbox.Drag(currentMouseState, lastMouseState);
                             Console.WriteLine("dragiging");
+                            guiFound = true;
                         }
 
                         else { Console.WriteLine("is not message box"); }
@@ -130,6 +132,7 @@ namespace Orchid
                         elem.OnMouseHover();
                         hoveredElement = elem;
                     }
+                    
                 }
             }
 

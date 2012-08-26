@@ -49,15 +49,16 @@ namespace Orchid
         }
     }
 
-
+    /// <summary>
+    /// Temporrary class that can be used until a proper guielement can be used
+    /// </summary>
     public class DefaultElement : GuiElement
     {
         public  DefaultElement(Game1 game): base(game)
             
-        {
+        {        }
 
-        }
-
+        
         public override string ToString()
         {
             return "EMPTY GUI ELEMENT";
@@ -102,7 +103,15 @@ namespace Orchid
         string name { get { return _name; } set { _name = value; } }
 
 
-
+        /// <summary>
+        /// The constructor for the button class
+        /// </summary>
+        /// <param name="buttonSize">the size of the button, x y w h</param>
+        /// <param name="text">the string that will be drawn on the button</param>
+        /// <param name="game"></param>
+        /// <param name="command">the function that will be called when the button gets clicked</param>
+        /// <param name="innerColor">the inner button color</param>
+        /// <param name="textColor"></param>
         public Button(Rectangle buttonSize, string text, Game1 game, Func<int> command = null , Color innerColor = new Color(), Color? textColor = null)
             : base(buttonSize, game)
         {
@@ -180,6 +189,7 @@ namespace Orchid
             this.innerColor = buttonColor;
         }
 
+        //this is mouse down, not click. 
         public override void OnMouseDown() 
         {
             this.command();
@@ -196,6 +206,15 @@ namespace Orchid
             this.game.msgList.Add(text);
         }
 
+        /// <summary>
+        /// Builds a Rect out of the size rect. It's uneven looking right now because 
+        /// if one axis (x or y) is longer than the other, the borders will be different sizes
+        /// You'll see what I mean when you make your own button instance
+        /// 
+        /// To solve it we'd just have to calculate a borderwidth somehow, and then 
+        /// substract for the width and height at the same time, rather than having
+        /// two different values
+        /// </summary>
         public void BuildInnerRect()
         {
             //the inner portion will be 90 percent the rect of the button, leaving a 10 percent border
@@ -209,6 +228,7 @@ namespace Orchid
             //this.innerRectangle = innerRectangle;
         }
 
+        //loads content. Really don't know what it's for though.
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -221,8 +241,6 @@ namespace Orchid
             spriteBatch.Begin();
             spriteBatch.Draw(dummyTexture, rect, borderColor);
             spriteBatch.Draw(dummyTexture, innerRectangle, innerColor);
-
-            
 
             //find where to put the text. Midleft along the center of the button. '12' is half the rect of the font, which is 24
             textPos = new Vector2(rect.Center.X - (innerRectangle.Width / 2), rect.Center.Y - 12);
