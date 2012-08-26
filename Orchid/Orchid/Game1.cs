@@ -96,6 +96,7 @@ namespace Orchid
         protected override void Initialize()
         {
 
+
             //Where to spawn the XNA game screen
             //see here http://stackoverflow.com/questions/9726667/how-can-i-control-where-xna-positions-the-game-window-at-startup
             var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.
