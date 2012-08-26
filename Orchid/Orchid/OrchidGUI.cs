@@ -54,6 +54,19 @@ namespace Orchid
             }
         }
 
+        //updates all the surfaces of the MessageBoxes
+        public static void UpdateGUIMessageBoxes(List<GuiElement> elemList, GameTime gameTime)
+        {
+            foreach (GuiElement elem in elemList)
+            {
+                if (elem is MessageBox)
+                {
+                    MessageBox castedElem = (MessageBox)elem;
+                    castedElem.UpdateSurface();
+                }
+            }
+        }
+
 
 
 

@@ -103,7 +103,7 @@ namespace Orchid
                         {
                             MessageBox msgbox = (MessageBox)elem;
                             msgbox.Drag(currentMouseState, lastMouseState);
-                            Console.WriteLine("dragiging");
+                            Console.WriteLine("dragging something");
                             guiFound = true;
                         }
 

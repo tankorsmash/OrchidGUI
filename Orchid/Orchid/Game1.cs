@@ -137,6 +137,12 @@ namespace Orchid
             messageArea = new MessageBox(this, GraphicsDevice, spriteBatch, size,
                                 Color.RoyalBlue, defaultFont, this.defaultBG, msgList);
 
+            //test smallArea
+            List<string> smallList = new List<string>(new string[] {"Small MsgBox"});
+            Rectangle smallRect = new Rectangle(500,500, 125, 125);
+            MessageBox smallBox = new MessageBox(this, GraphicsDevice, spriteBatch, smallRect, 
+                Color.Red,
+                defaultFont, this.defaultBG, smallList);
 
             //test testArea out a bit
             //fill a blank list to use inside testarea
@@ -187,7 +193,7 @@ namespace Orchid
 
             base.Update(gameTime);
         }
-
+        
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -201,17 +207,13 @@ namespace Orchid
 
 
             //draw the message area textures,
-            //messageArea.Draw();
-            messageArea.UpdateSurface();
-            //draw the testArea
-            //testArea.Draw();
-            testArea.UpdateSurface();
+            Orchid.UpdateGUIMessageBoxes(Orchid.masterGuiElementList, gameTime);
 
             //reset the RenderTarget to the backbuffer
             GraphicsDevice.SetRenderTarget(null);
             GraphicsDevice.Clear(defaultBG);
 
-            ////draw the rendertargets to the backbuffer
+            ///draw the rendertargets to the backbuffer
             spriteBatch.Begin();
             //draw the MessageBoxes.
             Orchid.DrawGUIMessageBoxes(Orchid.masterGuiElementList, gameTime);
