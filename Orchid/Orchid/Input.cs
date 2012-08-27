@@ -22,6 +22,8 @@ namespace Orchid
         //the main Game instance
         Game1 theGame;
 
+        //added this comment
+
         //GuiElements cache
         GuiElement activeElement;
         GuiElement emptyElement;
