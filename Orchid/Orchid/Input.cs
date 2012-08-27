@@ -23,6 +23,7 @@ namespace Orchid
         Game1 theGame;
 
         //added this comment
+        //added this second comment to master
 
         //GuiElements cache
         GuiElement activeElement;
