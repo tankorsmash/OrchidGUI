@@ -187,37 +187,26 @@ namespace Orchid
         //current messages dictated etiher in UpdatedActiveMessages or scrollMsgs
         public void DrawMessages()
         {
-            ////make sure there's at least one item inside 
-            //if (this.msgList.Count >= 1)
-            //{
-            //    int y = 0;
-            //    foreach (int i in activeMessages)
-            //    {
-            //        spriteBatch.Begin();
-
-            //        //draw a string that goes lower as the amount of lines get drawn ~BC~
-            //        spriteBatch.DrawString(defaultFont, msgList[i], new Vector2(0, (y * 24)), Color.Black);
-                    
-            //        spriteBatch.End();
-            //        //increment y so that the next string gets printed below current line
-            //        y++;
-            //    }
-            //}            //make sure there's at least one item inside 
+            //make sure there's at least one item inside 
             if (this.msgList.Count >= 1)
             {
                 int y = 0;
+                float lastLinePos = 0;
                 foreach (int i in activeMessages)
                 {
                     spriteBatch.Begin();
 
                     //draw a string that goes lower as the amount of lines get drawn ~BC~
                     //spriteBatch.DrawString(defaultFont, msgList[i], new Vector2(0, (y * 24)), Color.Black);
-                    Rectangle relativeSize = new Rectangle(0, y * (int)largestFontHeight, this.rect.Width, this.rect.Height);
-                    TextFormatter(msgList[i], relativeSize);
+
+                    int sizeY = (y) ;
+                    Rectangle relativeSize = new Rectangle(0, sizeY, 
+                            this.rect.Width, this.rect.Height);
+                    lastLinePos =TextFormatter(msgList[i], relativeSize);
                     
                     spriteBatch.End();
                     //increment y so that the next string gets printed below current line
-                    y++;
+                    y = (int)lastLinePos +(int)largestFontHeight;
                 }
             }
         }
@@ -225,7 +214,7 @@ namespace Orchid
         // TODO: fix this up so that it accepts a bounding box rectangle, 
         // and allow the function to draw to a given surface, because right now it
         // just reuses the save RT as it was given, blindly.
-        public void TextFormatter(String html, Rectangle textAreaSize)
+        public float  TextFormatter(String html, Rectangle textAreaSize)
 
         {
 
@@ -296,8 +285,6 @@ namespace Orchid
 
                 foreach (string word in nodeText.Split(' '))
                 {
-
-
                     String word_with_space_appended = String.Format("{0} ", word);
                     //split into new line if the next set of text is too wide
                     //position.x is where the 'cursor' is, linestart.x is the leftmost side of the text
@@ -316,11 +303,13 @@ namespace Orchid
                     position.X += defaultFont.MeasureString(word_with_space_appended).X;
 
                     //spriteBatch.DrawString(defaultFont, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", new Vector2(position.X, 247), Color.Beige);
-                    //resets the height of drawn text.
                     
                 }
+                //resets the height of drawn text.
                 position.Y -= difference;
             }
+            //returns the last place the line was drawn to
+            return position.Y;
 
 
        

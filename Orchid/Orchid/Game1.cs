@@ -75,7 +75,7 @@ namespace Orchid
             this.inputHandler = new InputHandler(this);
 
             //a temp string list to make sure shit doesnt crash
-            string[] temp = { @"<b>blank1</b>", @"<b>blank2</b>", @"<b>blank3</b>", "blank4", "blank5", "blank6", "blank7", "blank8" };
+            string[] temp = { @"<b>blank1adsadka ak as asd  gsdgdfh this is my united states of whatever dshsd sdfgd  dsfgsdfggfgfg rtrafdga </b>", @"<b>blank2</b>", @"<b>blank3</b>", "blank4", "blank5", "blank6", "blank7", "blank8" };
             foreach (string item in temp)
             {
                 msgList.Add(item);
