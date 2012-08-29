@@ -75,7 +75,7 @@ namespace Orchid
             this.inputHandler = new InputHandler(this);
 
             //a temp string list to make sure shit doesnt crash
-            string[] temp = { "blank1", "blank2", "blank3", "blank4", "blank5", "blank6", "blank7", "blank8" };
+            string[] temp = { @"<b>blank1</b>", @"<b>blank2</b>", @"<b>blank3</b>", "blank4", "blank5", "blank6", "blank7", "blank8" };
             foreach (string item in temp)
             {
                 msgList.Add(item);
@@ -87,133 +87,132 @@ namespace Orchid
 
         }
 
-        // TODO: fix this up so that it accepts a bounding box rectangle, 
-        // and allow the function to draw to a given surface, because right now it
-        // just reuses the save RT as it was given, blindly.
-        public void TextFormatter(Rectangle textAreaSize)
+        //// TODO: fix this up so that it accepts a bounding box rectangle, 
+        //// and allow the function to draw to a given surface, because right now it
+        //// just reuses the save RT as it was given, blindly.
+        //public void TextFormatter(Rectangle textAreaSize)
 
-        {
+        //{
 
-            //test html string
-            // <b> for bold, <i> for italics,  <Color.a_color> ie <Color.Red> for red.
-            // combine Color.a_color with either .bold or .italics for those tags
-            // ie <Color.Red.bold> or <Color.Red.italic> . No need for both bold and italic yet.
-            //string html = @"unformatted text<b> Bolded text</b> regular text<color.Beige> italic text</color.Beige> normal text";
-            string html = @"this is a real mother fucking paragraph yo, I don't even give a <Color.Green.bold>fuck</Color.Green.bold><Color.Turquoise> how long you thought</Color.Turquoise>  the last nice was, this thing is getting <i>real motherfucker</i>. I am <b>angry</b>, but also using a lot of words, so maybe I'm not as <Color.Red>angry</Color.Red> as you though eh? You're an asshole.";
+        //    ///test html string
+        //    /// <b> for bold, <i> for italics,  <Color.a_color> ie <Color.Red> for red.
+        //    /// combine Color.a_color with either .bold or .italics for those tags
+        //    /// ie <Color.Red.bold> or <Color.Red.italic> . No need for both bold and italic yet.
+        //    string html = @"this is a real mother fucking paragraph yo, I don't even give a <Color.Green.bold>fuck</Color.Green.bold><Color.Turquoise> how long you thought</Color.Turquoise>  the last nice was, this thing is getting <i>real motherfucker</i>. I am <b>angry</b>, but also using a lot of words, so maybe I'm not as <Color.Red>angry</Color.Red> as you though eh? You're an asshole.";
 
-            //creates an HTMLDocument
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(html);
+        //    //creates an HTMLDocument
+        //    HtmlDocument doc = new HtmlDocument();
+        //    doc.LoadHtml(html);
              
              
-            //all the font heights, into a list
-            List<float> fontHeights = new List<float>();
-            //height of the regular font
-            float regularFontHeight = (float)defaultFont.MeasureString("ABCabc").Y;
-            fontHeights.Add(regularFontHeight);
-            //height of the bold font and the difference between this and regular
-            float boldFontHeight = (float)boldFont.MeasureString("ABCabc").Y;
-            fontHeights.Add(boldFontHeight);
-            //height of the italic font and the difference between this and regular
-            float italicFontHeight = (float)italicFont.MeasureString("ABCabc").Y;
-            fontHeights.Add(italicFontHeight);
+        //    //all the font heights, into a list
+        //    List<float> fontHeights = new List<float>();
+        //    //height of the regular font
+        //    float regularFontHeight = (float)defaultFont.MeasureString("ABCabc").Y;
+        //    fontHeights.Add(regularFontHeight);
+        //    //height of the bold font and the difference between this and regular
+        //    float boldFontHeight = (float)boldFont.MeasureString("ABCabc").Y;
+        //    fontHeights.Add(boldFontHeight);
+        //    //height of the italic font and the difference between this and regular
+        //    float italicFontHeight = (float)italicFont.MeasureString("ABCabc").Y;
+        //    fontHeights.Add(italicFontHeight);
 
-            //find the tallest fontsize, then make it so the smaller fonts get drawn 
-            //a bit lower than that
-            float largestFontHeight = fontHeights.Max();  
+        //    //find the tallest fontsize, then make it so the smaller fonts get drawn 
+        //    //a bit lower than that
+        //    float largestFontHeight = fontHeights.Max();  
             
-            float regularFontDifference = largestFontHeight - regularFontHeight;
-            float boldDifference = largestFontHeight - boldFontHeight;
-            float italicDifference = largestFontHeight - italicFontHeight;
+        //    float regularFontDifference = largestFontHeight - regularFontHeight;
+        //    float boldDifference = largestFontHeight - boldFontHeight;
+        //    float italicDifference = largestFontHeight - italicFontHeight;
 
-            HtmlNodeCollection nodes = doc.DocumentNode.ChildNodes;
+        //    HtmlNodeCollection nodes = doc.DocumentNode.ChildNodes;
 
-            //where to start the line printing
-            Vector2 lineStart = new Vector2(textAreaSize.X, textAreaSize.Y);
+        //    //where to start the line printing
+        //    Vector2 lineStart = new Vector2(textAreaSize.X, textAreaSize.Y);
 
-            //testing starting point
-            //spriteBatch.DrawString(defaultFont, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", lineStart, Color.Beige);
+        //    //testing starting point
+        //    //spriteBatch.DrawString(defaultFont, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", lineStart, Color.Beige);
             
-            //the starting position for the text
-            Vector2 position = lineStart;
-            //loop over all the nodes, and draw them in the right spot
-            foreach (HtmlNode node in nodes)
-            {
-                //declare local variables
-                SpriteFont font;
-                float difference;
-                Color fontColor = Color.Black;
-                string nodeText = node.InnerText;
+        //    //the starting position for the text
+        //    Vector2 position = lineStart;
+        //    //loop over all the nodes, and draw them in the right spot
+        //    foreach (HtmlNode node in nodes)
+        //    {
+        //        //declare local variables
+        //        SpriteFont font;
+        //        float difference;
+        //        Color fontColor = Color.Black;
+        //        string nodeText = node.InnerText;
 
 
-                //check for formatting
-                if (node.Name.StartsWith("color."))
-                {
-                    string textColor = node.Name.Split('.')[1];
-                    //fontColor = Color.Red;
-                    System.Drawing.Color tempColor = System.Drawing.Color.FromName(textColor);
-                    fontColor = new Color(tempColor.R, tempColor.G, tempColor.B, tempColor.A);
-                    //fontColor = (Color)typeof(Color).GetField(node.Name).GetValue(null);
-                    Console.WriteLine(fontColor);
-                }
-                if (node.Name == "b" | node.Name.Contains(".bold"))
-                {
-                    font = boldFont;
-                    difference = boldDifference;
+        //        //check for formatting
+        //        if (node.Name.StartsWith("color."))
+        //        {
+        //            string textColor = node.Name.Split('.')[1];
+        //            //fontColor = Color.Red;
+        //            System.Drawing.Color tempColor = System.Drawing.Color.FromName(textColor);
+        //            fontColor = new Color(tempColor.R, tempColor.G, tempColor.B, tempColor.A);
+        //            //fontColor = (Color)typeof(Color).GetField(node.Name).GetValue(null);
+        //            Console.WriteLine(fontColor);
+        //        }
+        //        if (node.Name == "b" | node.Name.Contains(".bold"))
+        //        {
+        //            font = boldFont;
+        //            difference = boldDifference;
                        
-                }
+        //        }
 
-                else if (node.Name == "i" | node.Name.Contains(".italic"))
-                {
-                    font = italicFont;
-                    difference = italicDifference;
-                }
+        //        else if (node.Name == "i" | node.Name.Contains(".italic"))
+        //        {
+        //            font = italicFont;
+        //            difference = italicDifference;
+        //        }
 
-                else
-                {
-                    font = defaultFont;
-                    difference = regularFontDifference;
-                }
+        //        else
+        //        {
+        //            font = defaultFont;
+        //            difference = regularFontDifference;
+        //        }
 
-                //adjust for height, but it doesn't work
-                position.Y += difference ;
+        //        //adjust for height, but it doesn't work
+        //        position.Y += difference ;
 
-                //loop over all the words in nodeText, split on spaces and 
-                // then make sure that their width isnt too long, instead of an entire lines
-                // width
+        //        //loop over all the words in nodeText, split on spaces and 
+        //        // then make sure that their width isnt too long, instead of an entire lines
+        //        // width
 
-                foreach (string word in nodeText.Split(' '))
-                {
+        //        foreach (string word in nodeText.Split(' '))
+        //        {
 
 
-                    String word_with_space_appended = String.Format("{0} ", word);
-                    //split into new line if the next set of text is too wide
-                    //position.x is where the 'cursor' is, linestart.x is the leftmost side of the text
-                    // box. 
-                    if ((position.X - lineStart.X) + font.MeasureString(word_with_space_appended).X >= textAreaSize.Width)
-                    {
-                        //if the string is too wide, go down a line,
-                        position.Y += largestFontHeight;
-                        //reset the cursor to the leftmost postion
-                        position.X = lineStart.X;
-                    }
+        //            String word_with_space_appended = String.Format("{0} ", word);
+        //            //split into new line if the next set of text is too wide
+        //            //position.x is where the 'cursor' is, linestart.x is the leftmost side of the text
+        //            // box. 
+        //            if ((position.X - lineStart.X) + font.MeasureString(word_with_space_appended).X >= textAreaSize.Width)
+        //            {
+        //                //if the string is too wide, go down a line,
+        //                position.Y += largestFontHeight;
+        //                //reset the cursor to the leftmost postion
+        //                position.X = lineStart.X;
+        //            }
 
-                    //draw the word_with_space_appended
-                    spriteBatch.DrawString(font, word_with_space_appended, position, fontColor);
-                    //moves the position over to the end of current node's text
-                    position.X += defaultFont.MeasureString(word_with_space_appended).X;
+        //            //draw the word_with_space_appended
+        //            spriteBatch.DrawString(font, word_with_space_appended, position, fontColor);
+        //            //moves the position over to the end of current node's text
+        //            position.X += defaultFont.MeasureString(word_with_space_appended).X;
 
-                    //spriteBatch.DrawString(defaultFont, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", new Vector2(position.X, 247), Color.Beige);
-                    //resets the height of drawn text.
+        //            //spriteBatch.DrawString(defaultFont, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", new Vector2(position.X, 247), Color.Beige);
+        //            //resets the height of drawn text.
                     
-                }
-                position.Y -= difference;
-            }
+        //        }
+        //        position.Y -= difference;
+        //    }
 
 
        
 
-        }
+        //}
         
         
         
@@ -364,8 +363,8 @@ namespace Orchid
             //draw the MessageBoxes.
             Orchid.DrawGUIMessageBoxes(Orchid.masterGuiElementList, gameTime);
 
-            Rectangle size = new Rectangle(400, 300, 300, 250);
-            TextFormatter(size);
+            //Rectangle size = new Rectangle(400, 300, 300, 250);
+            //TextFormatter(size);
             //text formatting fooling
 
             //draw the MBs to the backbuffer, and draw that.

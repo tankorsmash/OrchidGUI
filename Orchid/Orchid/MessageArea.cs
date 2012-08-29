@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Media;
 using System.IO;
 using System.Text;
 using System.Net;
+using HtmlAgilityPack;
 
 namespace Orchid
 {
@@ -98,6 +99,16 @@ namespace Orchid
         //whether or not the message area display is showing the current messages or not
         public bool realtimeMsgs = true;
 
+        //fontsizes
+        float regularFontHeight;
+        float boldFontHeight;
+        float italicFontHeight;
+        float largestFontHeight;
+
+        float regularFontDifference;
+        float boldDifference;
+        float italicDifference;
+
 
         /// <summary>
         /// Constructor class
@@ -123,6 +134,8 @@ namespace Orchid
             this.defaultFont = defaultFont;
             this.gameBG = gameBG;
 
+            CalculateFontSizes();
+
             if (moveLocked)
             {
                 //do nothing
@@ -132,6 +145,30 @@ namespace Orchid
                 Orchid.masterGuiElementList.Add(this);
                 Console.WriteLine("added a msgbox to list");
             }
+
+        }
+
+        public void CalculateFontSizes()
+        {           
+            //all the font heights, into a list
+            List<float> fontHeights = new List<float>();
+            //height of the regular font
+             regularFontHeight = (float)Game1.defaultFont.MeasureString("ABCabc").Y;
+            fontHeights.Add(regularFontHeight);
+            //height of the bold font and the difference between this and regular
+             boldFontHeight = (float)Game1.boldFont.MeasureString("ABCabc").Y;
+            fontHeights.Add(boldFontHeight);
+            //height of the italic font and the difference between this and regular
+             italicFontHeight = (float)Game1.italicFont.MeasureString("ABCabc").Y;
+            fontHeights.Add(italicFontHeight);
+
+            //find the tallest fontsize, then make it so the smaller fonts get drawn 
+            //a bit lower than that
+             largestFontHeight = fontHeights.Max();
+
+             regularFontDifference = largestFontHeight - regularFontHeight;
+             boldDifference = largestFontHeight - boldFontHeight;
+             italicDifference = largestFontHeight - italicFontHeight;
 
         }
 
@@ -150,7 +187,22 @@ namespace Orchid
         //current messages dictated etiher in UpdatedActiveMessages or scrollMsgs
         public void DrawMessages()
         {
-            //make sure there's at least one item inside 
+            ////make sure there's at least one item inside 
+            //if (this.msgList.Count >= 1)
+            //{
+            //    int y = 0;
+            //    foreach (int i in activeMessages)
+            //    {
+            //        spriteBatch.Begin();
+
+            //        //draw a string that goes lower as the amount of lines get drawn ~BC~
+            //        spriteBatch.DrawString(defaultFont, msgList[i], new Vector2(0, (y * 24)), Color.Black);
+                    
+            //        spriteBatch.End();
+            //        //increment y so that the next string gets printed below current line
+            //        y++;
+            //    }
+            //}            //make sure there's at least one item inside 
             if (this.msgList.Count >= 1)
             {
                 int y = 0;
@@ -159,13 +211,120 @@ namespace Orchid
                     spriteBatch.Begin();
 
                     //draw a string that goes lower as the amount of lines get drawn ~BC~
-                    spriteBatch.DrawString(defaultFont, msgList[i], new Vector2(0, (y * 24)), Color.Black);
+                    //spriteBatch.DrawString(defaultFont, msgList[i], new Vector2(0, (y * 24)), Color.Black);
+                    Rectangle relativeSize = new Rectangle(0, y * (int)largestFontHeight, this.rect.Width, this.rect.Height);
+                    TextFormatter(msgList[i], relativeSize);
                     
                     spriteBatch.End();
                     //increment y so that the next string gets printed below current line
                     y++;
                 }
             }
+        }
+
+        // TODO: fix this up so that it accepts a bounding box rectangle, 
+        // and allow the function to draw to a given surface, because right now it
+        // just reuses the save RT as it was given, blindly.
+        public void TextFormatter(String html, Rectangle textAreaSize)
+
+        {
+
+            ///test html string
+            /// <b> for bold, <i> for italics,  <Color.a_color> ie <Color.Red> for red.
+            /// combine Color.a_color with either .bold or .italics for those tags
+            /// ie <Color.Red.bold> or <Color.Red.italic> . No need for both bold and italic yet.
+            //string html = @"this is a real mother fucking paragraph yo, I don't even give a <Color.Green.bold>fuck</Color.Green.bold><Color.Turquoise> how long you thought</Color.Turquoise>  the last nice was, this thing is getting <i>real motherfucker</i>. I am <b>angry</b>, but also using a lot of words, so maybe I'm not as <Color.Red>angry</Color.Red> as you though eh? You're an asshole.";
+
+            //creates an HTMLDocument
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
+            HtmlNodeCollection nodes = doc.DocumentNode.ChildNodes;
+
+            //where to start the line printing
+            Vector2 lineStart = new Vector2(textAreaSize.X, textAreaSize.Y);
+
+            //testing starting point
+            //spriteBatch.DrawString(defaultFont, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", lineStart, Color.Beige);
+            
+            //the starting position for the text
+            Vector2 position = lineStart;
+            //loop over all the nodes, and draw them in the right spot
+            foreach (HtmlNode node in nodes)
+            {
+                //declare local variables
+                SpriteFont font;
+                float difference;
+                Color fontColor = Color.Black;
+                string nodeText = node.InnerText;
+
+
+                //check for formatting
+                if (node.Name.StartsWith("color."))
+                {
+                    string textColor = node.Name.Split('.')[1];
+                    //fontColor = Color.Red;
+                    System.Drawing.Color tempColor = System.Drawing.Color.FromName(textColor);
+                    fontColor = new Color(tempColor.R, tempColor.G, tempColor.B, tempColor.A);
+                    //fontColor = (Color)typeof(Color).GetField(node.Name).GetValue(null);
+                    Console.WriteLine(fontColor);
+                }
+                if (node.Name == "b" | node.Name.Contains(".bold"))
+                {
+                    font = Game1.boldFont;
+                    difference = boldDifference;
+                       
+                }
+
+                else if (node.Name == "i" | node.Name.Contains(".italic"))
+                {
+                    font = Game1.italicFont;
+                    difference = italicDifference;
+                }
+
+                else
+                {
+                    font = Game1.defaultFont;
+                    difference = regularFontDifference;
+                }
+
+                //adjust for height, but it doesn't work
+                position.Y += difference ;
+
+                //loop over all the words in nodeText, split on spaces and 
+                // then make sure that their width isnt too long, instead of an entire lines
+                // width
+
+                foreach (string word in nodeText.Split(' '))
+                {
+
+
+                    String word_with_space_appended = String.Format("{0} ", word);
+                    //split into new line if the next set of text is too wide
+                    //position.x is where the 'cursor' is, linestart.x is the leftmost side of the text
+                    // box. 
+                    if ((position.X - lineStart.X) + font.MeasureString(word_with_space_appended).X >= textAreaSize.Width)
+                    {
+                        //if the string is too wide, go down a line,
+                        position.Y += largestFontHeight;
+                        //reset the cursor to the leftmost postion
+                        position.X = lineStart.X;
+                    }
+
+                    //draw the word_with_space_appended
+                    spriteBatch.DrawString(font, word_with_space_appended, position, fontColor);
+                    //moves the position over to the end of current node's text
+                    position.X += defaultFont.MeasureString(word_with_space_appended).X;
+
+                    //spriteBatch.DrawString(defaultFont, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", new Vector2(position.X, 247), Color.Beige);
+                    //resets the height of drawn text.
+                    
+                }
+                position.Y -= difference;
+            }
+
+
+       
+
         }
 
         /// <summary>
