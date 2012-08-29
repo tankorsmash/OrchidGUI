@@ -105,7 +105,7 @@ namespace Orchid
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);
              
-
+             
             //all the font heights, into a list
             List<float> fontHeights = new List<float>();
             //height of the regular font
