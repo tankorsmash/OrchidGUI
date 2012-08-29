@@ -98,12 +98,13 @@ namespace Orchid
             // <b> for bold, <i> for italics,  <Color.a_color> ie <Color.Red> for red.
             // combine Color.a_color with either .bold or .italics for those tags
             // ie <Color.Red.bold> or <Color.Red.italic> . No need for both bold and italic yet.
-            string html = @"unformatted text<b> Bolded text</b> regular text<color.Beige> italic text</color.Beige> normal text";
+            //string html = @"unformatted text<b> Bolded text</b> regular text<color.Beige> italic text</color.Beige> normal text";
+            string html = @"this is a real mother fucking paragraph yo, I don't even give a <Color.Green.bold>fuck</Color.Green.bold><Color.Turquoise> how long you thought</Color.Turquoise>  the last nice was, this thing is getting <i>real motherfucker</i>. I am <b>angry</b>, but also using a lot of words, so maybe I'm not as <Color.Red>angry</Color.Red> as you though eh? You're an asshole.";
 
             //creates an HTMLDocument
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);
-
+             
 
             //all the font heights, into a list
             List<float> fontHeights = new List<float>();
@@ -128,7 +129,7 @@ namespace Orchid
             HtmlNodeCollection nodes = doc.DocumentNode.ChildNodes;
 
             //where to start the line printing
-            Vector2 lineStart = new Vector2(200, 200);
+            Vector2 lineStart = new Vector2(textAreaSize.X, textAreaSize.Y);
 
             //testing starting point
             //spriteBatch.DrawString(defaultFont, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", lineStart, Color.Beige);
@@ -181,20 +182,32 @@ namespace Orchid
                 // then make sure that their width isnt too long, instead of an entire lines
                 // width
 
-                //split into new line if the next set of text is too wide
-                if (position.X + font.MeasureString(nodeText).X >= textAreaSize.Width)
+                foreach (string word in nodeText.Split(' '))
                 {
-                    position.Y += largestFontHeight;
-                    position.X = lineStart.X;
+
+
+                    String word_with_space_appended = String.Format("{0} ", word);
+                    //split into new line if the next set of text is too wide
+                    //position.x is where the 'cursor' is, linestart.x is the leftmost side of the text
+                    // box. 
+                    if ((position.X - lineStart.X) + font.MeasureString(word_with_space_appended).X >= textAreaSize.Width)
+                    {
+                        //if the string is too wide, go down a line,
+                        position.Y += largestFontHeight;
+                        //reset the cursor to the leftmost postion
+                        position.X = lineStart.X;
+                    }
+
+                    //draw the word_with_space_appended
+                    spriteBatch.DrawString(font, word_with_space_appended, position, fontColor);
+                    //moves the position over to the end of current node's text
+                    position.X += defaultFont.MeasureString(word_with_space_appended).X;
+
+                    //spriteBatch.DrawString(defaultFont, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", new Vector2(position.X, 247), Color.Beige);
+                    //resets the height of drawn text.
+                    
                 }
-
-                spriteBatch.DrawString(font, nodeText, position, fontColor);
-                //moves the position over to the end of current node's text
-                position.X += defaultFont.MeasureString(nodeText).X;
-
-                //spriteBatch.DrawString(defaultFont, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", new Vector2(position.X, 247), Color.Beige);
-                //resets the height of drawn text.
-                position.Y -= difference ;
+                position.Y -= difference;
             }
 
 
@@ -351,7 +364,7 @@ namespace Orchid
             //draw the MessageBoxes.
             Orchid.DrawGUIMessageBoxes(Orchid.masterGuiElementList, gameTime);
 
-            Rectangle size = new Rectangle(0, 0, 25, 25);
+            Rectangle size = new Rectangle(400, 300, 300, 250);
             TextFormatter(size);
             //text formatting fooling
 
