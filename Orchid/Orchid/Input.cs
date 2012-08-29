@@ -15,6 +15,20 @@ using System.Net;
 
 namespace Orchid
 {
+    /// <summary>
+    /// a gamestate representing where to send the input.
+    /// </summary>
+    public  class GameState
+    {
+
+        public string name;
+
+        public GameState(string stateName)
+        {
+            this.name = stateName;
+        }
+    }
+
     public class InputHandler
     {
 
@@ -22,8 +36,7 @@ namespace Orchid
         //the main Game instance
         Game1 theGame;
 
-        //added this comment
-        //added this second comment to master
+
 
         //GuiElements cache
         GuiElement activeElement;
@@ -84,8 +97,25 @@ namespace Orchid
             {
                 //Console.WriteLine("trying for a mouse up");
                 activeElement.OnMouseUp();
-
                 activeElement = emptyElement;
+                foreach (GuiElement elem in guiElementList)
+                {
+                    if (elem is TextEntry)
+                    {
+                        if (elem.rect.Contains(mousePos))
+                        {
+                            TextEntry castedElem = (TextEntry)elem;
+                            castedElem.OnMouseDown();
+
+                            activeElement = elem;
+
+                            theGame.currentGameState = theGame.typingGameState;
+
+                        }
+                    }
+                }
+
+               
 
 
             }
@@ -149,43 +179,79 @@ namespace Orchid
             //update current key state
             currentKeyState = Keyboard.GetState();
 
-            if (KeyPressed(Keys.S))
+            //if the gameState is playing, then do the following stuff, 
+            if (game.currentGameState == game.playingGameState)
             {
+                if (KeyPressed(Keys.T))
+                {
+
+
+                }
+
+                //if you hit espace exit 
+                if (KeyPressed(Keys.Escape))
+                {
+                    game.Exit();
+                }
+
+                if (KeyPressed(Keys.P))
+                {
+                    game.messageArea.PauseMessageArea();
+                }
+                if (KeyPressed(Keys.U))
+                {
+                    game.messageArea.PauseMessageArea(true);
+                }
+
+                //scroll messages back  5 lines
+                if (KeyPressed(Keys.W))
+                {
+                    game.messageArea.ScrollMessageArea(-5);
+                }
+                //scroll messages forward 5 lines
+                if (KeyPressed(Keys.S))
+                {
+                    game.messageArea.ScrollMessageArea(5);
+                }
+
+                if (KeyPressed(Keys.F))
+                {
+                    game.messageArea.msgList.Add("<Color.Magenta.bold>This is bold and magenta text </Color.Magenta.bold> <i> Press F do do this again</i>");
+                }
+
 
             }
+            else if (game.currentGameState == game.typingGameState)
+            {
+                //check is a key was released
+                foreach (Keys key in lastKeyState.GetPressedKeys())
+                {
+                    if (KeyPressed(key))
+                    {
+                        TextEntry castedElem = (TextEntry)activeElement;
 
-            //if you hit espace exit 
-            if (KeyPressed(Keys.Escape))
-            {
-                game.Exit();
-            }
+                        //if the key was backspace, remove last item in typed
+                        if (key == Keys.Back)
+                        {
+                            castedElem.typed.RemoveAt(castedElem.typed.Count - 1);
+                        }
 
-            if (KeyPressed(Keys.P))
-            {
-                game.messageArea.PauseMessageArea();
-            }
-            if (KeyPressed(Keys.U))
-            {
-                game.messageArea.PauseMessageArea(true);
-            }
+                        else if (key == Keys.Escape)
+                        {
+                            theGame.currentGameState = theGame.playingGameState;
+                        }
+                        else
+                        {
+                            castedElem.typed.Add(key.ToString());
+                        }
 
-            //scroll messages back  5 lines
-            if (KeyPressed(Keys.W))
-            {
-                game.messageArea.ScrollMessageArea(-5);
-            }
-            //scroll messages forward 5 lines
-            if (KeyPressed(Keys.S))
-            {
-                game.messageArea.ScrollMessageArea(5);
-            }
+                    }
 
-            if (KeyPressed(Keys.I))
-            {
-                game.messageArea.msgList.Add("<Color.Magenta.bold>This is bold  magenta text </Color.Magenta.bold>");
-            }
+                }
 
-            //save the current keystate as last keystate for next loop
+                //save the current keystate as last keystate for next loop
+
+            }
             lastKeyState = currentKeyState;
         }
 

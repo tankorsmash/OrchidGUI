@@ -40,6 +40,19 @@ namespace Orchid
         }
 
 
+        //updates all the surfaces of the MessageBoxes
+        public static void UpdateGUIMessageBoxes(List<GuiElement> elemList, GameTime gameTime)
+        {
+            foreach (GuiElement elem in elemList)
+            {
+                if (elem is MessageBox)
+                {
+                    MessageBox castedElem = (MessageBox)elem;
+                    castedElem.UpdateSurface();
+                }
+            }
+        }
+
         //draws all the messageBoxes. Loops over all the gui elements, so it might get slow later
         public static void DrawGUIMessageBoxes(List<GuiElement> elemList, GameTime gameTime)
         {
@@ -54,21 +67,31 @@ namespace Orchid
             }
         }
 
-        //updates all the surfaces of the MessageBoxes
-        public static void UpdateGUIMessageBoxes(List<GuiElement> elemList, GameTime gameTime)
+
+
+
+
+        public static void DrawGUITextEntrys(List<GuiElement> elemList, GameTime gameTime)
         {
             foreach (GuiElement elem in elemList)
             {
-                if (elem is MessageBox)
+                if (elem is TextEntry)
                 {
-                    MessageBox castedElem = (MessageBox)elem;
+                    TextEntry castedElem = (TextEntry)elem;
+                    castedElem.Draw();
+                }
+            }
+        }
+        public static void UpdateGUITextEntrys(List<GuiElement> elemList, GameTime gameTime)
+        {
+            foreach (GuiElement elem in elemList)
+            {
+                if (elem is TextEntry)
+                {
+                    TextEntry castedElem = (TextEntry)elem;
                     castedElem.UpdateSurface();
                 }
             }
         }
-
-
-
-
     }
 }
