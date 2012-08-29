@@ -190,18 +190,19 @@ namespace Orchid
             //make sure there's at least one item inside 
             if (this.msgList.Count >= 1)
             {
+                //y is where the line gets drawn, relative to the RT
                 int y = 0;
+                //last line pos is where the last line was drawn
                 float lastLinePos = 0;
+                //activemesssages is a list of ints, index of which messages to be drawn
                 foreach (int i in activeMessages)
                 {
                     spriteBatch.Begin();
 
                     //draw a string that goes lower as the amount of lines get drawn ~BC~
-                    //spriteBatch.DrawString(defaultFont, msgList[i], new Vector2(0, (y * 24)), Color.Black);
-
-                    int sizeY = (y) ;
-                    Rectangle relativeSize = new Rectangle(0, sizeY, 
+                    Rectangle relativeSize = new Rectangle(0, y, 
                             this.rect.Width, this.rect.Height);
+                    //format each string and draw it
                     lastLinePos =TextFormatter(msgList[i], relativeSize);
                     
                     spriteBatch.End();
