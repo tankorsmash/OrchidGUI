@@ -87,24 +87,22 @@ namespace Orchid
 
         }
 
+        // TODO: fix this up so that it accepts a bounding box rectangle, 
+        // and allow the function to draw to a given surface, because right now it
+        // just reuses the save RT as it was given, blindly.
         public void TextFormatter()
         {
+
+            //test html string
+            // <b> for bold, <i> for italics,  <Color.a_color> ie <Color.Red> for red.
+            // combine Color.a_color with either .bold or .italics for those tags
+            // ie <Color.Red.bold> or <Color.Red.italic> . No need for both bold and italic yet.
             string html = @"unformatted text<b> Bolded text</b> regular text<color.Beige> italic text</color.Beige> normal text";
 
-
+            //creates an HTMLDocument
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);
 
-
-            ////height of the regular font
-            //int regularFontHeight = (int)defaultFont.MeasureString("ABCabc").Y;
-            //int regularFontDifference = 0;
-            ////height of the bold font and the difference between this and regular
-            //int boldFontHeight = (int)boldFont.MeasureString("ABCabc").Y;
-            //int boldDifference = regularFontHeight - boldFontHeight;
-            ////height of the italic font and the difference between this and regular
-            //int italicFontHeight = (int)italicFont.MeasureString("ABCabc").Y;
-            //int italicDifference = regularFontHeight - italicFontHeight;
 
             //all the font heights, into a list
             List<float> fontHeights = new List<float>();
@@ -130,9 +128,11 @@ namespace Orchid
 
             //where to start the line printing
             Vector2 lineStart = new Vector2(200, 200);
+
             //testing starting point
             //spriteBatch.DrawString(defaultFont, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", lineStart, Color.Beige);
             
+            //the starting position for the text
             Vector2 position = lineStart;
             //loop over all the nodes, and draw them in the right spot
             foreach (HtmlNode node in nodes)
@@ -171,15 +171,15 @@ namespace Orchid
                     difference = regularFontDifference;
                 }
 
+                //adjust for height, but it doesn't work
                 position.Y += difference ;
-                //Console.WriteLine(difference);
-
 
                 spriteBatch.DrawString(font, node.InnerText, position, fontColor);
+                //moves the position over to the end of current node's text
                 position.X += defaultFont.MeasureString(node.InnerText).X;
 
                 //spriteBatch.DrawString(defaultFont, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", new Vector2(position.X, 247), Color.Beige);
-
+                //resets the height of drawn text.
                 position.Y -= difference ;
             }
 
