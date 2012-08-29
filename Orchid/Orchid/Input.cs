@@ -180,6 +180,11 @@ namespace Orchid
                 game.messageArea.ScrollMessageArea(5);
             }
 
+            if (KeyPressed(Keys.I))
+            {
+                game.messageArea.msgList.Add("<Color.Magenta.bold>This is bold  magenta text </Color.Magenta.bold>");
+            }
+
             //save the current keystate as last keystate for next loop
             lastKeyState = currentKeyState;
         }
