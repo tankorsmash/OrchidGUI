@@ -90,7 +90,8 @@ namespace Orchid
         // TODO: fix this up so that it accepts a bounding box rectangle, 
         // and allow the function to draw to a given surface, because right now it
         // just reuses the save RT as it was given, blindly.
-        public void TextFormatter()
+        public void TextFormatter(Rectangle textAreaSize)
+
         {
 
             //test html string
@@ -141,6 +142,8 @@ namespace Orchid
                 SpriteFont font;
                 float difference;
                 Color fontColor = Color.Black;
+                string nodeText = node.InnerText;
+
 
                 //check for formatting
                 if (node.Name.StartsWith("color."))
@@ -174,9 +177,20 @@ namespace Orchid
                 //adjust for height, but it doesn't work
                 position.Y += difference ;
 
-                spriteBatch.DrawString(font, node.InnerText, position, fontColor);
+                //loop over all the words in nodeText, split on spaces and 
+                // then make sure that their width isnt too long, instead of an entire lines
+                // width
+
+                //split into new line if the next set of text is too wide
+                if (position.X + font.MeasureString(nodeText).X >= textAreaSize.Width)
+                {
+                    position.Y += largestFontHeight;
+                    position.X = lineStart.X;
+                }
+
+                spriteBatch.DrawString(font, nodeText, position, fontColor);
                 //moves the position over to the end of current node's text
-                position.X += defaultFont.MeasureString(node.InnerText).X;
+                position.X += defaultFont.MeasureString(nodeText).X;
 
                 //spriteBatch.DrawString(defaultFont, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", new Vector2(position.X, 247), Color.Beige);
                 //resets the height of drawn text.
@@ -337,7 +351,8 @@ namespace Orchid
             //draw the MessageBoxes.
             Orchid.DrawGUIMessageBoxes(Orchid.masterGuiElementList, gameTime);
 
-            TextFormatter();
+            Rectangle size = new Rectangle(0, 0, 25, 25);
+            TextFormatter(size);
             //text formatting fooling
 
             //draw the MBs to the backbuffer, and draw that.
