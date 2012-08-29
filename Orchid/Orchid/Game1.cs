@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 using System.IO;
 using System.Text;
 using System.Net;
-
+using HtmlAgilityPack;
 
 
 
@@ -33,7 +33,9 @@ namespace Orchid
         public MessageBox testArea;
 
         //font
-        public static  SpriteFont defaultFont;
+        public static SpriteFont defaultFont;
+        public static SpriteFont boldFont; 
+        public static SpriteFont italicFont; 
 
         //input
         InputHandler inputHandler;
@@ -85,7 +87,109 @@ namespace Orchid
 
         }
 
+        public void TextFormatter()
+        {
+            string html = @"unformatted text<b> Bolded text</b> regular text<color.Beige> italic text</color.Beige> normal text";
 
+
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
+
+
+            ////height of the regular font
+            //int regularFontHeight = (int)defaultFont.MeasureString("ABCabc").Y;
+            //int regularFontDifference = 0;
+            ////height of the bold font and the difference between this and regular
+            //int boldFontHeight = (int)boldFont.MeasureString("ABCabc").Y;
+            //int boldDifference = regularFontHeight - boldFontHeight;
+            ////height of the italic font and the difference between this and regular
+            //int italicFontHeight = (int)italicFont.MeasureString("ABCabc").Y;
+            //int italicDifference = regularFontHeight - italicFontHeight;
+
+            //all the font heights, into a list
+            List<float> fontHeights = new List<float>();
+            //height of the regular font
+            float regularFontHeight = (float)defaultFont.MeasureString("ABCabc").Y;
+            fontHeights.Add(regularFontHeight);
+            //height of the bold font and the difference between this and regular
+            float boldFontHeight = (float)boldFont.MeasureString("ABCabc").Y;
+            fontHeights.Add(boldFontHeight);
+            //height of the italic font and the difference between this and regular
+            float italicFontHeight = (float)italicFont.MeasureString("ABCabc").Y;
+            fontHeights.Add(italicFontHeight);
+
+            //find the tallest fontsize, then make it so the smaller fonts get drawn 
+            //a bit lower than that
+            float largestFontHeight = fontHeights.Max();  
+            
+            float regularFontDifference = largestFontHeight - regularFontHeight;
+            float boldDifference = largestFontHeight - boldFontHeight;
+            float italicDifference = largestFontHeight - italicFontHeight;
+
+            HtmlNodeCollection nodes = doc.DocumentNode.ChildNodes;
+
+            //where to start the line printing
+            Vector2 lineStart = new Vector2(200, 200);
+            //testing starting point
+            //spriteBatch.DrawString(defaultFont, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", lineStart, Color.Beige);
+            
+            Vector2 position = lineStart;
+            //loop over all the nodes, and draw them in the right spot
+            foreach (HtmlNode node in nodes)
+            {
+                //declare local variables
+                SpriteFont font;
+                float difference;
+                Color fontColor = Color.Black;
+
+                //check for formatting
+                if (node.Name.StartsWith("color."))
+                {
+                    string textColor = node.Name.Split('.')[1];
+                    //fontColor = Color.Red;
+                    System.Drawing.Color tempColor = System.Drawing.Color.FromName(textColor);
+                    fontColor = new Color(tempColor.R, tempColor.G, tempColor.B, tempColor.A);
+                    //fontColor = (Color)typeof(Color).GetField(node.Name).GetValue(null);
+                    Console.WriteLine(fontColor);
+                }
+                if (node.Name == "b" | node.Name.Contains(".bold"))
+                {
+                    font = boldFont;
+                    difference = boldDifference;
+                       
+                }
+
+                else if (node.Name == "i" | node.Name.Contains(".italic"))
+                {
+                    font = italicFont;
+                    difference = italicDifference;
+                }
+
+                else
+                {
+                    font = defaultFont;
+                    difference = regularFontDifference;
+                }
+
+                position.Y += difference ;
+                //Console.WriteLine(difference);
+
+
+                spriteBatch.DrawString(font, node.InnerText, position, fontColor);
+                position.X += defaultFont.MeasureString(node.InnerText).X;
+
+                //spriteBatch.DrawString(defaultFont, "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", new Vector2(position.X, 247), Color.Beige);
+
+                position.Y -= difference ;
+            }
+
+
+       
+
+        }
+        
+        
+        
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -140,6 +244,8 @@ namespace Orchid
 
             //load font
             defaultFont = Content.Load<SpriteFont>("DefaultFont");
+            boldFont = Content.Load<SpriteFont>("BoldFont");
+            italicFont = Content.Load<SpriteFont>("ItalicFont");
 
 
             //create a message area at the bottom of the scree, 1/4 of the screen.
@@ -230,6 +336,10 @@ namespace Orchid
             spriteBatch.Begin();
             //draw the MessageBoxes.
             Orchid.DrawGUIMessageBoxes(Orchid.masterGuiElementList, gameTime);
+
+            TextFormatter();
+            //text formatting fooling
+
             //draw the MBs to the backbuffer, and draw that.
             spriteBatch.End();
 
