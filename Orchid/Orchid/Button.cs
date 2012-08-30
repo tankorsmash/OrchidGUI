@@ -252,7 +252,9 @@ namespace Orchid
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(dummyTexture, rect, borderColor);
+            Color newColor = new Color(borderColor.R,borderColor.G,  borderColor.B, 200);
+
+            spriteBatch.Draw(dummyTexture, rect, newColor);
             spriteBatch.Draw(dummyTexture, innerRectangle, innerColor);
 
             //find where to put the text. Midleft along the center of the button. '12' is half the rect of the font, which is 24

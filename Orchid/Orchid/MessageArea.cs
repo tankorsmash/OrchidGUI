@@ -54,14 +54,14 @@ namespace Orchid
         {
 
             //change the renderTarger (pygame surface)
-            graphicsDevice.SetRenderTarget(surface);
-            //clear it, like normal
+            graphicsDevice.SetRenderTarget(surface);   
+            //clear it, like normal  
             graphicsDevice.Clear(Color.Thistle);   
-
+             
             //make some SB draws
-            spriteBatch.Begin();
+            spriteBatch.Begin(); 
 
-            spriteBatch.End();
+            spriteBatch.End(); 
 
             //then reset the drawing surface to null, backbuffer.
             graphicsDevice.SetRenderTarget(null);
@@ -73,7 +73,7 @@ namespace Orchid
         }
 
         public virtual void Draw()
-        {
+        { 
             //spriteBatch.Begin();
 
 
@@ -325,19 +325,16 @@ namespace Orchid
         }
 
 
-       
-
-        //}
-
         /// <summary>
         /// Only thing is does is draw the surface, a RenderTarget2d to the current buffer.
         /// Has to be the BackBuffer (setRenderTarget(null))
         /// </summary>
-        public override void Draw()
+        public override void Draw() 
         {
 
             //draws the new surface stuff to the back buffer
-            spriteBatch.Draw(this.surface, this.rect, this.backgroundColor);
+            Color newColor = new Color(this.backgroundColor.R, this.backgroundColor.G, this.backgroundColor.B, 100);
+            spriteBatch.Draw(this.surface, this.rect, newColor);
 
         }
 
@@ -473,5 +470,7 @@ namespace Orchid
             //return surface;
         } 
     }
+
+    
 
 }
