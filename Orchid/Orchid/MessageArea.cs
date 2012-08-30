@@ -56,7 +56,7 @@ namespace Orchid
             //change the renderTarger (pygame surface)
             graphicsDevice.SetRenderTarget(surface);
             //clear it, like normal
-            graphicsDevice.Clear(Color.Thistle);  
+            graphicsDevice.Clear(Color.Thistle);   
 
             //make some SB draws
             spriteBatch.Begin();
