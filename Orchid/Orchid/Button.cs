@@ -252,7 +252,7 @@ namespace Orchid
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            Color newColor = new Color(borderColor.R,borderColor.G,  borderColor.B, 200);
+            Color newColor = new Color(borderColor.R ,borderColor.G,  borderColor.B );
 
             spriteBatch.Draw(dummyTexture, rect, newColor);
             spriteBatch.Draw(dummyTexture, innerRectangle, innerColor);

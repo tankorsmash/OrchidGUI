@@ -23,6 +23,8 @@ namespace Orchid
         protected GraphicsDevice graphicsDevice;
         protected SpriteBatch spriteBatch;
 
+        //base color is the color without alpha
+        public Color baseColor;
         public Color backgroundColor;
 
         public RenderTarget2D surface;
@@ -38,16 +40,55 @@ namespace Orchid
         public float boldDifference;
         public float italicDifference;
 
+        //alpha percentage. 1.0 = Alpha 255
+        private float _alpha = 1F;
+        public float alpha
+        {
+            get { return _alpha / 255; }
+            set { _alpha = value * 255; }
+        }
+        //public float alpha = 1f;
+
         public Surface(Game1 game, GraphicsDevice graphicsDevice, 
             SpriteBatch spriteBatch, Rectangle rect, Color colorBG) :base(game)
         {
-            this.backgroundColor = colorBG;
+
+            this.baseColor = colorBG;
+
+            this.CalculateBackgroundColor();
+
+
+
             this.graphicsDevice = graphicsDevice;
             this.spriteBatch = spriteBatch;
             this.surface = new RenderTarget2D(graphicsDevice, rect.Width, rect.Height);
             this.rect = rect;
             Console.WriteLine("msgbox x {0}, y {1}, w {2} h {3} ", this.rect.X,
                     this.rect.Y, this.rect.Width, this.rect.Height);
+        }
+
+        public void CalculateBackgroundColor()
+        {
+            //set the color for the Surface.
+            int R = this.baseColor.R * (int)this.alpha;
+            int G = this.baseColor.G * (int)this.alpha;
+            int B = this.baseColor.B * (int)this.alpha;
+
+            this.backgroundColor = new Color(R, G, B);
+
+        }
+
+
+        public void FadeOut(int ticks)
+        {
+            this.alpha = 0.75f;
+            Console.WriteLine(this.alpha);
+        }
+
+        public virtual void Update()
+        {
+            this.FadeOut(1);
+            this.CalculateBackgroundColor();
         }
 
         public virtual  void UpdateSurface()
@@ -333,8 +374,8 @@ namespace Orchid
         {
 
             //draws the new surface stuff to the back buffer
-            Color newColor = new Color(this.backgroundColor.R, this.backgroundColor.G, this.backgroundColor.B, 100);
-            spriteBatch.Draw(this.surface, this.rect, newColor);
+            //Color newColor = new Color(this.backgroundColor.R, this.backgroundColor.G, this.backgroundColor.B, 100);
+            spriteBatch.Draw(this.surface, this.rect, this.backgroundColor);
 
         }
 

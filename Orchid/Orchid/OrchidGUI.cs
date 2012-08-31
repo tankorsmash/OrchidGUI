@@ -48,6 +48,7 @@ namespace Orchid
                 if (elem is MessageBox)
                 {
                     MessageBox castedElem = (MessageBox)elem;
+                    castedElem.Update();
                     castedElem.UpdateSurface();
                 }
             }
