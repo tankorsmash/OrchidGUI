@@ -61,8 +61,9 @@ namespace Orchid
 
         public Game1()
         {
-
-            TargetElapsedTime = TimeSpan.FromMilliseconds(30);
+            //frame limit. change the last number to the frames per second
+            int limit = 1000 / 60;
+            TargetElapsedTime = TimeSpan.FromMilliseconds(limit);
 
             //set the default background color
             defaultBG = Color.RoyalBlue;

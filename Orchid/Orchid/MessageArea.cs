@@ -45,7 +45,13 @@ namespace Orchid
         public float alpha
         {
             get { return _alpha ; }
-            set { _alpha = value ; }
+            set {
+                if (value < 0)
+                {
+                    _alpha = 0;
+                }
+                else { _alpha = value; }
+            }
         }
         //public float alpha = 1f;
 
@@ -81,7 +87,7 @@ namespace Orchid
 
         public void FadeOut(int ticks)
         {
-            this.alpha = this.alpha - .05f;
+            this.alpha = this.alpha - .1f;
             Console.WriteLine("This is the alpha channel: {0}\n\tand _alpha: {1}", this.alpha, this._alpha);
         }
 
