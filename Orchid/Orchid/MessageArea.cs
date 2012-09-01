@@ -44,8 +44,8 @@ namespace Orchid
         private float _alpha = 1F;
         public float alpha
         {
-            get { return _alpha / 255; }
-            set { _alpha = value * 255; }
+            get { return _alpha ; }
+            set { _alpha = value ; }
         }
         //public float alpha = 1f;
 
@@ -70,9 +70,9 @@ namespace Orchid
         public void CalculateBackgroundColor()
         {
             //set the color for the Surface.
-            int R = this.baseColor.R * (int)this.alpha;
-            int G = this.baseColor.G * (int)this.alpha;
-            int B = this.baseColor.B * (int)this.alpha;
+            int R = (int)(this.baseColor.R * this.alpha);
+            int G = (int)(this.baseColor.G * this.alpha);
+            int B = (int)(this.baseColor.B * this.alpha);
 
             this.backgroundColor = new Color(R, G, B);
 
@@ -81,8 +81,8 @@ namespace Orchid
 
         public void FadeOut(int ticks)
         {
-            this.alpha = 0.75f;
-            Console.WriteLine(this.alpha);
+            this.alpha = this.alpha - .05f;
+            Console.WriteLine("This is the alpha channel: {0}\n\tand _alpha: {1}", this.alpha, this._alpha);
         }
 
         public virtual void Update()
@@ -120,7 +120,7 @@ namespace Orchid
 
             //this.UpdateSurface();
 
-            spriteBatch.Draw(this.surface, this.rect, this.backgroundColor);
+            spriteBatch.Draw(this.surface, this.rect, Color.White);
             //spriteBatch.End();
         }
 
@@ -375,7 +375,7 @@ namespace Orchid
 
             //draws the new surface stuff to the back buffer
             //Color newColor = new Color(this.backgroundColor.R, this.backgroundColor.G, this.backgroundColor.B, 100);
-            spriteBatch.Draw(this.surface, this.rect, this.backgroundColor);
+            spriteBatch.Draw(this.surface, this.rect, this.backgroundColor * this.alpha);
 
         }
 

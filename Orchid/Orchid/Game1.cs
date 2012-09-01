@@ -62,6 +62,8 @@ namespace Orchid
         public Game1()
         {
 
+            TargetElapsedTime = TimeSpan.FromMilliseconds(30);
+
             //set the default background color
             defaultBG = Color.RoyalBlue;
 
