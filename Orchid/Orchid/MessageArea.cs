@@ -50,7 +50,7 @@ namespace Orchid
                 {
                     _alpha = 0;
                 }
-                else { _alpha = value; }
+                else { _alpha = value; } 
             }
         }
         //public float alpha = 1f;
