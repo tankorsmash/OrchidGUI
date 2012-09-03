@@ -230,6 +230,9 @@ namespace Orchid
                     {
                         TextEntry castedElem = (TextEntry)activeElement;
 
+                        // TODO: BUG: if you backspace when there aren't any chars
+                        // left to backspace away, it'll crash.
+
                         //if the key was backspace, remove last item in typed
                         if (key == Keys.Back)
                         {

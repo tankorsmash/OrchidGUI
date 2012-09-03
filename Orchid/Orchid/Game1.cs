@@ -160,7 +160,7 @@ namespace Orchid
             Rectangle size = new Rectangle(0, height - areaH, width, areaH);
 
             //test message area
-            messageArea = new MessageBox(this, GraphicsDevice, spriteBatch, size, Color.Green, msgList);
+            messageArea = new MessageBox(this, GraphicsDevice, spriteBatch, size, Color.Green, msgList, false, Color.Black);
 
             //test smallArea
             List<string> smallList = new List<string>(new string[] {"Small MsgBox"});
@@ -179,11 +179,12 @@ namespace Orchid
             testList.Clear();
             testList.Add("This is testBox");
             testArea = new MessageBox(this, GraphicsDevice, spriteBatch, 
-                new Rectangle(100, 100, 255, 255), Color.Gold, testList);
+                new Rectangle(100, 100, 255, 255), Color.Gold, testList,
+                textColor: Color.Black);
 
             Rectangle textRect = new Rectangle(400, 200, 100, 25);
             TextEntry textEntry = new TextEntry(this, GraphicsDevice, spriteBatch,
-                textRect, Color.DarkBlue, new List<string>(new string[]{"asd"}));
+                textRect, Color.DarkBlue, new List<string>(new string[]{"asd"}), Color.Red);
             // TODO: use this.Content to load your game content here
 
 

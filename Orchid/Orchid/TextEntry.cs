@@ -23,8 +23,10 @@ namespace Orchid
 
         //constructor
         public TextEntry(Game1 game, GraphicsDevice graphicsDevice,
-            SpriteBatch spriteBatch, Rectangle rect, Color colorBG, List<string> msgList)
-            : base(game, graphicsDevice, spriteBatch, rect, colorBG, msgList)
+            SpriteBatch spriteBatch, Rectangle rect, Color colorBG, 
+            List<string> msgList,Color textColor )
+            : base(game, graphicsDevice, spriteBatch, rect, colorBG, msgList, false,textColor)
+
         {
 
             //adds this instance to the globabl GUI element list

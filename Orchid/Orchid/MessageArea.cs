@@ -26,6 +26,7 @@ namespace Orchid
         //base color is the color without alpha
         public Color baseColor;
         public Color backgroundColor;
+        public Color textColor;
 
         public RenderTarget2D surface;
         //public Rectangle rect;
@@ -55,15 +56,17 @@ namespace Orchid
         }
         //public float alpha = 1f;
 
-        public Surface(Game1 game, GraphicsDevice graphicsDevice, 
-            SpriteBatch spriteBatch, Rectangle rect, Color colorBG) :base(game)
+        public Surface(Game1 game, GraphicsDevice graphicsDevice,
+            SpriteBatch spriteBatch, Rectangle rect, Color colorBG, 
+            Color textColor)
+            : base(game)
         {
 
             this.baseColor = colorBG;
 
             this.CalculateBackgroundColor();
 
-
+            this.textColor = textColor;
 
             this.graphicsDevice = graphicsDevice;
             this.spriteBatch = spriteBatch;
@@ -93,7 +96,7 @@ namespace Orchid
 
         public virtual void Update()
         {
-            this.FadeOut(1);
+            //this.FadeOut(1);
             this.CalculateBackgroundColor();
         }
 
@@ -113,21 +116,17 @@ namespace Orchid
             //then reset the drawing surface to null, backbuffer.
             graphicsDevice.SetRenderTarget(null);
 
-            //graphicsDevice.Clear(Color.CornflowerBlue);
-
             //return surface;
 
         }
 
         public virtual void Draw()
         { 
-            //spriteBatch.Begin();
 
 
             //this.UpdateSurface();
 
             spriteBatch.Draw(this.surface, this.rect, Color.White);
-            //spriteBatch.End();
         }
 
         // TODO:
@@ -161,16 +160,16 @@ namespace Orchid
                 //declare local variables
                 SpriteFont font;
                 float difference;
-                Color fontColor = Color.Black;
+                Color fontColor = textColor;
                 string nodeText = node.InnerText;
 
 
                 //check for formatting
                 if (node.Name.StartsWith("color."))
                 {
-                    string textColor = node.Name.Split('.')[1];
+                    string txtColor = node.Name.Split('.')[1];
                     //fontColor = Color.Red;
-                    System.Drawing.Color tempColor = System.Drawing.Color.FromName(textColor);
+                    System.Drawing.Color tempColor = System.Drawing.Color.FromName(txtColor);
                     fontColor = new Color(tempColor.R, tempColor.G, tempColor.B, tempColor.A);
                     //fontColor = (Color)typeof(Color).GetField(node.Name).GetValue(null);
                     Console.WriteLine(fontColor);
@@ -205,9 +204,11 @@ namespace Orchid
                 {
                     String word_with_space_appended = String.Format("{0} ", word);
                     //split into new line if the next set of text is too wide
-                    //position.x is where the 'cursor' is, linestart.x is the leftmost side of the text
+                    //position.x is where the 'cursor' is, 
+                    // linestart.x is the leftmost side of the text
                     // box. 
-                    if ((position.X - lineStart.X) + font.MeasureString(word_with_space_appended).X >= textAreaSize.Width)
+                    if ((position.X - lineStart.X) + 
+                        font.MeasureString(word_with_space_appended).X >= textAreaSize.Width)
                     {
                         //if the string is too wide, go down a line,
                         position.Y += largestFontHeight;
@@ -245,6 +246,8 @@ namespace Orchid
         public SpriteFont defaultFont;
         //the color of the widget's background
         public Color gameBG;
+        //the color of the text
+        //public Color colorText;
         //the list that holds all the messages
         public List<string> msgList;
         //the amount of messages to be drawn.
@@ -284,8 +287,8 @@ namespace Orchid
         /// <param name="msgList"> the list of strings that the messagebox will deal with</param>
         /// <param name="moveLocked">whether or not the MB can get dragged or not</param>
         public MessageBox(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch,
-            Rectangle rect, Color colorBG, List<string> msgList, bool moveLocked = false)
-            : base(game, graphicsDevice, spriteBatch, rect, colorBG)
+            Rectangle rect, Color colorBG, List<string> msgList, bool moveLocked = false, Color textColor = new Color())
+            : base(game, graphicsDevice, spriteBatch, rect, colorBG, textColor)
         {
 
             //this.writer = writer;
