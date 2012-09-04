@@ -36,6 +36,7 @@ namespace Orchid
         //message boxes. testArea's for testing.
         public MessageBox messageArea;
         public MessageBox testArea;
+        public Surface resizingSurface;
 
         //font
         public static SpriteFont defaultFont;
@@ -183,6 +184,14 @@ namespace Orchid
             //Rectangle textRect = new Rectangle(400, 200, 100, 25);
             //TextEntry textEntry = new TextEntry(this, GraphicsDevice, spriteBatch,
             //    textRect, Color.DarkBlue, new List<string>(new string[]{"asd"}), Color.Red);
+
+            //new surface, for resizing
+            Rectangle size2 = new Rectangle(100, 500, 200, 200);
+            resizingSurface = new Surface(this, GraphicsDevice,
+                spriteBatch, size2, Color.White, Color.OliveDrab );
+            Texture2D imgTexture = Content.Load<Texture2D>("smiley");
+            resizingSurface.image = imgTexture;
+
             // TODO: use this.Content to load your game content here
 
 
@@ -233,6 +242,7 @@ namespace Orchid
             //draw the message area textures,
             Orchid.UpdateGUIMessageBoxes(Orchid.masterGuiElementList, gameTime);
             Orchid.UpdateGUITextEntrys(Orchid.masterGuiElementList, gameTime);
+            resizingSurface.Update();
 
             //reset the RenderTarget to the backbuffer
             GraphicsDevice.SetRenderTarget(null);
@@ -243,6 +253,8 @@ namespace Orchid
             //draw the MessageBoxes.
             Orchid.DrawGUIMessageBoxes(Orchid.masterGuiElementList, gameTime);
             Orchid.DrawGUITextEntrys(Orchid.masterGuiElementList, gameTime);
+
+            resizingSurface.Draw();
 
             //Rectangle size = new Rectangle(400, 300, 300, 250);
             //TextFormatter(size);

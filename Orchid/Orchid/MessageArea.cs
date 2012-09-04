@@ -17,7 +17,10 @@ using HtmlAgilityPack;
 namespace Orchid
 {
 
-
+    /// <summary>
+    /// A base for most GUI elements. Must have Update and then UpdateSurface 
+    /// called, then have it Draw() called.
+    /// </summary>
     public class Surface : GuiElement
     {
         protected GraphicsDevice graphicsDevice;
@@ -54,6 +57,16 @@ namespace Orchid
                 else { _alpha = value; }   
             }
         }
+
+
+        //image to be drawn to the background
+        private Texture2D _image;
+        public Texture2D image
+        {
+            get { return _image; }
+            set { _image = value; }
+        }
+
         //public float alpha = 1f;
 
         public Surface(Game1 game, GraphicsDevice graphicsDevice,
@@ -68,13 +81,15 @@ namespace Orchid
 
             this.textColor = textColor;
 
+
             this.graphicsDevice = graphicsDevice;
             this.spriteBatch = spriteBatch;
             this.surface = new RenderTarget2D(graphicsDevice, rect.Width, rect.Height);
             this.rect = rect;
-            Console.WriteLine("msgbox x {0}, y {1}, w {2} h {3} ", this.rect.X,
+            Console.WriteLine("New Surface at x {0}, y {1}, w {2} h {3} ", this.rect.X,
                     this.rect.Y, this.rect.Width, this.rect.Height);
         }
+
 
         public void CalculateBackgroundColor()
         {
@@ -98,6 +113,7 @@ namespace Orchid
         {
             //this.FadeOut(1);
             this.CalculateBackgroundColor();
+            this.UpdateSurface();
         }
 
         public virtual  void UpdateSurface()
@@ -106,15 +122,25 @@ namespace Orchid
             //change the renderTarger (pygame surface)
             graphicsDevice.SetRenderTarget(surface);   
             //clear it, like normal  
-            graphicsDevice.Clear(Color.Thistle);   
+            graphicsDevice.Clear(Color.Red);   
              
             //make some SB draws
             spriteBatch.Begin(); 
 
+            //draw the image to the surface
+            if (this.image != null)
+            {
+                //clear the screen so there isn't a BG color
+                graphicsDevice.Clear(Color.Transparent);   
+                Rectangle size = new Rectangle(0, 0, surface.Width, surface.Height);
+                spriteBatch.Draw(this.image, size, Color.White * this.alpha);
+                //this.game.msgList.Add("draw");
+            }
+
             spriteBatch.End(); 
 
             //then reset the drawing surface to null, backbuffer.
-            graphicsDevice.SetRenderTarget(null);
+            //graphicsDevice.SetRenderTarget(null);
 
             //return surface;
 
@@ -126,7 +152,7 @@ namespace Orchid
 
             //this.UpdateSurface();
 
-            spriteBatch.Draw(this.surface, this.rect, Color.White);
+            spriteBatch.Draw(this.surface, this.rect, this.backgroundColor * this.alpha);
         }
 
         // TODO:
@@ -282,8 +308,6 @@ namespace Orchid
         /// <param name="spriteBatch"></param>
         /// <param name="rect">The rectangle that represents the size of the msgbox</param>
         /// <param name="colorBG">color of the background</param>
-        /// 
-        /// 
         /// <param name="msgList"> the list of strings that the messagebox will deal with</param>
         /// <param name="moveLocked">whether or not the MB can get dragged or not</param>
         public MessageBox(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch,
