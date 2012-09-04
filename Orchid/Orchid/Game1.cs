@@ -120,11 +120,11 @@ namespace Orchid
             // TODO: Add your initialization logic here
             this.currentGameState = this.playingGameState;
             
-            //create a button
-            Rectangle qwe = new Rectangle(500, 0, 210, 110);
-            this.button = new Button(qwe, "NEW BUTTON", this);
-            //and another button
-            this.button2 = new Button(new Rectangle(0, 0, 155, 122), "second", this);
+            ////create a button
+            //Rectangle qwe = new Rectangle(500, 0, 210, 110);
+            //this.button = new Button(qwe, "NEW BUTTON", this);
+            ////and another button
+            //this.button2 = new Button(new Rectangle(0, 0, 155, 122), "second", this);
 
 
             //message area buttons, up and down message scroll
@@ -158,33 +158,31 @@ namespace Orchid
             //create a message area at the bottom of the scree, 1/4 of the screen.
             int areaH = height / 4;
             Rectangle size = new Rectangle(0, height - areaH, width, areaH);
-
-            //test message area
             messageArea = new MessageBox(this, GraphicsDevice, spriteBatch, size, Color.Green, msgList, false, Color.Black);
 
-            //test smallArea
-            List<string> smallList = new List<string>(new string[] {"Small MsgBox"});
-            Rectangle smallRect = new Rectangle(500,500, 125, 125);
-            MessageBox smallBox = new MessageBox(this, GraphicsDevice, spriteBatch, smallRect, Color.Red, smallList);
+            ////test smallArea
+            //List<string> smallList = new List<string>(new string[] {"Small MsgBox"});
+            //Rectangle smallRect = new Rectangle(500,500, 125, 125);
+            //MessageBox smallBox = new MessageBox(this, GraphicsDevice, spriteBatch, smallRect, Color.Red, smallList);
 
             //test testArea out a bit
             //fill a blank list to use inside testarea
-            List<string> testList = new List<string>();
-            string[] temp = { "blank1", "blank2", "blank3", "blank4", "blank5", "blank6", "blank7", "blank8" };
-            foreach (string item in temp)
-            {
-                testList.Add(item);
-            }
+            //List<string> testList = new List<string>();
+            //string[] temp = { "blank1", "blank2", "blank3", "blank4", "blank5", "blank6", "blank7", "blank8" };
+            //foreach (string item in temp)
+            //{
+            //    testList.Add(item);
+            //}
 
-            testList.Clear();
-            testList.Add("This is testBox");
-            testArea = new MessageBox(this, GraphicsDevice, spriteBatch, 
-                new Rectangle(100, 100, 255, 255), Color.Gold, testList,
-                textColor: Color.Black);
+            //testList.Clear();
+            //testList.Add("This is testBox");
+            //testArea = new MessageBox(this, GraphicsDevice, spriteBatch, 
+            //    new Rectangle(100, 100, 255, 255), Color.Gold, testList,
+            //    textColor: Color.Black);
 
-            Rectangle textRect = new Rectangle(400, 200, 100, 25);
-            TextEntry textEntry = new TextEntry(this, GraphicsDevice, spriteBatch,
-                textRect, Color.DarkBlue, new List<string>(new string[]{"asd"}), Color.Red);
+            //Rectangle textRect = new Rectangle(400, 200, 100, 25);
+            //TextEntry textEntry = new TextEntry(this, GraphicsDevice, spriteBatch,
+            //    textRect, Color.DarkBlue, new List<string>(new string[]{"asd"}), Color.Red);
             // TODO: use this.Content to load your game content here
 
 

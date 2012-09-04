@@ -46,6 +46,8 @@ namespace Orchid
         {
 
             this.msgList.Clear();
+            //takes all the strings in the typed list and then joins em all up and passes
+            // them as a line to msgList.
             string toAdd = String.Join(String.Empty, typed.ToArray());
             this.msgList.Add(toAdd);
 
