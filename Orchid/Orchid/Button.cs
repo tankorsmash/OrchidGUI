@@ -231,13 +231,18 @@ namespace Orchid
         public void BuildInnerRect()
         {
             //the inner portion will be 90 percent the rect of the button, leaving a 10 percent border
-            double innerW = rect.Width * .9;
-            double innerH = rect.Height * .9;
-            double innerX = rect.Center.X - (innerW / 2);
-            double innerY = rect.Center.Y - (innerH / 2);
-            //it'll be set to having the same center point as the borderRect            
-            this.innerRectangle = new Rectangle((int)innerX, (int)innerY, (int)innerW, (int)innerH);
+            //double innerW = rect.Width * .9;
+            //double innerH = rect.Height * .9;
+            //double innerX = rect.Center.X - (innerW / 2);
+            //double innerY = rect.Center.Y - (innerH / 2);
 
+            double innerDiffW = rect.Width * .1;
+            double innerDiffH = rect.Height * .1;
+            //it'll be set to having the same center point as the borderRect            
+            //this.innerRectangle = new Rectangle((int)innerX, (int)innerY, (int)innerW, (int)innerH);
+            this.innerRectangle = this.rect;
+            this.innerRectangle.Inflate(-(int)innerDiffH, -(int)innerDiffH);
+            
             //this.innerRectangle = innerRectangle;
         }
 

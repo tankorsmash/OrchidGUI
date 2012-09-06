@@ -99,9 +99,13 @@ namespace Orchid
                             theGame.msgList.Add(text);
 
                             //if mousepos is along the left side of the box
+                                // make sure it's not too high
                             if ((castedElem.rect.Top < mousePos.Y &
-                                mousePos.Y < castedElem.rect.Bottom) &
-                                (castedElem.rect.Left < mousePos.X) & (castedElem.rect.Left+25 > mousePos.X))
+                                mousePos.Y < castedElem.rect.Bottom) 
+                                &
+                                // make sure its not too far the the left or right.
+                                (castedElem.rect.Left-(castedElem.rect.Width *.1)  < mousePos.X) &
+                                (castedElem.rect.Left+(castedElem.rect.Width *.1) > mousePos.X))
                             {
                                 string text2 = String.Format("{0}, the Surface, has mouse in", castedElem);
                                 theGame.msgList.Add(text2);
