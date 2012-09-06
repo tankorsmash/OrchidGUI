@@ -218,7 +218,10 @@ namespace Orchid
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back ==
                                                 ButtonState.Pressed)
-                this.Exit();
+                this.Exit();            //draw the message area textures,
+            Orchid.UpdateGUIMessageBoxes(Orchid.masterGuiElementList, gameTime);
+            Orchid.UpdateGUITextEntrys(Orchid.masterGuiElementList, gameTime);
+            resizingSurface.Update();
 
 
             //test the input against all the elements of the gui
@@ -242,10 +245,7 @@ namespace Orchid
             // TODO: Add your drawing code here
 
 
-            //draw the message area textures,
-            Orchid.UpdateGUIMessageBoxes(Orchid.masterGuiElementList, gameTime);
-            Orchid.UpdateGUITextEntrys(Orchid.masterGuiElementList, gameTime);
-            resizingSurface.Update();
+
 
             //reset the RenderTarget to the backbuffer
             GraphicsDevice.SetRenderTarget(null);

@@ -65,8 +65,8 @@ namespace Orchid
 
         public void CheckMouseAgainstElements(List<GuiElement> guiElementList)
         {
-            Point mousePos = new Point(Mouse.GetState().X, Mouse.GetState().Y);
             currentMouseState = Mouse.GetState();
+            Point mousePos = new Point(currentMouseState.X, currentMouseState.Y);
 
             //this.theGame.testArea.Drag(currentMouseState, lastMouseState);
 
@@ -76,6 +76,7 @@ namespace Orchid
                 //loop over the elements in the gui list 
                 foreach (GuiElement elem in guiElementList)
                 {
+
                     if (elem is Button)
                     {
 
