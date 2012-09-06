@@ -222,7 +222,7 @@ namespace Orchid
 
 
             //test the input against all the elements of the gui
-            inputHandler.CheckMouseAgainstElements(Orchid.masterGuiElementList);
+            //inputHandler.CheckMouseAgainstElements(Orchid.masterGuiElementList);
             inputHandler.CheckMouseAgainstElements(new List<GuiElement>{(GuiElement)this.resizingSurface});
             inputHandler.HandleKeys(this);
             // TODO: Add your update logic here

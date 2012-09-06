@@ -75,15 +75,15 @@ namespace Orchid
             : base(game)
         {
 
+            this.graphicsDevice = graphicsDevice;
+            this.spriteBatch = spriteBatch;
+
             this.baseColor = colorBG;
-
             this.CalculateBackgroundColor();
-
             this.textColor = textColor;
 
 
-            this.graphicsDevice = graphicsDevice;
-            this.spriteBatch = spriteBatch;
+
             this.surface = new RenderTarget2D(graphicsDevice, rect.Width, rect.Height);
             this.rect = rect;
             Console.WriteLine("New Surface at x {0}, y {1}, w {2} h {3} ", this.rect.X,
@@ -92,18 +92,19 @@ namespace Orchid
 
         public void Drag(MouseState currentMouseState, MouseState lastMouseState)
         {
-            this.rect.X -= lastMouseState.X - currentMouseState.X;
-            this.rect.Y -= lastMouseState.Y - currentMouseState.Y;
+            this.rect.X +=  currentMouseState.X - lastMouseState.X;
+            this.rect.Y +=  currentMouseState.Y - lastMouseState.Y;
             Console.WriteLine("Done dragging {0}", rect);
 
         }
 
         public void Resize(MouseState currentMouseState, MouseState lastMouseState)
         {
-            Console.WriteLine("pre resize {0}", rect.Width);
-            this.rect.Width -= lastMouseState.X - currentMouseState.X;
+            int diff = currentMouseState.X - lastMouseState.X;
+            Console.WriteLine("pre resize {0}, diff {1}", this.rect.Width, diff);
+            this.rect.Width +=  diff;
             //this.rect.Y -= lastMouseState.Y - currentMouseState.Y;
-            Console.WriteLine("POST resize {0}", rect.Width);
+            Console.WriteLine("POST resize {0}", this.rect.Width);
         }
         public void CalculateBackgroundColor()
         {
@@ -133,10 +134,19 @@ namespace Orchid
         public virtual  void UpdateSurface()
         {
 
+            //update the surface size to match the rect's 
+            // h/w if it's not the same as rect
+            if (this.surface.Bounds.Width != this.rect.Width | 
+                this.surface.Height != this.rect.Height)
+            {
+                this.surface = new RenderTarget2D(graphicsDevice, rect.Width, rect.Height);
+            }
+
             //change the renderTarger (pygame surface)
             graphicsDevice.SetRenderTarget(surface);   
             //clear it, like normal  
             graphicsDevice.Clear(Color.Red);   
+
              
             //make some SB draws
             spriteBatch.Begin(); 
