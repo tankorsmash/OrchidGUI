@@ -90,7 +90,21 @@ namespace Orchid
                     this.rect.Y, this.rect.Width, this.rect.Height);
         }
 
+        public void Drag(MouseState currentMouseState, MouseState lastMouseState)
+        {
+            this.rect.X -= lastMouseState.X - currentMouseState.X;
+            this.rect.Y -= lastMouseState.Y - currentMouseState.Y;
+            Console.WriteLine("Done dragging {0}", rect);
 
+        }
+
+        public void Resize(MouseState currentMouseState, MouseState lastMouseState)
+        {
+            Console.WriteLine("pre resize {0}", rect.Width);
+            this.rect.Width -= lastMouseState.X - currentMouseState.X;
+            //this.rect.Y -= lastMouseState.Y - currentMouseState.Y;
+            Console.WriteLine("POST resize {0}", rect.Width);
+        }
         public void CalculateBackgroundColor()
         {
             //set the color for the Surface.
@@ -361,12 +375,17 @@ namespace Orchid
         /// Pretty self explanatory, subtracts the difference of current mouse pos 
         /// from the last mouse pos. Could probably switch it up to make it more clear
         /// </summary>
-        public void Drag(MouseState currentMouseState, MouseState lastMouseState)
-        {
-            this.rect.X -= lastMouseState.X - currentMouseState.X;
-            this.rect.Y -= lastMouseState.Y - currentMouseState.Y;
-        }
+        //public void Drag(MouseState currentMouseState, MouseState lastMouseState)
+        //{
+        //    this.rect.X -= lastMouseState.X - currentMouseState.X;
+        //    this.rect.Y -= lastMouseState.Y - currentMouseState.Y;
+        //}
 
+        //public void Resize(MouseState currentMouseState, MouseState lastMouseState)
+        //{
+        //    this.rect.Width -= lastMouseState.X - currentMouseState.X;
+        //    //this.rect.Y -= lastMouseState.Y - currentMouseState.Y;
+        //}
 
         //draws the items of msgList to the surface... ActiveMessages is the list of
         //current messages dictated etiher in UpdatedActiveMessages or scrollMsgs

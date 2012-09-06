@@ -186,7 +186,8 @@ namespace Orchid
             //    textRect, Color.DarkBlue, new List<string>(new string[]{"asd"}), Color.Red);
 
             //new surface, for resizing
-            Rectangle size2 = new Rectangle(100, 500, 200, 200);
+            Rectangle size2 = new Rectangle(300, 300, 500, 200);
+            
             resizingSurface = new Surface(this, GraphicsDevice,
                 spriteBatch, size2, Color.White, Color.OliveDrab );
             Texture2D imgTexture = Content.Load<Texture2D>("smiley");
@@ -215,12 +216,14 @@ namespace Orchid
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back ==
+                                                ButtonState.Pressed)
                 this.Exit();
 
 
             //test the input against all the elements of the gui
             inputHandler.CheckMouseAgainstElements(Orchid.masterGuiElementList);
+            inputHandler.CheckMouseAgainstElements(new List<GuiElement>{(GuiElement)this.resizingSurface});
             inputHandler.HandleKeys(this);
             // TODO: Add your update logic here
 

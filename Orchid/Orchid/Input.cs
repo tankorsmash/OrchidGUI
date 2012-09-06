@@ -79,13 +79,35 @@ namespace Orchid
                     if (elem is Button)
                     {
 
-                        Button elem2 = elem as Button;
+                        Button castedElem = elem as Button;
                         //elem = elem as Button;
-                        if (elem2.rect.Contains(mousePos))
+                        if (castedElem.rect.Contains(mousePos))
                         {
                             activeElement = elem;
-                            elem2.OnMouseDown();
+                            castedElem.OnMouseDown();
 
+                        }
+                    }
+
+                    else if (elem is Surface)
+                    {
+                        if (elem.rect.Contains(mousePos))
+                        {
+                            Surface castedElem = elem as Surface;
+                            string text = String.Format("{0}, the Surface, has mouse down", castedElem);
+                            theGame.msgList.Add(text);
+
+                            //if mousepos is along the left side of the box
+                            if ((castedElem.rect.Top < mousePos.Y &
+                                mousePos.Y < castedElem.rect.Bottom) &
+                                (castedElem.rect.Left < mousePos.X) & (castedElem.rect.Left+25 > mousePos.X))
+                            {
+                                string text2 = String.Format("{0}, the Surface, has mouse in", castedElem);
+                                theGame.msgList.Add(text2);
+                                castedElem.Resize(currentMouseState, lastMouseState);
+
+                                
+                            }
                         }
                     }
                 }
