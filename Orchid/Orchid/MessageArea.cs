@@ -57,6 +57,10 @@ namespace Orchid
                 else { _alpha = value; }   
             }
         }
+        
+        //the smallest size the surface can be
+        int min_width;
+        int min_height;
 
 
         //image to be drawn to the background
@@ -71,7 +75,7 @@ namespace Orchid
 
         public Surface(Game1 game, GraphicsDevice graphicsDevice,
             SpriteBatch spriteBatch, Rectangle rect, Color colorBG, 
-            Color textColor)
+            Color textColor, int min_width = 25, int min_height = 25)
             : base(game)
         {
 
@@ -82,6 +86,9 @@ namespace Orchid
             this.CalculateBackgroundColor();
             this.textColor = textColor;
 
+            //defines the smallest the surface can be.
+            this.min_width = min_width;
+            this.min_height = min_height;
 
 
             this.surface = new RenderTarget2D(graphicsDevice, rect.Width, rect.Height);
@@ -100,9 +107,16 @@ namespace Orchid
 
         public void Resize(MouseState currentMouseState, MouseState lastMouseState)
         {
-            int diff = currentMouseState.X - lastMouseState.X;
-            Console.WriteLine("pre resize {0}, diff {1}", this.rect.Width, diff);
-            this.rect.Width +=  diff;
+            int diff_width = currentMouseState.X - lastMouseState.X;
+            Console.WriteLine("pre resize {0}, diff_width {1}", this.rect.Width, diff_width);
+            if (this.rect.Width + diff_width <= this.min_width)
+            {
+                Console.WriteLine("the width would be less than 0, no change.");
+            }
+            else
+            {
+                this.rect.Width += diff_width;
+            }
             //this.rect.Y -= lastMouseState.Y - currentMouseState.Y;
             Console.WriteLine("POST resize {0}", this.rect.Width);
         }
