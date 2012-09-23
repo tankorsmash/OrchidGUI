@@ -103,6 +103,8 @@ namespace Orchid
         Color innerColor;
         Vector2 textPos;
 
+        //SpriteBatch spriteBatch;
+
         //default button colors
         Color buttonColor = new Color(18, 64, 171);
         Color hiliteButtonColor = new Color(108, 140, 213);
@@ -121,8 +123,7 @@ namespace Orchid
         /// <param name="command">the function that will be called when the button gets clicked</param>
         /// <param name="innerColor">the inner button color</param>
         /// <param name="textColor"></param>
-        public Button(Rectangle buttonSize, string text, Game1 game, Func<int> command = null ,
-            Color innerColor = new Color(), Color? textColor = null)
+        public Button(Rectangle buttonSize, string text, Game1 game, SpriteBatch spriteBatch, Func<int> command = null, Color innerColor = new Color(), Color? textColor = null)
             //: base(buttonSize, game)
             : base(game)
         {
@@ -131,6 +132,8 @@ namespace Orchid
             //the rect of the entire button
             this.rect = buttonSize;
             this.BuildInnerRect();
+
+            this.spriteBatch = spriteBatch;
  
             //colors
             if (innerColor == new Color())
@@ -249,14 +252,14 @@ namespace Orchid
         //loads content. Really don't know what it's for though.
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            //spriteBatch = new SpriteBatch(GraphicsDevice);
             dummyTexture = new Texture2D(GraphicsDevice, 1, 1);
             dummyTexture.SetData(new Color[] { Color.White });
         }
 
         public override void Draw(GameTime gameTime)
         {
-            spriteBatch.Begin();
+            //spriteBatch.Begin();
             Color newColor = new Color(borderColor.R ,borderColor.G,  borderColor.B );
 
             spriteBatch.Draw(dummyTexture, rect, newColor);
@@ -266,7 +269,7 @@ namespace Orchid
             textPos = new Vector2(rect.Center.X - (innerRectangle.Width / 2), rect.Center.Y - 12);
             spriteBatch.DrawString(Game1.defaultFont, this.text, textPos, Color.Black);
             
-            spriteBatch.End();
+            //spriteBatch.End();
 
         }
 

@@ -40,8 +40,10 @@ namespace Orchid
         }
 
 
+
+
         //updates all the surfaces of the MessageBoxes
-        public static void UpdateGUIMessageBoxes(List<GuiElement> elemList, GameTime gameTime)
+        private static void UpdateGUIMessageBoxes(List<GuiElement> elemList, GameTime gameTime)
         {
             foreach (GuiElement elem in elemList)
             {
@@ -55,7 +57,7 @@ namespace Orchid
         }
 
         //draws all the messageBoxes. Loops over all the gui elements, so it might get slow later
-        public static void DrawGUIMessageBoxes(List<GuiElement> elemList, GameTime gameTime)
+        private static void DrawGUIMessageBoxes(List<GuiElement> elemList, GameTime gameTime)
         {
             //loop over each element in the list of GuiElements and Draw them all
             foreach (GuiElement elem in elemList)
@@ -69,10 +71,23 @@ namespace Orchid
         }
 
 
+        public static void UpdateGUI(List<GuiElement> elemList, GameTime gameTime)
+        {
+            UpdateGUIMessageBoxes(elemList, gameTime);
+            UpdateGUITextEntrys(elemList, gameTime);
+        }
 
 
+        public static void DrawGUI(List<GuiElement> elemList, GameTime gameTime) {
 
-        public static void DrawGUITextEntrys(List<GuiElement> elemList, GameTime gameTime)
+            DrawGUIMessageBoxes(elemList, gameTime);
+            DrawGUITextEntrys(elemList, gameTime);
+            DrawGUIButtons(elemList, gameTime);
+        
+        }
+
+
+        private static void DrawGUITextEntrys(List<GuiElement> elemList, GameTime gameTime)
         {
             foreach (GuiElement elem in elemList)
             {
@@ -83,7 +98,7 @@ namespace Orchid
                 }
             }
         }
-        public static void UpdateGUITextEntrys(List<GuiElement> elemList, GameTime gameTime)
+        private static void UpdateGUITextEntrys(List<GuiElement> elemList, GameTime gameTime)
         {
             foreach (GuiElement elem in elemList)
             {

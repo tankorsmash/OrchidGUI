@@ -50,8 +50,8 @@ namespace Orchid
 
         
         //screensize
-        public int width = 1024;
-        public int height = 768;
+        public int width = 1280;
+        public int height = 1024;
 
         //colors
         Color defaultBG;
@@ -121,21 +121,7 @@ namespace Orchid
             // TODO: Add your initialization logic here
             this.currentGameState = this.playingGameState;
             
-            ////create a button
-            //Rectangle qwe = new Rectangle(500, 0, 210, 110);
-            //this.button = new Button(qwe, "NEW BUTTON", this);
-            ////and another button
-            //this.button2 = new Button(new Rectangle(0, 0, 155, 122), "second", this);
 
-
-            //message area buttons, up and down message scroll
-            Button msgAreaScrlUp = new Button(new Rectangle(this.width - 100, this.height - 150,
-                                                25, 25), "up", this);
-            Button msgAreaScrlDown = new Button(new Rectangle(this.width - 100, this.height - 50,
-                                                25, 25), "down", this);
-            //binding the commands using lambdas.
-            msgAreaScrlUp.command = () => messageArea.ScrollMessageArea(-5);
-            msgAreaScrlDown.command = () => messageArea.ScrollMessageArea(5);
              
 
             base.Initialize();
@@ -160,6 +146,22 @@ namespace Orchid
             int areaH = height / 4;
             Rectangle size = new Rectangle(0, height - areaH, width, areaH);
             messageArea = new MessageBox(this, GraphicsDevice, spriteBatch, size, Color.Green, msgList, false, Color.Black);
+           
+            ////create a button
+            //Rectangle qwe = new Rectangle(500, 0, 210, 110);
+            //this.button = new Button(qwe, "NEW BUTTON", this);
+            ////and another button
+            //this.button2 = new Button(new Rectangle(0, 0, 155, 122), "second", this);
+
+
+            //message area buttons, up and down message scroll
+            Button msgAreaScrlUp = new Button(new Rectangle(this.width - 100, this.height - 150,
+                                                25, 25), "up", this, command: null, spriteBatch: spriteBatch);
+            Button msgAreaScrlDown = new Button(new Rectangle(this.width - 100, this.height - 50,
+                                                25, 25), "down", this, command: null, spriteBatch: spriteBatch);
+            //binding the commands using lambdas.
+            msgAreaScrlUp.command = () => messageArea.ScrollMessageArea(-5);
+            msgAreaScrlDown.command = () => messageArea.ScrollMessageArea(5);
 
             ////test smallArea
             //List<string> smallList = new List<string>(new string[] {"Small MsgBox"});
@@ -220,8 +222,11 @@ namespace Orchid
                                                 ButtonState.Pressed)
                 this.Exit();
             //draw the message area textures,
-            Orchid.UpdateGUIMessageBoxes(Orchid.masterGuiElementList, gameTime);
-            Orchid.UpdateGUITextEntrys(Orchid.masterGuiElementList, gameTime);
+            //Orchid.UpdateGUIMessageBoxes(Orchid.masterGuiElementList, gameTime);
+            //Orchid.UpdateGUITextEntrys(Orchid.masterGuiElementList, gameTime);
+
+            Orchid.UpdateGUI(Orchid.masterGuiElementList, gameTime);
+
             resizingSurface.Update();
 
 
@@ -254,15 +259,9 @@ namespace Orchid
 
             ///draw the rendertargets to the backbuffer
             spriteBatch.Begin();
-            //draw the MessageBoxes.
-            Orchid.DrawGUIMessageBoxes(Orchid.masterGuiElementList, gameTime);
-            Orchid.DrawGUITextEntrys(Orchid.masterGuiElementList, gameTime);
+            Orchid.DrawGUI(Orchid.masterGuiElementList, gameTime);
 
             resizingSurface.Draw();
-
-            //Rectangle size = new Rectangle(400, 300, 300, 250);
-            //TextFormatter(size);
-            //text formatting fooling
 
             //draw the MBs to the backbuffer, and draw that.
             spriteBatch.End();
@@ -270,7 +269,7 @@ namespace Orchid
             //draw the buttons after, so they're on top, as well as after End()
             //because otherwise the MSB would be draw on top, because Buttons don't need
             //to use Spritebatches here.
-            Orchid.DrawGUIButtons(Orchid.masterGuiElementList, gameTime);
+            
 
 
             base.Draw(gameTime);
