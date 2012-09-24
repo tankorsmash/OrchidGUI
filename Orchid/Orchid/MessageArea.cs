@@ -90,6 +90,10 @@ namespace Orchid
             this.min_width = min_width;
             this.min_height = min_height;
 
+            if (this is Surface)
+            {
+                Orchid.masterGuiElementList.Add(this);
+            }
 
             this.surface = new RenderTarget2D(graphicsDevice, rect.Width, rect.Height);
             this.rect = rect;

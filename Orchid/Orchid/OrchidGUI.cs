@@ -71,10 +71,35 @@ namespace Orchid
         }
 
 
+        public static void DrawGUISurfaces(List<GuiElement> elemList, GameTime gameTime)
+        {
+
+            //loop over each element in the list of GuiElements and Draw them all
+            foreach (GuiElement elem in elemList)
+            {
+                if (elem is Surface)
+                {
+                    Surface castedElem = (Surface)elem;
+                    castedElem.Draw();
+                }
+            }
+        }        private static void UpdateGUISurfaces(List<GuiElement> elemList, GameTime gameTime)
+        {
+            foreach (GuiElement elem in elemList)
+            {
+                if (elem is Surface)
+                {
+                    Surface castedElem = (Surface)elem;
+                    castedElem.UpdateSurface();
+                }
+            }
+        }
+
         public static void UpdateGUI(List<GuiElement> elemList, GameTime gameTime)
         {
             UpdateGUIMessageBoxes(elemList, gameTime);
             UpdateGUITextEntrys(elemList, gameTime);
+            UpdateGUISurfaces(elemList, gameTime);
         }
 
 
@@ -82,6 +107,7 @@ namespace Orchid
 
             DrawGUIMessageBoxes(elemList, gameTime);
             DrawGUITextEntrys(elemList, gameTime);
+            DrawGUISurfaces(elemList, gameTime);
             DrawGUIButtons(elemList, gameTime);
         
         }

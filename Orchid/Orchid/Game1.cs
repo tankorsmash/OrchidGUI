@@ -96,6 +96,33 @@ namespace Orchid
 
         }
 
+        /// <summary>
+        /// A wrapper for loading images into the game
+        /// </summary>
+        /// <param name="content_name">The name for the content you want to load into the game</param>
+        /// 
+        /// <returns>returns a Surface, sized to Size rect, ready to use.</returns>
+        public Surface createImageSurface(string content_name, Rectangle size_arg= new Rectangle() )
+        {
+            Rectangle size2;
+
+            if (size_arg == new Rectangle())
+            {
+                size2 = new Rectangle(300, 300, 500, 200);
+            }
+
+            else { 
+                size2 = size_arg;
+            }
+
+            resizingSurface = new Surface(this, GraphicsDevice,
+                spriteBatch, size2, Color.White, Color.OliveDrab);
+            Texture2D imgTexture = Content.Load<Texture2D>(content_name);
+            resizingSurface.image = imgTexture;
+
+            return resizingSurface;
+
+        }
         
 
         /// <summary>
@@ -190,11 +217,11 @@ namespace Orchid
             //new surface, for resizing
             Rectangle size2 = new Rectangle(300, 300, 500, 200);
             
-            resizingSurface = new Surface(this, GraphicsDevice,
-                spriteBatch, size2, Color.White, Color.OliveDrab );
-            Texture2D imgTexture = Content.Load<Texture2D>("smiley");
-            resizingSurface.image = imgTexture;
-
+            //resizingSurface = new Surface(this, GraphicsDevice,
+            //    spriteBatch, size2, Color.White, Color.Black );
+            //Texture2D imgTexture = Content.Load<Texture2D>("smiley");
+            //resizingSurface.image = imgTexture;
+            createImageSurface("smiley", size2);
             // TODO: use this.Content to load your game content here
 
 
@@ -222,17 +249,14 @@ namespace Orchid
                                                 ButtonState.Pressed)
                 this.Exit();
             //draw the message area textures,
-            //Orchid.UpdateGUIMessageBoxes(Orchid.masterGuiElementList, gameTime);
-            //Orchid.UpdateGUITextEntrys(Orchid.masterGuiElementList, gameTime);
-
             Orchid.UpdateGUI(Orchid.masterGuiElementList, gameTime);
 
-            resizingSurface.Update();
+            //resizingSurface.Update();
 
 
             //test the input against all the elements of the gui
-            //inputHandler.CheckMouseAgainstElements(Orchid.masterGuiElementList);
-            inputHandler.CheckMouseAgainstElements(new List<GuiElement>{(GuiElement)this.resizingSurface});
+            inputHandler.CheckMouseAgainstElements(Orchid.masterGuiElementList);
+            //inputHandler.CheckMouseAgainstElements(new List<GuiElement>{(GuiElement)this.resizingSurface});
             inputHandler.HandleKeys(this);
             // TODO: Add your update logic here
 
@@ -261,7 +285,7 @@ namespace Orchid
             spriteBatch.Begin();
             Orchid.DrawGUI(Orchid.masterGuiElementList, gameTime);
 
-            resizingSurface.Draw();
+            //resizingSurface.Draw();
 
             //draw the MBs to the backbuffer, and draw that.
             spriteBatch.End();
