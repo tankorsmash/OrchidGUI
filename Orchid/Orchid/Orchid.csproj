@@ -124,6 +124,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="TextEntry.cs" />
     <Compile Include="TextParser.cs" />
+    <Compile Include="ToolTip.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

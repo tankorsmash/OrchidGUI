@@ -118,6 +118,8 @@ namespace Orchid
             resizingSurface = new Surface(this, GraphicsDevice,
                 spriteBatch, size2, Color.White, Color.OliveDrab);
             Texture2D imgTexture = Content.Load<Texture2D>(content_name);
+            //Changed to use a filepath, rather than a Content name
+            //Texture2D imgTexture = Texture2D.FromStream(GraphicsDevice,  File.OpenRead(content_name));
             resizingSurface.image = imgTexture;
 
             return resizingSurface;
@@ -215,15 +217,17 @@ namespace Orchid
             //    textRect, Color.DarkBlue, new List<string>(new string[]{"asd"}), Color.Red);
 
             //new surface, for resizing
-            Rectangle size2 = new Rectangle(300, 300, 500, 200);
-            
-            //resizingSurface = new Surface(this, GraphicsDevice,
-            //    spriteBatch, size2, Color.White, Color.Black );
-            //Texture2D imgTexture = Content.Load<Texture2D>("smiley");
-            //resizingSurface.image = imgTexture;
+            Rectangle size2 = new Rectangle(300, 300, 200, 200);
             createImageSurface("smiley", size2);
-            // TODO: use this.Content to load your game content here
+            //createImageSurface(@"C:\Users\Mark\Documents\Visual Studio 2010\Projects\Orchid\Orchid\OrchidContent\smiley.png", size2); 
 
+            Rectangle size3 = new Rectangle(100, 100, 200, 200);
+            createImageSurface("inverted", size3);
+            //createImageSurface(@"C:\Users\Mark\Documents\Visual Studio 2010\Projects\Orchid\Orchid\OrchidContent\inverted.png", size3); 
+
+            // TODO: use this.Content to load your game content here
+            new Tooltip(this, GraphicsDevice, spriteBatch, size3, Color.White,
+                new List<string>(new string[] { "hello" }));
 
         }
 
