@@ -35,7 +35,7 @@ namespace Orchid
                 {
                     elem.Draw(gameTime);
                 }
-               
+
             }
         }
 
@@ -49,7 +49,7 @@ namespace Orchid
             {
                 if (elem is MessageBox)
                 {
-                    MessageBox castedElem = (MessageBox)elem;
+                    MessageBox castedElem = (MessageBox) elem;
                     castedElem.Update();
                     castedElem.UpdateSurface();
                 }
@@ -64,7 +64,7 @@ namespace Orchid
             {
                 if (elem is MessageBox)
                 {
-                    MessageBox castedElem = (MessageBox)elem;
+                    MessageBox castedElem = (MessageBox) elem;
                     castedElem.Draw();
                 }
             }
@@ -79,17 +79,19 @@ namespace Orchid
             {
                 if (elem is Surface)
                 {
-                    Surface castedElem = (Surface)elem;
+                    Surface castedElem = (Surface) elem;
                     castedElem.Draw();
                 }
             }
-        }        private static void UpdateGUISurfaces(List<GuiElement> elemList, GameTime gameTime)
+        }
+
+        private static void UpdateGUISurfaces(List<GuiElement> elemList, GameTime gameTime)
         {
             foreach (GuiElement elem in elemList)
             {
                 if (elem is Surface)
                 {
-                    Surface castedElem = (Surface)elem;
+                    Surface castedElem = (Surface) elem;
                     castedElem.UpdateSurface();
                 }
             }
@@ -100,20 +102,46 @@ namespace Orchid
             UpdateGUIMessageBoxes(elemList, gameTime);
             UpdateGUITextEntrys(elemList, gameTime);
             UpdateGUISurfaces(elemList, gameTime);
+            UpdateGUITooltips(elemList,gameTime);
         }
 
 
-        public static void DrawGUI(List<GuiElement> elemList, GameTime gameTime) {
+        public static void DrawGUI(List<GuiElement> elemList, GameTime gameTime)
+        {
 
             DrawGUIMessageBoxes(elemList, gameTime);
             DrawGUITextEntrys(elemList, gameTime);
             DrawGUISurfaces(elemList, gameTime);
             DrawGUIButtons(elemList, gameTime);
-        
+            DrawGUITextTooltips(elemList,gameTime);
+
         }
 
+        private static void DrawGUITextTooltips(List<GuiElement> elemList, GameTime gameTime)
+        {
+            foreach (GuiElement elem in elemList)
+            {
+                if (elem is Tooltip)
+                {
+                    Tooltip castedElem = (Tooltip)elem;
+                    castedElem.Draw();
+                }
+            }
+        }
 
-        private static void DrawGUITextEntrys(List<GuiElement> elemList, GameTime gameTime)
+        private static void UpdateGUITooltips(List<GuiElement> elemList, GameTime gameTime)
+        {
+            foreach (GuiElement elem in elemList)
+            {
+                if (elem is Tooltip)
+                {
+                    Tooltip castedElem = (Tooltip)elem;
+                    castedElem.UpdateSurface();
+                }
+            }
+        }
+
+    private static void DrawGUITextEntrys(List<GuiElement> elemList, GameTime gameTime)
         {
             foreach (GuiElement elem in elemList)
             {

@@ -286,6 +286,7 @@ namespace Orchid
 
                     //draw the word_with_space_appended
                     spriteBatch.DrawString(font, word_with_space_appended, position, fontColor);
+                    //if (this is Tooltip) { Console.WriteLine("wrote text");}
                     //moves the position over to the end of current node's text
                     position.X += font.MeasureString(word_with_space_appended).X;
 
@@ -524,6 +525,32 @@ namespace Orchid
             }
         }
 
+        //updates the messagearea surface, with the correct SetRenderTarget value
+        //because you need to begin the spritebatch AFTER you've set the RT to what you want
+        public override void UpdateSurface()
+        {
+
+            //change the renderTarger (pygame surface)
+            graphicsDevice.SetRenderTarget(this.surface);
+            //clear it, like normal, make sure this is white!
+            graphicsDevice.Clear(Color.White);
+
+            //updates the int[] for the indexes of the messages to draw
+            UpdateActiveMessages();
+
+            //draw messages on surface
+            DrawMessages();
+
+            //then reset the drawing surface to null, backbuffer.
+            //#### DON'T DRAW TO BackBuffer, it clears it.
+            //graphicsDevice.SetRenderTarget(null);
+
+            //graphicsDevice.Clear(gameBG);
+
+            //return surface;
+        } 
+
+
         /// <summary>
         /// MessageBoxes only draw a number of items in a range of ints, so this changes
         /// the range, from the default last to -7 or so, to whatever distance is.
@@ -566,30 +593,7 @@ namespace Orchid
 
 
 
-        //updates the messagearea surface, with the correct SetRenderTarget value
-        //because you need to begin the spritebatch AFTER you've set the RT to what you want
-        public override void UpdateSurface()
-        {
 
-            //change the renderTarger (pygame surface)
-            graphicsDevice.SetRenderTarget(this.surface);
-            //clear it, like normal
-            graphicsDevice.Clear(Color.Thistle);
-
-            //updates the int[] for the indexes of the messages to draw
-            UpdateActiveMessages();
-
-            //draw messages on surface
-            DrawMessages();
-
-            //then reset the drawing surface to null, backbuffer.
-            //#### DON'T DRAW TO BackBuffer, it clears it.
-            //graphicsDevice.SetRenderTarget(null);
-
-            //graphicsDevice.Clear(gameBG);
-
-            //return surface;
-        } 
     }
 
     
