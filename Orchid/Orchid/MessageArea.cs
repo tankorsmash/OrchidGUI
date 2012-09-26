@@ -508,7 +508,8 @@ namespace Orchid
             if (realtimeMsgs)
             {
                 //create an empty array the size of the messageLimit
-                activeMessages = new int[messageLimit];
+                //activeMessages = new int[messageLimit];
+                activeMessages = new int[Math.Min(messageLimit,msgList.Count)];
 
                 //use the array to populate the messagearea item.
                 int index = 0;
