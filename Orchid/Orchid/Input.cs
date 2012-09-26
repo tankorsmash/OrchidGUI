@@ -205,7 +205,8 @@ namespace Orchid
                     hoveredElement.OffMouseHover();
                 }
 
-                foreach (GuiElement elem in guiElementList)
+                List<GuiElement> orig_elemlist = new List<GuiElement>(guiElementList);
+                foreach (GuiElement elem in orig_elemlist)
                 {
                     if (elem.rect.Contains(mousePos))
                     {

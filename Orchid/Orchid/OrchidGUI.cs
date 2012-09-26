@@ -77,7 +77,8 @@ namespace Orchid
             //loop over each element in the list of GuiElements and Draw them all
             foreach (GuiElement elem in elemList)
             {
-                if (elem is Surface)
+                if (elem.name == "Surface")
+
                 {
                     Surface castedElem = (Surface) elem;
                     castedElem.Draw();
@@ -109,7 +110,7 @@ namespace Orchid
         public static void DrawGUI(List<GuiElement> elemList, GameTime gameTime)
         {
 
-            DrawGUIMessageBoxes(elemList, gameTime);
+            //DrawGUIMessageBoxes(elemList, gameTime);
             DrawGUITextEntrys(elemList, gameTime);
             DrawGUISurfaces(elemList, gameTime);
             DrawGUIButtons(elemList, gameTime);
@@ -124,7 +125,10 @@ namespace Orchid
                 if (elem is Tooltip)
                 {
                     Tooltip castedElem = (Tooltip)elem;
-                    castedElem.Draw();
+                    if (!(castedElem.IsHidden))
+                    {
+                        castedElem.Draw();
+                    }
                 }
             }
         }

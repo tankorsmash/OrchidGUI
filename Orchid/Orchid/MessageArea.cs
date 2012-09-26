@@ -99,6 +99,17 @@ namespace Orchid
             this.rect = rect;
             Console.WriteLine("New Surface at x {0}, y {1}, w {2} h {3} ", this.rect.X,
                     this.rect.Y, this.rect.Width, this.rect.Height);
+
+            //create a tooltip, so long as itself is not a tooltip
+            if (!(this is Tooltip))
+            {
+                int tt_height = 50;
+                int tt_y = this.rect.Top - tt_height;
+                Rectangle tt_size = new Rectangle(this.rect.Left, tt_y, 275, tt_height);
+                CreateTooltip(tt_size);
+            }
+
+
         }
 
         public void Drag(MouseState currentMouseState, MouseState lastMouseState)

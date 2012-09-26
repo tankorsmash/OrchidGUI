@@ -21,7 +21,7 @@ namespace Orchid
         //name of the button
         //public string _name = "GuiElement";
         protected string _name;
-        protected string name { get { return _name; } set { _name = value; } }
+        public string name { get { return _name; } set { _name = value; } }
 
         //protected string name = "DefaultUnchangedGUIELEMET";
 
@@ -38,10 +38,11 @@ namespace Orchid
         }
 
         //All guielements should have a tooltip
-        public  virtual void CreateTooltip()
+        public  virtual void CreateTooltip(Rectangle tt_rect)
         {
-            Rectangle tool_size = new Rectangle(100, 100, 275, 50);
-            new Tooltip(this.game, GraphicsDevice, this.spriteBatch, tool_size, Color.White,
+            //Rectangle tool_size = new Rectangle(100, 100, 275, 50);
+
+            new Tooltip(this.game, this.game.GraphicsDevice, this.spriteBatch, tt_rect, Color.White,
                 new List<string>(new string[] { "Tooltip testing" }));
         }
 
@@ -53,6 +54,8 @@ namespace Orchid
         public virtual void OnMouseHover()
         {
             Console.WriteLine("{0}:{1} received mouse over", this, this.GetHashCode());
+
+
 
         }
 
