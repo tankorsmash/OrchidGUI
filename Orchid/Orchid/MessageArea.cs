@@ -24,7 +24,7 @@ namespace Orchid
     public class Surface : GuiElement
     {
         protected GraphicsDevice graphicsDevice;
-        protected SpriteBatch spriteBatch;
+        //protected SpriteBatch spriteBatch;
 
         //base color is the color without alpha
         public Color baseColor;
@@ -76,7 +76,7 @@ namespace Orchid
         public Surface(Game1 game, GraphicsDevice graphicsDevice,
             SpriteBatch spriteBatch, Rectangle rect, Color colorBG, 
             Color textColor, int min_width = 25, int min_height = 25)
-            : base(game)
+            : base(game, spriteBatch)
         {
 
             this.graphicsDevice = graphicsDevice;

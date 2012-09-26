@@ -24,7 +24,7 @@ namespace Orchid
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch;
         Button button;
         Button button2;
 
@@ -226,8 +226,9 @@ namespace Orchid
             //createImageSurface(@"C:\Users\Mark\Documents\Visual Studio 2010\Projects\Orchid\Orchid\OrchidContent\inverted.png", size3); 
 
             // TODO: use this.Content to load your game content here
-            new Tooltip(this, GraphicsDevice, spriteBatch, size3, Color.White,
-                new List<string>(new string[] { "hello" }));
+            Rectangle tool_size = new Rectangle(100, 100, 275, 50);
+            new Tooltip(this, GraphicsDevice, spriteBatch, tool_size, Color.White,
+                new List<string>(new string[] { "Tooltip testing" }));
 
         }
 

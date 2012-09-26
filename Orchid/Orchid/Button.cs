@@ -14,6 +14,7 @@ namespace Orchid
     public class GuiElement : DrawableGameComponent
     {
         public Game1 game;
+        public SpriteBatch spriteBatch;
         public Rectangle rect;
 
 
@@ -26,13 +27,22 @@ namespace Orchid
 
 
 
-        public GuiElement(Game1 game)
+        public GuiElement(Game1 game, SpriteBatch spriteBatch)
             : base(game)
         {
             this.game = game;
+            this.spriteBatch = spriteBatch;
 
             this.name= this.GetType().Name;
             Console.WriteLine("GUIElement name: {0}", this.name);
+        }
+
+        //All guielements should have a tooltip
+        public  virtual void CreateTooltip()
+        {
+            Rectangle tool_size = new Rectangle(100, 100, 275, 50);
+            new Tooltip(this.game, GraphicsDevice, this.spriteBatch, tool_size, Color.White,
+                new List<string>(new string[] { "Tooltip testing" }));
         }
 
 
@@ -42,7 +52,8 @@ namespace Orchid
         }
         public virtual void OnMouseHover()
         {
-            Console.WriteLine("{0} received mouse over", this);
+            Console.WriteLine("{0}:{1} received mouse over", this, this.GetHashCode());
+
         }
 
         public virtual void OnMouseDown()
@@ -67,7 +78,7 @@ namespace Orchid
     /// </summary>
     public class DefaultElement : GuiElement
     {
-        public  DefaultElement(Game1 game): base(game)
+        public  DefaultElement(Game1 game): base(game, game.spriteBatch)
             
         {        }
 
@@ -83,7 +94,7 @@ namespace Orchid
     {
 
         //texture
-        SpriteBatch spriteBatch;
+        //SpriteBatch spriteBatch;
         Texture2D dummyTexture;
 
         //rect of inner rectangle, with the buttoncolor 
@@ -125,7 +136,7 @@ namespace Orchid
         /// <param name="textColor"></param>
         public Button(Rectangle buttonSize, string text, Game1 game, SpriteBatch spriteBatch, Func<int> command = null, Color innerColor = new Color(), Color? textColor = null)
             //: base(buttonSize, game)
-            : base(game)
+            : base(game, spriteBatch)
         {
             //determines when the element is drawn. a higher number means it'll be drawn laster
             DrawOrder = 1000;
@@ -133,7 +144,7 @@ namespace Orchid
             this.rect = buttonSize;
             this.BuildInnerRect();
 
-            this.spriteBatch = spriteBatch;
+            //this.spriteBatch = spriteBatch;
  
             //colors
             if (innerColor == new Color())

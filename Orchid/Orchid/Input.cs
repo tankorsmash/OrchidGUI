@@ -57,11 +57,11 @@ namespace Orchid
         {
             //save a refernce to the main game, to easily access its attributes
             this.theGame = game;
-
+ 
             //create empty element
-            emptyElement = new GuiElement(this.theGame);
-            hoveredElement = new GuiElement(this.theGame);
-            activeElement = new GuiElement(this.theGame);
+            emptyElement = new GuiElement(this.theGame, this.theGame.spriteBatch);
+            hoveredElement = new GuiElement(this.theGame, this.theGame.spriteBatch);
+            activeElement = new GuiElement(this.theGame, this.theGame.spriteBatch);
         }
 
 
