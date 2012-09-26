@@ -112,7 +112,10 @@ namespace Orchid
         public void Resize(MouseState currentMouseState, MouseState lastMouseState)
         {
             int diff_width = currentMouseState.X - lastMouseState.X;
+            int diff_height = currentMouseState.Y - lastMouseState.Y;
             Console.WriteLine("pre resize {0}, diff_width {1}", this.rect.Width, diff_width);
+
+            //make the change to the width, provided it's not too narrow
             if (this.rect.Width + diff_width <= this.min_width)
             {
                 Console.WriteLine("the width would be less than 0, no change.");
@@ -121,6 +124,17 @@ namespace Orchid
             {
                 this.rect.Width += diff_width;
             }
+
+            //make the change to the height, provided it's not too narrow
+            if (this.rect.Height + diff_height <= this.min_height)
+            {
+                Console.WriteLine("the height would be less than 0, no change.");
+            }
+            else
+            {
+                this.rect.Height += diff_height;
+            }
+
             //this.rect.Y -= lastMouseState.Y - currentMouseState.Y;
             Console.WriteLine("POST resize {0}", this.rect.Width);
         }
