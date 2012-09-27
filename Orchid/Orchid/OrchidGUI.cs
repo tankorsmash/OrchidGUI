@@ -140,7 +140,7 @@ namespace Orchid
                 if (elem.name == "Tooltip")
                 {
                     Tooltip castedElem = (Tooltip)elem;
-                    castedElem.UpdateSurface();
+                    castedElem.Update();
                 }
             }
         }

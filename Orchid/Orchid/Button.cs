@@ -26,6 +26,7 @@ namespace Orchid
 
 
         public bool IsHidden = true;
+        public bool IsFading = false;
 
 
 
@@ -61,7 +62,7 @@ namespace Orchid
             try
             {
             //this.tooltip.IsHidden = true;
-            this.tooltip.FadeOut(100);
+            this.tooltip.FadeOut(0.05f);
 
             }
             catch (Exception)

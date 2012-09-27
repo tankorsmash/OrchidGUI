@@ -200,9 +200,14 @@ namespace Orchid
                 currentMouseState.RightButton == ButtonState.Released)
             {
 
+                //TODO: will need to make sure that hoveredElement becomes null or default
+                // because it just keeps on calling OffMouseHover until a new element comes along
                 if (!hoveredElement.rect.Contains(mousePos))
                 {
                     hoveredElement.OffMouseHover();
+
+                    //reset hoveredElement
+                    hoveredElement = emptyElement;
                 }
 
                 List<GuiElement> orig_elemlist = new List<GuiElement>(guiElementList);

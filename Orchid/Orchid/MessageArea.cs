@@ -44,6 +44,7 @@ namespace Orchid
         public float boldDifference;
         public float italicDifference;
 
+        public float FadeRate = .1f;
         //alpha percentage. 1.0 = Alpha 255
         private float _alpha = 1F;
         public float alpha
@@ -151,6 +152,19 @@ namespace Orchid
         }
         public void CalculateBackgroundColor()
         {
+            if (this.IsFading)
+            {
+                this.alpha = this.alpha - this.FadeRate;
+                Console.WriteLine("fading: this is the alpha channel: {0}\n\tand _alpha: {1}", this.alpha, this._alpha);
+            }
+            if (this.alpha == 0)
+            {
+                this.IsHidden = true;
+                this.IsFading = false;
+                Console.WriteLine("Done fading");
+            }
+
+
             //set the color for the Surface.
             int R = (int)(this.baseColor.R * this.alpha);
             int G = (int)(this.baseColor.G * this.alpha);
@@ -161,14 +175,19 @@ namespace Orchid
         }
 
 
-        public void FadeOut(int ticks)
+        public void FadeOut(float faderate)
         {
-            this.alpha = this.alpha - .1f;
-            Console.WriteLine("This is the alpha channel: {0}\n\tand _alpha: {1}", this.alpha, this._alpha);
-            if (this.alpha == 0)
-            {
-                this.IsHidden = true;
-            }
+
+            this.FadeRate = faderate;
+            this.IsFading = true;
+
+            //this.alpha = this.alpha - faderate;
+            ////Console.WriteLine("This is the alpha channel: {0}\n\tand _alpha: {1}", this.alpha, this._alpha);
+            //if (this.alpha == 0)
+            //{
+            //    this.IsHidden = true;
+            //    this.IsFading = false;
+            //}
         }
 
         public virtual void Update()
