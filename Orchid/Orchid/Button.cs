@@ -17,6 +17,7 @@ namespace Orchid
         public SpriteBatch spriteBatch;
         public Rectangle rect;
 
+        public Tooltip tooltip;
 
         //name of the button
         //public string _name = "GuiElement";
@@ -42,7 +43,7 @@ namespace Orchid
         {
             //Rectangle tool_size = new Rectangle(100, 100, 275, 50);
 
-            new Tooltip(this.game, this.game.GraphicsDevice, this.spriteBatch, tt_rect, Color.White,
+            this.tooltip = new Tooltip(this.game, this.game.GraphicsDevice, this.spriteBatch, tt_rect, Color.White,
                 new List<string>(new string[] { "Tooltip testing" }));
         }
 
@@ -50,10 +51,31 @@ namespace Orchid
         public virtual void OffMouseHover()
         {
             //Console.WriteLine("{0} lost mouse over", this);
+            try
+            {
+            this.tooltip.IsHidden = true;
+
+            }
+            catch (Exception)
+            {
+                
+                
+            }
+
         }
         public virtual void OnMouseHover()
         {
             Console.WriteLine("{0}:{1} received mouse over", this, this.GetHashCode());
+            try
+            {
+                this.tooltip.IsHidden = false;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+            }
 
 
 

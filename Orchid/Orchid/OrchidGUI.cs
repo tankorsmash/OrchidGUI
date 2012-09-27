@@ -31,7 +31,7 @@ namespace Orchid
             //loop over each element in the list of GuiElements and Draw them all
             foreach (GuiElement elem in elemList)
             {
-                if (elem is Button)
+                if (elem.name == "Button")
                 {
                     elem.Draw(gameTime);
                 }
@@ -47,7 +47,7 @@ namespace Orchid
         {
             foreach (GuiElement elem in elemList)
             {
-                if (elem is MessageBox)
+                if (elem.name == "MessageBox")
                 {
                     MessageBox castedElem = (MessageBox) elem;
                     castedElem.Update();
@@ -62,7 +62,7 @@ namespace Orchid
             //loop over each element in the list of GuiElements and Draw them all
             foreach (GuiElement elem in elemList)
             {
-                if (elem is MessageBox)
+                if (elem.name == "MessageBox")
                 {
                     MessageBox castedElem = (MessageBox) elem;
                     castedElem.Draw();
@@ -90,7 +90,7 @@ namespace Orchid
         {
             foreach (GuiElement elem in elemList)
             {
-                if (elem is Surface)
+                if (elem.name == "Surface")
                 {
                     Surface castedElem = (Surface) elem;
                     castedElem.UpdateSurface();
@@ -110,7 +110,7 @@ namespace Orchid
         public static void DrawGUI(List<GuiElement> elemList, GameTime gameTime)
         {
 
-            //DrawGUIMessageBoxes(elemList, gameTime);
+            DrawGUIMessageBoxes(elemList, gameTime);
             DrawGUITextEntrys(elemList, gameTime);
             DrawGUISurfaces(elemList, gameTime);
             DrawGUIButtons(elemList, gameTime);
@@ -122,7 +122,7 @@ namespace Orchid
         {
             foreach (GuiElement elem in elemList)
             {
-                if (elem is Tooltip)
+                if (elem.name == "Tooltip")
                 {
                     Tooltip castedElem = (Tooltip)elem;
                     if (!(castedElem.IsHidden))
@@ -137,7 +137,7 @@ namespace Orchid
         {
             foreach (GuiElement elem in elemList)
             {
-                if (elem is Tooltip)
+                if (elem.name == "Tooltip")
                 {
                     Tooltip castedElem = (Tooltip)elem;
                     castedElem.UpdateSurface();
@@ -149,7 +149,7 @@ namespace Orchid
         {
             foreach (GuiElement elem in elemList)
             {
-                if (elem is TextEntry)
+                if (elem.name == "TextEntry")
                 {
                     TextEntry castedElem = (TextEntry)elem;
                     castedElem.Draw();
@@ -160,7 +160,7 @@ namespace Orchid
         {
             foreach (GuiElement elem in elemList)
             {
-                if (elem is TextEntry)
+                if (elem.name == "TextEntry")
                 {
                     TextEntry castedElem = (TextEntry)elem;
                     castedElem.UpdateSurface();
