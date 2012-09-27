@@ -22,6 +22,13 @@ namespace Orchid
         //name of the button
         //public string _name = "GuiElement";
         protected string _name;
+
+
+
+        public bool IsHidden = true;
+
+
+
         public string name { get { return _name; } set { _name = value; } }
 
         //protected string name = "DefaultUnchangedGUIELEMET";
@@ -53,7 +60,8 @@ namespace Orchid
             //Console.WriteLine("{0} lost mouse over", this);
             try
             {
-            this.tooltip.IsHidden = true;
+            //this.tooltip.IsHidden = true;
+            this.tooltip.FadeOut(100);
 
             }
             catch (Exception)
@@ -69,6 +77,7 @@ namespace Orchid
             try
             {
                 this.tooltip.IsHidden = false;
+                this.tooltip.alpha = 1;
 
             }
             catch (Exception ex)

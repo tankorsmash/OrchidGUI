@@ -23,7 +23,6 @@ namespace Orchid
     public class Tooltip : MessageBox
     {
         //whether or not to draw the tooltip
-        public bool IsHidden = true;
 
         public Tooltip(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch,
             Rectangle rect, Color colorBG, List<string> msgList) : base(game, graphicsDevice, spriteBatch, rect, colorBG, msgList)

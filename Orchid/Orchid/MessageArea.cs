@@ -165,6 +165,10 @@ namespace Orchid
         {
             this.alpha = this.alpha - .1f;
             Console.WriteLine("This is the alpha channel: {0}\n\tand _alpha: {1}", this.alpha, this._alpha);
+            if (this.alpha == 0)
+            {
+                this.IsHidden = true;
+            }
         }
 
         public virtual void Update()
