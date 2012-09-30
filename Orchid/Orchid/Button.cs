@@ -52,7 +52,7 @@ namespace Orchid
             //Rectangle tool_size = new Rectangle(100, 100, 275, 50);
 
             this.tooltip = new Tooltip(this.game, this.game.GraphicsDevice, this.spriteBatch, tt_rect, Color.White,
-                new List<string>(new string[] { "Tooltip testing" }));
+                new List<string>(new string[] { "Default <b>Tooltip</b> Message asdadsada as as dsa" }));
         }
 
 

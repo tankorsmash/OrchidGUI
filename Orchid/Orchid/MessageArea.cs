@@ -113,6 +113,13 @@ namespace Orchid
 
         }
 
+        public  void DrawOutline()
+        {
+            Rectangle bigger_rect = this.rect;
+            bigger_rect.Inflate(10,10);
+            this.spriteBatch.Draw(this.surface, bigger_rect, Color.Green);
+        }
+
         public void Drag(MouseState currentMouseState, MouseState lastMouseState)
         {
             this.rect.X +=  currentMouseState.X - lastMouseState.X;
@@ -157,7 +164,7 @@ namespace Orchid
                 this.alpha = this.alpha - this.FadeRate;
                 Console.WriteLine("fading: this is the alpha channel: {0}\n\tand _alpha: {1}", this.alpha, this._alpha);
             }
-            if (this.alpha == 0)
+            if (this.alpha <= 0 && this.IsFading)
             {
                 this.IsHidden = true;
                 this.IsFading = false;
@@ -241,7 +248,7 @@ namespace Orchid
 
 
             //this.UpdateSurface();
-
+            this.DrawOutline();
             spriteBatch.Draw(this.surface, this.rect, this.backgroundColor * this.alpha);
         }
 

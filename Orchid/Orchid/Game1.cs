@@ -217,18 +217,21 @@ namespace Orchid
             //    textRect, Color.DarkBlue, new List<string>(new string[]{"asd"}), Color.Red);
 
             //new surface, for resizing
-            Rectangle size2 = new Rectangle(300, 300, 200, 200);
-            createImageSurface("smiley", size2);
-            //createImageSurface(@"C:\Users\Mark\Documents\Visual Studio 2010\Projects\Orchid\Orchid\OrchidContent\smiley.png", size2); 
+            //Rectangle size2 = new Rectangle(300, 300, 200, 200);
+            //createImageSurface("smiley", size2);
+            ////createImageSurface(@"C:\Users\Mark\Documents\Visual Studio 2010\Projects\Orchid\Orchid\OrchidContent\smiley.png", size2); 
 
-            Rectangle size3 = new Rectangle(100, 100, 200, 200);
-            createImageSurface("inverted", size3);
-            //createImageSurface(@"C:\Users\Mark\Documents\Visual Studio 2010\Projects\Orchid\Orchid\OrchidContent\inverted.png", size3); 
+            //Rectangle size3 = new Rectangle(100, 100, 200, 200);
+            //createImageSurface("inverted", size3);
+            ////createImageSurface(@"C:\Users\Mark\Documents\Visual Studio 2010\Projects\Orchid\Orchid\OrchidContent\inverted.png", size3); 
+
+            ////Tooltip testing. Won't show now, I think because it's not attached to anything.
+            //Rectangle tool_size = new Rectangle(100, 100, 275, 50);
+            //new Tooltip(this, GraphicsDevice, spriteBatch, tool_size, Color.White,
+            //    new List<string>(new string[] { "Tooltip testing" }));
+
 
             // TODO: use this.Content to load your game content here
-            Rectangle tool_size = new Rectangle(100, 100, 275, 50);
-            new Tooltip(this, GraphicsDevice, spriteBatch, tool_size, Color.White,
-                new List<string>(new string[] { "Tooltip testing" }));
 
         }
 

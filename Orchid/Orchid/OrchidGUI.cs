@@ -31,7 +31,7 @@ namespace Orchid
             //loop over each element in the list of GuiElements and Draw them all
             foreach (GuiElement elem in elemList)
             {
-                if (elem.name == "Button")
+                if (elem.GetType().Name == "Button")
                 {
                     elem.Draw(gameTime);
                 }
@@ -47,7 +47,7 @@ namespace Orchid
         {
             foreach (GuiElement elem in elemList)
             {
-                if (elem.name == "MessageBox")
+                if (elem.GetType().Name == "MessageBox")
                 {
                     MessageBox castedElem = (MessageBox) elem;
                     castedElem.Update();
@@ -62,7 +62,7 @@ namespace Orchid
             //loop over each element in the list of GuiElements and Draw them all
             foreach (GuiElement elem in elemList)
             {
-                if (elem.name == "MessageBox")
+                if (elem.GetType().Name == "MessageBox")
                 {
                     MessageBox castedElem = (MessageBox) elem;
                     castedElem.Draw();
@@ -77,7 +77,7 @@ namespace Orchid
             //loop over each element in the list of GuiElements and Draw them all
             foreach (GuiElement elem in elemList)
             {
-                if (elem.name == "Surface")
+                if (elem.GetType().Name == "Surface")
 
                 {
                     Surface castedElem = (Surface) elem;
@@ -90,7 +90,7 @@ namespace Orchid
         {
             foreach (GuiElement elem in elemList)
             {
-                if (elem.name == "Surface")
+                if (elem.GetType().Name == "Surface")
                 {
                     Surface castedElem = (Surface) elem;
                     castedElem.UpdateSurface();
@@ -101,6 +101,7 @@ namespace Orchid
         public static void UpdateGUI(List<GuiElement> elemList, GameTime gameTime)
         {
             UpdateGUIMessageBoxes(elemList, gameTime);
+            UpdateGUIMenus(elemList, gameTime);
             UpdateGUITextEntrys(elemList, gameTime);
             UpdateGUISurfaces(elemList, gameTime);
             UpdateGUITooltips(elemList,gameTime);
@@ -111,6 +112,7 @@ namespace Orchid
         {
 
             DrawGUIMessageBoxes(elemList, gameTime);
+            DrawGUIMenus(elemList, gameTime);
             DrawGUITextEntrys(elemList, gameTime);
             DrawGUISurfaces(elemList, gameTime);
             DrawGUIButtons(elemList, gameTime);
@@ -122,7 +124,7 @@ namespace Orchid
         {
             foreach (GuiElement elem in elemList)
             {
-                if (elem.name == "Tooltip")
+                if (elem.GetType().Name == "Tooltip")
                 {
                     Tooltip castedElem = (Tooltip)elem;
                     if (!(castedElem.IsHidden))
@@ -137,7 +139,7 @@ namespace Orchid
         {
             foreach (GuiElement elem in elemList)
             {
-                if (elem.name == "Tooltip")
+                if (elem.GetType().Name == "Tooltip")
                 {
                     Tooltip castedElem = (Tooltip)elem;
                     castedElem.Update();
@@ -149,7 +151,7 @@ namespace Orchid
         {
             foreach (GuiElement elem in elemList)
             {
-                if (elem.name == "TextEntry")
+                if (elem.GetType().Name == "TextEntry")
                 {
                     TextEntry castedElem = (TextEntry)elem;
                     castedElem.Draw();
@@ -160,9 +162,31 @@ namespace Orchid
         {
             foreach (GuiElement elem in elemList)
             {
-                if (elem.name == "TextEntry")
+                if (elem.GetType().Name == "TextEntry")
                 {
                     TextEntry castedElem = (TextEntry)elem;
+                    castedElem.UpdateSurface();
+                }
+            }
+        }
+    private static void DrawGUIMenus(List<GuiElement> elemList, GameTime gameTime)
+        {
+            foreach (GuiElement elem in elemList)
+            {
+                if (elem.GetType().Name == "Menu")
+                {
+                    Menu castedElem = (Menu)elem;
+                    castedElem.Draw();
+                }
+            }
+        }
+        private static void UpdateGUIMenus(List<GuiElement> elemList, GameTime gameTime)
+        {
+            foreach (GuiElement elem in elemList)
+            {
+                if (elem.GetType().Name == "Menu")
+                {
+                    Menu castedElem = (Menu)elem;
                     castedElem.UpdateSurface();
                 }
             }
