@@ -122,9 +122,14 @@ namespace Orchid
 
         public void Drag(MouseState currentMouseState, MouseState lastMouseState)
         {
+            //change this' rect's position
             this.rect.X +=  currentMouseState.X - lastMouseState.X;
             this.rect.Y +=  currentMouseState.Y - lastMouseState.Y;
             Console.WriteLine("Done dragging {0}", rect);
+
+            //Change the tooltips position too
+            this.tooltip.rect.X +=  currentMouseState.X - lastMouseState.X;
+            this.tooltip.rect.Y +=  currentMouseState.Y - lastMouseState.Y;
 
         }
 
