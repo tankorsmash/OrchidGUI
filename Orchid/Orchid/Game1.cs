@@ -141,7 +141,7 @@ namespace Orchid
             //see here http://stackoverflow.com/questions/9726667/how-can-i-control-where-xna-positions-the-game-window-at-startup
             var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.
                 FromHandle(this.Window.Handle);
-            form.Location = new System.Drawing.Point(800, 100);
+            form.Location = new System.Drawing.Point(630, 15);
             //Where to spawn the Console
             //Console.SetWindowPosition(100, 0); //Doesnt work need to manually do with
             // with the console properties and defaults
