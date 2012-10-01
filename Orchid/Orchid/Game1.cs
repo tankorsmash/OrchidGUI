@@ -233,7 +233,7 @@ namespace Orchid
             //menu testing
             Rectangle menu_size = new Rectangle(100, 100, 275, 50);
             new Menu(this, GraphicsDevice, spriteBatch, menu_size, Color.Green,
-                new List<string>(new string[] { "Menu 1" }), new List<Menu>());
+                new List<string>(new string[] { "Menu 1" }), null, null, null);
             // TODO: use this.Content to load your game content here
 
         }
