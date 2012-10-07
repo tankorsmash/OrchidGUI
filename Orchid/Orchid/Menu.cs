@@ -41,13 +41,21 @@ namespace Orchid
         /// <param name="textColor">If left empty, it'll be black</param>
         public Menu(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch,
                     Rectangle rect, Color colorBG, List<string> msgList, Menu parent, List<Menu> subMenus, CommandHandler command, Color textColor)
-            : base(game, graphicsDevice, spriteBatch, rect, colorBG, msgList, false, textColor:textColor)
+            : base(game, graphicsDevice, spriteBatch, rect, colorBG, msgList, false, textColor: textColor)
         {
 
             this.parent = parent;
             this.subMenus = subMenus;
-            this._command += command;
 
+            if (command != null)
+            {
+                this._command += command;
+            }
+            else
+            {
+                this._command += () => this.CreateSubMenus(null, new List<string>(new string[] {"test default"}));
+
+            }
         }
 
 
@@ -57,7 +65,7 @@ namespace Orchid
             try
             {
                 this._command.Invoke();
-                this.CreateSubMenus(null, new List<string>(new string[] {"test 3"}));
+                //this.CreateSubMenus(null, new List<string>(new string[] {"test 3"}));
             }
 
             catch (NullReferenceException ex)
@@ -77,7 +85,7 @@ namespace Orchid
         {
             //create a rect lower than the current
             Rectangle new_rect = this.rect;
-            new_rect.Offset(this.rect.Width, 0);
+            new_rect.Offset(this.rect.Width + 10, 0);
 
 
             Orchid.CreateMenuItem(new_rect, msgList, command, parent: this, colorBG: this.backgroundColor);
