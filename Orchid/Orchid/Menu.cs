@@ -54,8 +54,33 @@ namespace Orchid
         public override void OnMouseUp()
         {
             //base.OnMouseUp();
-            this._command.Invoke();
+            try
+            {
+                this._command.Invoke();
+                this.CreateSubMenus(null, new List<string>(new string[] {"test 3"}));
+            }
 
+            catch (NullReferenceException ex)
+            {
+           
+                Console.WriteLine("Caught null for menu clicking");
+            }
+
+        }
+
+        /// <summary>
+        /// creates a submenu with the given command and text.
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="msgList"></param>
+        public  void CreateSubMenus(CommandHandler command, List<String> msgList)
+        {
+            //create a rect lower than the current
+            Rectangle new_rect = this.rect;
+            new_rect.Offset(this.rect.Width, 0);
+
+
+            Orchid.CreateMenuItem(new_rect, msgList, command, parent: this, colorBG: this.backgroundColor);
         }
     }
 

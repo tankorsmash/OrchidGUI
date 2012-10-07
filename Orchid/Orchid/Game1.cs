@@ -242,13 +242,18 @@ namespace Orchid
 
             Rectangle cmd_size = new Rectangle(300, 400, 275, 50);
             //CommandHandler cmd = new CommandHandler(() => Console.WriteLine("Clicked the menu"));
-            
 
-            CommandHandler cmd = new CommandHandler(() => Orchid.CreateMenuItem(cmd_size, new List<string>(new string[] { "Menu 2" }),null, null, null));
+
+            CommandHandler cmd =
+                new CommandHandler( () => Orchid.CreateMenuItem(cmd_size, 
+                                    new List<string>(new string[] {"Menu 2"}),
+                                    command:() => Exit(),
+                                    parent: null, colorBG: null));
             Rectangle menu_size = new Rectangle(100, 100, 275, 50);
             Orchid.CreateMenuItem(menu_size, new List<string>(new string[] { "Menu 1" }),cmd, null, null);
-            //new Menu(this, GraphicsDevice, spriteBatch, menu_size, Color.Green,
-            //    new List<string>(new string[] { "Menu 1" }), parent: null, subMenus: null, command: null);
+
+
+
             // TODO: use this.Content to load your game content here
 
         }
