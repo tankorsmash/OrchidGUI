@@ -39,9 +39,9 @@ namespace Orchid
 
 
         //GuiElements cache
-        GuiElement activeElement;
-        GuiElement emptyElement;
-        GuiElement hoveredElement;
+        public GuiElement activeElement;
+        public GuiElement emptyElement;
+        public GuiElement hoveredElement;
 
         //MouseStates cache
         MouseState currentMouseState = Mouse.GetState();
@@ -131,7 +131,7 @@ namespace Orchid
                     {
                         string text2 = String.Format("{0}, the Surface, has mouse in", castedElem);
                         theGame.msgList.Add(text2);
-                        Console.WriteLine("RESIZING");
+                        //Console.WriteLine("RESIZING");
                         castedElem.Resize(currentMouseState, lastMouseState);
 
 

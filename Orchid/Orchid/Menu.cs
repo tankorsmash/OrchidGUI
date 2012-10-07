@@ -22,7 +22,9 @@ namespace Orchid
         //A list to hold all the menus that'll show up when you click on this one
         public Menu parent;
         public List<Menu> subMenus;
-        public Delegate command;
+        
+
+        public  event CommandHandler _command;
         
         /// <summary>
         /// 
@@ -38,13 +40,13 @@ namespace Orchid
         /// <param name="command"></param>
         /// <param name="textColor">If left empty, it'll be black</param>
         public Menu(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch,
-                    Rectangle rect, Color colorBG, List<string> msgList, Menu parent, List<Menu> subMenus, Delegate command, Color textColor)
+                    Rectangle rect, Color colorBG, List<string> msgList, Menu parent, List<Menu> subMenus, CommandHandler command, Color textColor)
             : base(game, graphicsDevice, spriteBatch, rect, colorBG, msgList, false, textColor:textColor)
         {
 
             this.parent = parent;
             this.subMenus = subMenus;
-            this.command = command;
+            this._command += command;
 
         }
 
@@ -52,6 +54,7 @@ namespace Orchid
         public override void OnMouseUp()
         {
             //base.OnMouseUp();
+            this._command.Invoke();
 
         }
     }

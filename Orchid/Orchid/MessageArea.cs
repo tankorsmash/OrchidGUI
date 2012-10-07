@@ -137,7 +137,7 @@ namespace Orchid
         {
             int diff_width = currentMouseState.X - lastMouseState.X;
             int diff_height = currentMouseState.Y - lastMouseState.Y;
-            Console.WriteLine("pre resize {0}, diff_width {1}", this.rect.Width, diff_width);
+            //Console.WriteLine("pre resize {0}, diff_width {1}", this.rect.Width, diff_width);
 
             //make the change to the width, provided it's not too narrow
             if (this.rect.Width + diff_width <= this.min_width)
@@ -160,14 +160,14 @@ namespace Orchid
             }
 
             //this.rect.Y -= lastMouseState.Y - currentMouseState.Y;
-            Console.WriteLine("POST resize {0}", this.rect.Width);
+            //Console.WriteLine("POST resize {0}", this.rect.Width);
         }
         public void CalculateBackgroundColor()
         {
             if (this.IsFading)
             {
                 this.alpha = this.alpha - this.FadeRate;
-                Console.WriteLine("fading: this is the alpha channel: {0}\n\tand _alpha: {1}", this.alpha, this._alpha);
+                //Console.WriteLine("fading: this is the alpha channel: {0}\n\tand _alpha: {1}", this.alpha, this._alpha);
             }
             if (this.alpha <= 0 && this.IsFading)
             {

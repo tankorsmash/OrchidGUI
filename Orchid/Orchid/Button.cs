@@ -74,7 +74,22 @@ namespace Orchid
         }
         public virtual void OnMouseHover()
         {
+            //so long as the hoveredElement isn't this, print that we got a mouseover
+            if (this.game.inputHandler.hoveredElement != this)
+
+            {
+                //Console.WriteLine("ASDAFSJSDKGSDJGSDK:GDSFGKSDFGHDDSGS");
             Console.WriteLine("{0}:{1} received mouse over", this, this.GetHashCode());
+            }
+
+            //the try stmt will crash on tooltip. Not exactly sure why yet.
+            if (this is Tooltip)
+            {
+                return;
+                
+            }
+
+
             try
             {
                 this.tooltip.IsHidden = false;

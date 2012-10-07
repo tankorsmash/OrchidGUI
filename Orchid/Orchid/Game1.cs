@@ -18,6 +18,9 @@ using HtmlAgilityPack;
 
 namespace Orchid
 {
+
+    public delegate void CommandHandler();
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -44,7 +47,7 @@ namespace Orchid
         public static SpriteFont italicFont; 
 
         //input
-        InputHandler inputHandler;
+        public InputHandler inputHandler;
         MouseState currentMouseState = Mouse.GetState();
         MouseState lastMouseState = Mouse.GetState();
 
@@ -237,7 +240,8 @@ namespace Orchid
 
             //menu testing
             Rectangle menu_size = new Rectangle(100, 100, 275, 50);
-            Orchid.CreateMenuItem(menu_size, new List<string>(new string[] { "Menu 1" }), null, null, null);
+            CommandHandler cmd = new CommandHandler(() => Console.WriteLine("Clicked the menu"));
+            Orchid.CreateMenuItem(menu_size, new List<string>(new string[] { "Menu 1" }),cmd, null, null);
             //new Menu(this, GraphicsDevice, spriteBatch, menu_size, Color.Green,
             //    new List<string>(new string[] { "Menu 1" }), parent: null, subMenus: null, command: null);
             // TODO: use this.Content to load your game content here
