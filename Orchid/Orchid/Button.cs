@@ -157,7 +157,7 @@ namespace Orchid
         Color clickedButtonColor = new Color(42, 68, 128);
         Color inactiveButtonColor = new Color(70, 113, 213);
 
-        Color defaultTextColor = Color.White;
+        Color defaultTextColor = Color.Magenta;
 
 
         /// <summary>

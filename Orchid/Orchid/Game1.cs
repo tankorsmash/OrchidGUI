@@ -84,7 +84,7 @@ namespace Orchid
             this.inputHandler = new InputHandler(this);
 
             //a temp string list to make sure shit doesnt crash
-            string[] temp = { @"<b>blank1adsadka ak as asd  gsdgdfh this is my united states of whatever dshsd sdfgd  dsfgsdfggfgfg rtrafdga </b>", @"<b>blank2</b>", @"<b>blank3</b>", "blank4", "blank5", "blank6", "blank7", "blank8" };
+            string[] temp = { @"<b>this is my united states of whatever </b>", @"<b>blank2</b>", @"<b>blank3</b>", "blank4", "blank5", "blank6", "blank7", "blank8" };
             foreach (string item in temp)
             {
                 msgList.Add(item);
@@ -151,7 +151,6 @@ namespace Orchid
             this.currentGameState = this.playingGameState;
             
 
-             
 
             base.Initialize();
         }
@@ -169,6 +168,12 @@ namespace Orchid
             defaultFont = Content.Load<SpriteFont>("DefaultFont");
             boldFont = Content.Load<SpriteFont>("BoldFont");
             italicFont = Content.Load<SpriteFont>("ItalicFont");
+
+            //set some Orchid variables up
+            Orchid.spriteBatch = spriteBatch;
+            Orchid.graphicsDevice = GraphicsDevice;
+            Orchid.game = this;
+
 
 
             //create a message area at the bottom of the scree, 1/4 of the screen.
@@ -232,8 +237,9 @@ namespace Orchid
 
             //menu testing
             Rectangle menu_size = new Rectangle(100, 100, 275, 50);
-            new Menu(this, GraphicsDevice, spriteBatch, menu_size, Color.Green,
-                new List<string>(new string[] { "Menu 1" }), null, null, null);
+            Orchid.CreateMenuItem(menu_size, new List<string>(new string[] { "Menu 1" }), null, null, null);
+            //new Menu(this, GraphicsDevice, spriteBatch, menu_size, Color.Green,
+            //    new List<string>(new string[] { "Menu 1" }), parent: null, subMenus: null, command: null);
             // TODO: use this.Content to load your game content here
 
         }
@@ -280,13 +286,8 @@ namespace Orchid
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            //GraphicsDevice.Clear(Color.Green);
-            GraphicsDevice.SetRenderTarget(null);
-            GraphicsDevice.Clear(defaultBG);
+
             // TODO: Add your drawing code here
-
-
-
 
             //reset the RenderTarget to the backbuffer
             GraphicsDevice.SetRenderTarget(null);
@@ -296,15 +297,9 @@ namespace Orchid
             spriteBatch.Begin();
             Orchid.DrawGUI(Orchid.masterGuiElementList, gameTime);
 
-            //resizingSurface.Draw();
 
-            //draw the MBs to the backbuffer, and draw that.
             spriteBatch.End();
 
-            //draw the buttons after, so they're on top, as well as after End()
-            //because otherwise the MSB would be draw on top, because Buttons don't need
-            //to use Spritebatches here.
-            
 
 
             base.Draw(gameTime);

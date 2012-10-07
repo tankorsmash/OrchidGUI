@@ -223,7 +223,7 @@ namespace Orchid
             //change the renderTarger (pygame surface)
             graphicsDevice.SetRenderTarget(surface);   
             //clear it, like normal  
-            graphicsDevice.Clear(Color.Red);   
+            graphicsDevice.Clear(Color.Black);   
 
              
             //make some SB draws

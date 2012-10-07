@@ -25,6 +25,11 @@ namespace Orchid
         //list of gui elements
         public static List<GuiElement> masterGuiElementList = new List<GuiElement>();
 
+        public static SpriteBatch spriteBatch;
+        public static GraphicsDevice graphicsDevice;
+        public static Game1 game;
+
+
         //draws all the gui buttons. Loops over all the gui elements, so it might get slow later
         public static void DrawGUIButtons(List<GuiElement> elemList, GameTime gameTime)
         {
@@ -51,7 +56,7 @@ namespace Orchid
                 {
                     MessageBox castedElem = (MessageBox) elem;
                     castedElem.Update();
-                    castedElem.UpdateSurface();
+                    //castedElem.UpdateSurface();
                 }
             }
         }
@@ -107,16 +112,29 @@ namespace Orchid
             UpdateGUITooltips(elemList,gameTime);
         }
 
+        public static Menu CreateMenuItem(Rectangle rect, List<string> msgList, Delegate command, Menu parent, Color? colorBG)
+        {
+            if (rect == null)
+            {
+
+                 rect = new Rectangle(100, 100, 275, 50);
+            }
+
+            Menu menu= new Menu(Orchid.game, Orchid.graphicsDevice, spriteBatch, rect, Color.GreenYellow,
+                new List<string>(new string[] { "Menu 1" }), parent: null, subMenus: null, command: null, textColor:Color.Black);
+
+            return menu;
+        }
 
         public static void DrawGUI(List<GuiElement> elemList, GameTime gameTime)
         {
 
             DrawGUIMessageBoxes(elemList, gameTime);
-            DrawGUIMenus(elemList, gameTime);
             DrawGUITextEntrys(elemList, gameTime);
             DrawGUISurfaces(elemList, gameTime);
             DrawGUIButtons(elemList, gameTime);
             DrawGUITextTooltips(elemList,gameTime);
+            DrawGUIMenus(elemList, gameTime);
 
         }
 
@@ -187,7 +205,8 @@ namespace Orchid
                 if (elem.GetType().Name == "Menu")
                 {
                     Menu castedElem = (Menu)elem;
-                    castedElem.UpdateSurface();
+                    castedElem.Update();
+                    //castedElem.UpdateSurface();
                 }
             }
         }
