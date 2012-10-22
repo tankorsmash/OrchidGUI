@@ -112,7 +112,7 @@ namespace Orchid
             UpdateGUITooltips(elemList,gameTime);
         }
 
-        public static void CreateMenuItem(Rectangle rect, List<string> msgList, CommandHandler command, Menu parent, Color? colorBG)
+        public static void CreateMenu(Rectangle rect, List<string> msgList, CommandHandler command, Menu parent, Color? colorBG)
         {
             if (rect == null)
             {
@@ -121,7 +121,7 @@ namespace Orchid
             }
                    //new List<string>(new string[] { "Menu 1" })
             Menu menu= new Menu(Orchid.game, Orchid.graphicsDevice, spriteBatch, rect, Color.GreenYellow,
-                msgList, parent: null, subMenus: null, command: command, textColor:Color.Black);
+                msgList, parent: parent, subMenus: null, command: command, textColor:Color.Black);
 
             //return menu;
         }

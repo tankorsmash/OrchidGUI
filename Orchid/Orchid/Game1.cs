@@ -245,12 +245,12 @@ namespace Orchid
 
 
             //CommandHandler cmd =
-            //    new CommandHandler( () => Orchid.CreateMenuItem(cmd_size, 
+            //    new CommandHandler( () => Orchid.CreateMenu(cmd_size, 
             //                        new List<string>(new string[] {"Menu 2"}),
             //                        command:() => Exit(),
             //                        parent: null, colorBG: null));
             Rectangle menu_size = new Rectangle(100, 100, 275, 50);
-            Orchid.CreateMenuItem(menu_size, new List<string>(new string[] { "Menu 1" }),null, null, null);
+            Orchid.CreateMenu(menu_size, new List<string>(new string[] { "Menu 1" }),null, null, null);
 
 
 
