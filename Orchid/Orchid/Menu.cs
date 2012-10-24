@@ -20,11 +20,19 @@ namespace Orchid
         //list to hold the menu items on this menu level, a list of tuples that
         //have a msgList and command in them
         public List<Tuple<List<string>, CommandHandler>> MenuItems;
-        public string MenuName;
+        public string TopMenuName;
+
+        public Menu TopMenu;
+
+        public Color colorBG;
 
         public Menu parent;
 
         public event CommandHandler _command;
+
+        public GraphicsDevice graphicsDevice;
+        //public SpriteBatch spriteBatch;
+        //public Rectangle rect;
 
         //object to build all the menu items once the MenuContainer is told
         //to begin building
@@ -34,33 +42,50 @@ namespace Orchid
                                  graphicsDevice,
                              SpriteBatch spriteBatch,
                              Rectangle rect,
+                             Color colorBG,
                              string name = "Default MenuContainer")
             : base(game, spriteBatch)
         {
-            this.MenuName = name;
+            this.TopMenuName = name;
+            this.graphicsDevice = graphicsDevice;
+            this.rect = rect;
+
+            this.CreateTopMenu();
             this.parent = parent;
+
+
+            this.colorBG = colorBG;
         }
 
         //TODO: fill with logic
-        public virtual Update()
+        public virtual void Update()
         {
             
         }
 
+        private void CreateTopMenu()
+        {
+            //Creates a menu that will be drawn before it ever gets clicked on.
+            this.TopMenu = new Menu(game, this.graphicsDevice, spriteBatch, rect,
+                                    Color.Red, Orchid.CreateMsgList(this.TopMenuName), null, null, null, colorBG);
+        }
+
+
+
         //Draw... something. It needs a header of some sort, but that'd
         //but just a regular Menu. Need to figure it out.
-        public virtual Draw()
+        public virtual void Draw()
         {
             //Top button is the first button. Think File menu button.
-            this.DrawTopButton();
+            this.DrawTopMenu();
 
         }
 
 
-        public void DrawTopButton()
+        public void DrawTopMenu()
         { 
-            //Draws the button set to TopButton
-            this.TopButton.Draw()
+            //Draws the button set to TopMenu
+            this.TopMenu.Draw();
         }
 
         public void AddMenuItem(CommandHandler command, List<String> msgList)

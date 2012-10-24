@@ -30,6 +30,12 @@ namespace Orchid
         public static Game1 game;
 
 
+        //helper funciton for creating a list<str> from one string.
+        public static List<String> CreateMsgList(string line)
+        {
+            return new List<String>( new string[] {line});
+        }
+
         //draws all the gui buttons. Loops over all the gui elements, so it might get slow later
         public static void DrawGUIButtons(List<GuiElement> elemList, GameTime gameTime)
         {
@@ -183,7 +189,8 @@ namespace Orchid
             }
         }
 
-        private static void UpdateGUITooltips(List<GuiElement> elemList, GameTime gameTime)
+        private static void UpdateGUITooltips(List<GuiElement> elemList,
+                GameTime gameTime)
         {
             foreach (GuiElement elem in elemList)
             {
@@ -195,7 +202,8 @@ namespace Orchid
             }
         }
 
-    private static void DrawGUITextEntrys(List<GuiElement> elemList, GameTime gameTime)
+        private static void DrawGUITextEntrys(List<GuiElement> elemList,
+                GameTime gameTime)
         {
             foreach (GuiElement elem in elemList)
             {
@@ -206,7 +214,8 @@ namespace Orchid
                 }
             }
         }
-        private static void UpdateGUITextEntrys(List<GuiElement> elemList, GameTime gameTime)
+        private static void UpdateGUITextEntrys(List<GuiElement> elemList,
+                GameTime gameTime)
         {
             foreach (GuiElement elem in elemList)
             {
