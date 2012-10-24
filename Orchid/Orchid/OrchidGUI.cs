@@ -110,6 +110,7 @@ namespace Orchid
             UpdateGUITextEntrys(elemList, gameTime);
             UpdateGUISurfaces(elemList, gameTime);
             UpdateGUITooltips(elemList,gameTime);
+            UpdateGUIMenuContainers(elemList,gameTime);
         }
 
         public static void CreateMenu(Rectangle rect, List<string> msgList, CommandHandler command, Menu parent, Color? colorBG)
@@ -135,7 +136,36 @@ namespace Orchid
             DrawGUISurfaces(elemList, gameTime);
             DrawGUIButtons(elemList, gameTime);
             DrawGUITextTooltips(elemList,gameTime);
+            DrawGUIMenuContainers(elemList,gameTime);
 
+        }
+
+
+        private static void DrawGUIMenuContainers(List<GuiElement> elemList, GameTime gameTime)
+        {
+            foreach (GuiElement elem in elemList)
+            {
+                if (elem.GetType().Name == "MenuContainer")
+                {
+                    MenuContainer castedElem = (MenuContainer)elem;
+                    if (!(castedElem.IsHidden))
+                    {
+                        castedElem.Draw();
+                    }
+                }
+            }
+        }
+
+        private static void UpdateGUIMenuContainers(List<GuiElement> elemList, GameTime gameTime)
+        {
+            foreach (GuiElement elem in elemList)
+            {
+                if (elem.GetType().Name == "MenuContainer")
+                {
+                    MenuContainer castedElem = (MenuContainer)elem;
+                    castedElem.Update();
+                }
+            }
         }
 
         private static void DrawGUITextTooltips(List<GuiElement> elemList, GameTime gameTime)

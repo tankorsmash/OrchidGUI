@@ -17,8 +17,8 @@ namespace Orchid
 {
     public class MenuContainer : GuiElement
     {
-        //list to hold the menu items on this menu level, a list of tuples that have
-        // a msgList and command in them
+        //list to hold the menu items on this menu level, a list of tuples that
+        //have a msgList and command in them
         public List<Tuple<List<string>, CommandHandler>> MenuItems;
         public string MenuName;
 
@@ -26,12 +26,14 @@ namespace Orchid
 
         public event CommandHandler _command;
 
-        //object to build all the menu items once the MenuContainer is told to begin building
+        //object to build all the menu items once the MenuContainer is told
+        //to begin building
         public MenuContainer(Menu parent,
                              Game1 game,
                              GraphicsDevice
                                  graphicsDevice,
                              SpriteBatch spriteBatch,
+                             Rectangle rect,
                              string name = "Default MenuContainer")
             : base(game, spriteBatch)
         {
@@ -39,10 +41,33 @@ namespace Orchid
             this.parent = parent;
         }
 
+        //TODO: fill with logic
+        public virtual Update()
+        {
+            
+        }
+
+        //Draw... something. It needs a header of some sort, but that'd
+        //but just a regular Menu. Need to figure it out.
+        public virtual Draw()
+        {
+            //Top button is the first button. Think File menu button.
+            this.DrawTopButton();
+
+        }
+
+
+        public void DrawTopButton()
+        { 
+            //Draws the button set to TopButton
+            this.TopButton.Draw()
+        }
+
         public void AddMenuItem(CommandHandler command, List<String> msgList)
         {
 
-            //create a tuple with a stringlist and a command in it to append the list of menu items
+            //create a tuple with a stringlist and a command in it to append the
+            //list of menu items
             Tuple<List<string>, CommandHandler> pair =
                 new Tuple<List<string>, CommandHandler>(msgList, command);
 
@@ -52,9 +77,19 @@ namespace Orchid
 
         public  void CreateVisibleMenu()
         {
-            //loop over all the menu items and create a surface to draw to screen
+            //loop over all the menu items and create a surface to draw to
+            //screen
             for (int i = 0; i < MenuItems.Count; i++)
             {
+                //rect to change size for more than one menu shows, instead of
+                //being on top of each other
+                Rectangle size  = this.rect;
+                size.Offset(size.Height * i, 0);
+                Menu new_menu = new Menu(game, this.GraphicsDevice,
+                                         spriteBatch, rect, Color.Black,
+                                         new List<string>(new string[] {"TEST!"}),
+                                         null, null, null,
+                                         Color.Black);
                 
             }
         }
@@ -67,7 +102,8 @@ namespace Orchid
         public Menu parent;
         public List<Menu> subMenus;
 
-        //list to hold the menu items on this menu level, a list of tuples that have
+        //list to hold the menu items on this menu level, a list of tuples that
+        //have
         // a msgList and command in them
         public List<Tuple<List<string>, CommandHandler>> MenuItems;
 
@@ -92,6 +128,7 @@ namespace Orchid
                 textColor: textColor)
         {
             this.parent = parent;
+            //for now this just adds itself to its parent,if applicable
             this.NotifyParent();
 
             if (subMenus == null)
@@ -124,7 +161,6 @@ namespace Orchid
             try
             {
                 this.command.Invoke();
-                //this.CreateSubMenu(null, new List<string>(new string[] {"test 3"}));
             }
 
             catch (NullReferenceException ex)

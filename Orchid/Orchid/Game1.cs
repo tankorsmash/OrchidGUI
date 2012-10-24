@@ -51,7 +51,6 @@ namespace Orchid
         MouseState currentMouseState = Mouse.GetState();
         MouseState lastMouseState = Mouse.GetState();
 
-        
         //screensize
         public int width = 1280;
         public int height = 1024;
@@ -250,7 +249,11 @@ namespace Orchid
             //                        command:() => Exit(),
             //                        parent: null, colorBG: null));
             Rectangle menu_size = new Rectangle(100, 100, 275, 50);
-            Orchid.CreateMenu(menu_size, new List<string>(new string[] { "Menu 1" }),null, null, null);
+            // Orchid.CreateMenu(menu_size, new List<string>(new string[] { "Menu 1" }),null, null, null);
+
+            MenuContainer cont = new MenuContainer(null, this, GraphicsDevice,
+                    spriteBatch, menu_size
+                    );
 
 
 
