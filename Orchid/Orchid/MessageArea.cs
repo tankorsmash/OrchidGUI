@@ -412,9 +412,11 @@ namespace Orchid
         /// <param name="rect">The rectangle that represents the size of the msgbox</param>
         /// <param name="colorBG">color of the background</param>
         /// <param name="msgList"> the list of strings that the messagebox will deal with</param>
+        /// <param name="textColor"> </param>
         /// <param name="moveLocked">whether or not the MB can get dragged or not</param>
-        public MessageBox(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch,
-            Rectangle rect, Color colorBG, List<string> msgList, bool moveLocked = false, Color textColor = new Color())
+        public MessageBox(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch
+                spriteBatch, Rectangle rect, Color colorBG, List<string>
+                msgList, Color textColor, bool moveLocked = false)
             : base(game, graphicsDevice, spriteBatch, rect, colorBG, textColor)
         {
 

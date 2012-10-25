@@ -50,11 +50,12 @@ namespace Orchid
             this.graphicsDevice = graphicsDevice;
             this.rect = rect;
 
+            this.colorBG = colorBG;
+
             this.CreateTopMenu();
             this.parent = parent;
 
 
-            this.colorBG = colorBG;
         }
 
         //TODO: fill with logic
@@ -67,7 +68,7 @@ namespace Orchid
         {
             //Creates a menu that will be drawn before it ever gets clicked on.
             this.TopMenu = new Menu(game, this.graphicsDevice, spriteBatch, rect,
-                                    Color.Red, Orchid.CreateMsgList(this.TopMenuName), null, null, null, colorBG);
+                                    this.colorBG, Orchid.CreateMsgList(this.TopMenuName), null, null, null, Color.Blue);
         }
 
 
@@ -149,8 +150,8 @@ namespace Orchid
                     CommandHandler command,
                     Color textColor)
             : base(
-                game, graphicsDevice, spriteBatch, rect, colorBG, msgList, false,
-                textColor: textColor)
+                game, graphicsDevice, spriteBatch, rect, colorBG, msgList,
+                textColor: textColor, moveLocked: false)
         {
             this.parent = parent;
             //for now this just adds itself to its parent,if applicable

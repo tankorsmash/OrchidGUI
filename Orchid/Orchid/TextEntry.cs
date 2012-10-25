@@ -25,7 +25,7 @@ namespace Orchid
         public TextEntry(Game1 game, GraphicsDevice graphicsDevice,
             SpriteBatch spriteBatch, Rectangle rect, Color colorBG, 
             List<string> msgList,Color textColor )
-            : base(game, graphicsDevice, spriteBatch, rect, colorBG, msgList, false,textColor)
+            : base(game, graphicsDevice, spriteBatch, rect, colorBG, msgList,textColor, false)
 
         {
 

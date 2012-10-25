@@ -181,7 +181,7 @@ namespace Orchid
             //create a message area at the bottom of the scree, 1/4 of the screen.
             int areaH = height / 4;
             Rectangle size = new Rectangle(0, height - areaH, width, areaH);
-            messageArea = new MessageBox(this, GraphicsDevice, spriteBatch, size, Color.Green, msgList, false, Color.Black);
+            messageArea = new MessageBox(this, GraphicsDevice, spriteBatch, size, Color.Green, msgList, Color.Black, false);
            
             ////create a button
             //Rectangle qwe = new Rectangle(500, 0, 210, 110);
