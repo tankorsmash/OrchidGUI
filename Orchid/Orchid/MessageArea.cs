@@ -252,9 +252,13 @@ namespace Orchid
         { 
 
 
-            //this.UpdateSurface();
-            this.DrawOutline();
-            spriteBatch.Draw(this.surface, this.rect, this.backgroundColor * this.alpha);
+            if (!(this.IsHidden))
+            {
+                //this.UpdateSurface();
+                this.DrawOutline();
+                spriteBatch.Draw(this.surface, this.rect, this.backgroundColor *
+                        this.alpha);
+            }
         }
 
         // TODO:
@@ -370,7 +374,7 @@ namespace Orchid
 
     public class MessageBox : Surface
     {
-
+        
         //public MessageWriter writer;
         public SpriteFont defaultFont;
         //the color of the widget's background
@@ -516,10 +520,14 @@ namespace Orchid
         public override void Draw() 
         {
 
-            //draws the new surface stuff to the back buffer
-            //Color newColor = new Color(this.backgroundColor.R,
-            //this.backgroundColor.G, this.backgroundColor.B, 100);
-            spriteBatch.Draw(this.surface, this.rect, this.backgroundColor * this.alpha);
+            if (!(this.IsHidden))
+            {
+                //draws the new surface stuff to the back buffer
+                //Color newColor = new Color(this.backgroundColor.R,
+                //this.backgroundColor.G, this.backgroundColor.B, 100);
+                spriteBatch.Draw(this.surface, this.rect, this.backgroundColor *
+                        this.alpha);
+            }
 
         }
 

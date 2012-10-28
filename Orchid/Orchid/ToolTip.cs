@@ -29,6 +29,7 @@ namespace Orchid
         {
 
             this.textColor = Color.Black;
+            this.IsHidden = true;
 
         }
 

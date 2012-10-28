@@ -26,7 +26,7 @@ namespace Orchid
 
 
 
-        public bool IsHidden = true;
+        public bool IsHidden = false;
         public bool IsFading = false;
 
 

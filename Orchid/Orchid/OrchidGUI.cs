@@ -148,12 +148,13 @@ namespace Orchid
         }
 
 
+        //Need to make sure that there gets priority drawing so buttons aren't on top of menus
+        // or are. I'm not sure what I want just yet.
         private static void DrawGUIAll(List<GuiElement> elemList, GameTime gameTime)
         {
             foreach (GuiElement elem in elemList)
             {
-                        elem.Draw();
-                   
+                elem.Draw();
             }
         }
 

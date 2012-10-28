@@ -79,7 +79,11 @@ namespace Orchid
         public virtual void Draw()
         {
             //Top button is the first button. Think File menu button.
-            this.DrawTopMenu();
+
+            if (!(this.IsHidden))
+            {
+                this.DrawTopMenu();
+            }
 
         }
 
