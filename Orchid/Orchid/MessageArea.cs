@@ -209,7 +209,7 @@ namespace Orchid
             this.UpdateSurface();
         }
 
-        public virtual  void UpdateSurface()
+        public virtual void UpdateSurface()
         {
 
             //update the surface size to match the rect's 
@@ -244,13 +244,10 @@ namespace Orchid
             //then reset the drawing surface to null, backbuffer.
             //graphicsDevice.SetRenderTarget(null);
 
-            //return surface;
-
         }
 
         public  override void Draw()
         { 
-
 
             if (!(this.IsHidden))
             {

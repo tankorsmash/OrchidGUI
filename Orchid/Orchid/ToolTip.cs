@@ -22,13 +22,16 @@ namespace Orchid
     /// </summary>
     public class Tooltip : MessageBox
     {
-        //whether or not to draw the tooltip
 
-        public Tooltip(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch,
-            Rectangle rect, Color colorBG, List<string> msgList) : base(game, graphicsDevice, spriteBatch, rect, colorBG, msgList, new Color())
+        public Tooltip(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch
+                spriteBatch, Rectangle rect, Color colorBG, List<string>
+                msgList) : base(game, graphicsDevice, spriteBatch, rect,
+                    colorBG, msgList, new Color())
         {
 
             this.textColor = Color.Black;
+
+            //Tooltips start hidden
             this.IsHidden = true;
 
         }

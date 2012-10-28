@@ -29,6 +29,20 @@ namespace Orchid
         public static GraphicsDevice graphicsDevice;
         public static Game1 game;
 
+        //higher the priority, the later it'll be drawn. 
+        public static int BaseDrawPriorityGeneral       = 800;
+        public static int BaseDrawPriorityMenu          = 900;
+        public static int BaseDrawPriorityTooltip       = 1000;
+        public static int BaseDrawPrioritySurface       = 800;
+        public static int BaseDrawPriorityMessageBox    = 800;
+        public static int BaseDrawPriorityTextEntry     = 800;
+        public static int BaseDrawPriorityMenuContainer = 900;
+        public static int BaseDrawPriorityButton        = 900;
+        // public static int BaseDrawPriorityButton        = 1000;
+        // public static int BaseDrawPriorityButton        = 1000;
+        // public static int BaseDrawPriorityButton        = 1000;
+        // public static int BaseDrawPriorityButton        = 1000;
+        // public static int BaseDrawPriorityButton        = 1000;
 
         //helper funciton for creating a list<str> from one string.
         public static List<String> CreateMsgList(string line)
