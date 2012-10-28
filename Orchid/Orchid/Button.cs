@@ -14,6 +14,10 @@ namespace Orchid
 {
     public class GuiElement : DrawableGameComponent
     {
+
+        //used to determine when this object will be drawn
+        public int DrawPriority = Orchid.BaseDrawPriorityGeneral;
+
         public Game1 game;
         public SpriteBatch spriteBatch;
         public Rectangle rect;
@@ -146,6 +150,9 @@ namespace Orchid
 
     public class Button : GuiElement
     {
+
+        //used to determine when this object will be drawn
+        public int DrawPriority = Orchid.BaseDrawPriorityButton;
 
         //texture
         //SpriteBatch spriteBatch;

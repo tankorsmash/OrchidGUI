@@ -17,6 +17,11 @@ namespace Orchid
 {
     public class MenuContainer : GuiElement
     {
+
+        //used to determine when this object will be drawn
+        public int DrawPriority = Orchid.BaseDrawPriorityMenuContainer;
+
+
         //list to hold the menu items on this menu level, a list of tuples that
         //have a msgList and command in them
         public List<Tuple<List<string>, CommandHandler>> MenuItems;
@@ -129,6 +134,10 @@ namespace Orchid
 
     public class Menu : MessageBox
     {
+
+        //used to determine when this object will be drawn
+        public int DrawPriority = Orchid.BaseDrawPriorityMenu;
+
         //A list to hold all the menus that'll show up when you click on this one
         public Menu parent;
         public List<Menu> subMenus;

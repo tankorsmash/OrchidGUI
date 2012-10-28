@@ -23,6 +23,9 @@ namespace Orchid
     public class Tooltip : MessageBox
     {
 
+        //used to determine when this object will be drawn
+        public int DrawPriority = Orchid.BaseDrawPriorityTooltip;
+
         public Tooltip(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch
                 spriteBatch, Rectangle rect, Color colorBG, List<string>
                 msgList) : base(game, graphicsDevice, spriteBatch, rect,

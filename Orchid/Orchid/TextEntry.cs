@@ -18,6 +18,10 @@ namespace Orchid
 {
     class TextEntry : MessageBox
     {
+
+        //used to determine when this object will be drawn
+        public int DrawPriority = Orchid.BaseDrawPriorityTextEntry;
+        
         //the list of all the recently typed keys.
         public List<string> typed = new List<string>();
 

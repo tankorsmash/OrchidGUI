@@ -23,6 +23,10 @@ namespace Orchid
     /// </summary>
     public class Surface : GuiElement
     {
+
+        //used to determine when this object will be drawn
+        public int DrawPriority = Orchid.BaseDrawPrioritySurface;
+    
         protected GraphicsDevice graphicsDevice;
         //protected SpriteBatch spriteBatch;
 
@@ -371,6 +375,9 @@ namespace Orchid
 
     public class MessageBox : Surface
     {
+
+        //used to determine when this object will be drawn
+        public int DrawPriority = Orchid.BaseDrawPriorityMessageBox;
         
         //public MessageWriter writer;
         public SpriteFont defaultFont;
