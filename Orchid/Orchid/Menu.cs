@@ -67,9 +67,10 @@ namespace Orchid
         private void CreateTopMenu()
         {
             //Creates a menu that will be drawn before it ever gets clicked on.
-            this.TopMenu = new Menu(game, this.graphicsDevice, spriteBatch, rect,
-                                    this.colorBG, Orchid.CreateMsgList(this.TopMenuName), null, null, null, Color.Blue);
-        }
+            this.TopMenu = new Menu(game, this.graphicsDevice, spriteBatch,
+                    rect, colorBG, Orchid.CreateMsgList(this.TopMenuName),
+                    //colorBG is given to the MenuContainer constructor
+                    null, null, null, textColor: Color.Black); }
 
 
 
@@ -112,7 +113,7 @@ namespace Orchid
                 Rectangle size  = this.rect;
                 size.Offset(size.Height * i, 0);
                 Menu new_menu = new Menu(game, this.GraphicsDevice,
-                                         spriteBatch, rect, Color.Black,
+                                         spriteBatch, rect, colorBG,
                                          new List<string>(new string[] {"TEST!"}),
                                          null, null, null,
                                          Color.Black);

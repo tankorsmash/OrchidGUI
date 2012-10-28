@@ -248,7 +248,7 @@ namespace Orchid
 
         }
 
-        public virtual void Draw()
+        public  override void Draw()
         { 
 
 
@@ -517,7 +517,8 @@ namespace Orchid
         {
 
             //draws the new surface stuff to the back buffer
-            //Color newColor = new Color(this.backgroundColor.R, this.backgroundColor.G, this.backgroundColor.B, 100);
+            //Color newColor = new Color(this.backgroundColor.R,
+            //this.backgroundColor.G, this.backgroundColor.B, 100);
             spriteBatch.Draw(this.surface, this.rect, this.backgroundColor * this.alpha);
 
         }

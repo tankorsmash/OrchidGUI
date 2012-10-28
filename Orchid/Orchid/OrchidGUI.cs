@@ -116,7 +116,7 @@ namespace Orchid
             UpdateGUITextEntrys(elemList, gameTime);
             UpdateGUISurfaces(elemList, gameTime);
             UpdateGUITooltips(elemList,gameTime);
-            UpdateGUIMenuContainers(elemList,gameTime);
+            //UpdateGUIMenuContainers(elemList,gameTime);
         }
 
         public static void CreateMenu(Rectangle rect, List<string> msgList, CommandHandler command, Menu parent, Color? colorBG)
@@ -136,16 +136,26 @@ namespace Orchid
         public static void DrawGUI(List<GuiElement> elemList, GameTime gameTime)
         {
 
-            DrawGUIMessageBoxes(elemList, gameTime);
-            DrawGUIMenus(elemList, gameTime);
-            DrawGUITextEntrys(elemList, gameTime);
-            DrawGUISurfaces(elemList, gameTime);
-            DrawGUIButtons(elemList, gameTime);
-            DrawGUITextTooltips(elemList,gameTime);
-            DrawGUIMenuContainers(elemList,gameTime);
+            // DrawGUIMessageBoxes(elemList, gameTime);
+            // DrawGUIMenus(elemList, gameTime);
+            // DrawGUITextEntrys(elemList, gameTime);
+            // DrawGUISurfaces(elemList, gameTime);
+            // DrawGUIButtons(elemList, gameTime);
+            // DrawGUITextTooltips(elemList,gameTime);
+            // DrawGUIMenuContainers(elemList,gameTime);
 
+            DrawGUIAll(elemList, gameTime);
         }
 
+
+        private static void DrawGUIAll(List<GuiElement> elemList, GameTime gameTime)
+        {
+            foreach (GuiElement elem in elemList)
+            {
+                        elem.Draw();
+                   
+            }
+        }
 
         private static void DrawGUIMenuContainers(List<GuiElement> elemList, GameTime gameTime)
         {

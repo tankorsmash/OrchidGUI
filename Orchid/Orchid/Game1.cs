@@ -252,7 +252,7 @@ namespace Orchid
             // Orchid.CreateMenu(menu_size, new List<string>(new string[] { "Menu 1" }),null, null, null);
 
             MenuContainer cont = new MenuContainer(null, this, GraphicsDevice,
-                    spriteBatch, menu_size, Color.Red);
+                    spriteBatch, menu_size, colorBG:Color.Red);
 
 
 

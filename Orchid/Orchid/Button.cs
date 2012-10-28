@@ -56,6 +56,9 @@ namespace Orchid
                 new List<string>(new string[] { "Default <b>Tooltip</b> Message asdadsada as as dsa" }));
         }
 
+        public virtual void Draw()
+        {
+        }
 
         public virtual void OffMouseHover()
         {
