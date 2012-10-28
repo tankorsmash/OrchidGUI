@@ -25,7 +25,7 @@ namespace Orchid
     {
 
         //used to determine when this object will be drawn
-        public int DrawPriority = Orchid.BaseDrawPrioritySurface;
+        public int _drawPriority1 = Orchid.BaseDrawPrioritySurface;
     
         protected GraphicsDevice graphicsDevice;
         //protected SpriteBatch spriteBatch;
@@ -74,6 +74,12 @@ namespace Orchid
         {
             get { return _image; }
             set { _image = value; }
+        }
+
+        public override int DrawPriority
+        {
+            get { return _drawPriority1; }
+            set { _drawPriority1 = value; }
         }
 
         //public float alpha = 1f;
@@ -377,7 +383,7 @@ namespace Orchid
     {
 
         //used to determine when this object will be drawn
-        public int DrawPriority = Orchid.BaseDrawPriorityMessageBox;
+        public int _drawPriority2 = Orchid.BaseDrawPriorityMessageBox;
         
         //public MessageWriter writer;
         public SpriteFont defaultFont;
@@ -444,6 +450,12 @@ namespace Orchid
                 Console.WriteLine("added a msgbox to list");
             }
 
+        }
+
+        public override int DrawPriority
+        {
+            get { return _drawPriority2; }
+            set { _drawPriority2 = value; }
         }
 
         public void CalculateFontSizes()

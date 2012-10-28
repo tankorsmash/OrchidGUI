@@ -20,7 +20,7 @@ namespace Orchid
     {
 
         //used to determine when this object will be drawn
-        public int DrawPriority = Orchid.BaseDrawPriorityTextEntry;
+        public int _drawPriority2 = Orchid.BaseDrawPriorityTextEntry;
         
         //the list of all the recently typed keys.
         public List<string> typed = new List<string>();
@@ -37,6 +37,11 @@ namespace Orchid
             Orchid.masterGuiElementList.Add(this);
         }
 
+        public int DrawPriority
+        {
+            get { return _drawPriority2; }
+            set { _drawPriority2 = value; }
+        }
 
 
         public override void OnMouseDown()

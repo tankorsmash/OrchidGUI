@@ -31,12 +31,12 @@ namespace Orchid
 
         //higher the priority, the later it'll be drawn. 
         public static int BaseDrawPriorityGeneral       = 800;
-        public static int BaseDrawPriorityMenu          = 900;
+        public static int BaseDrawPriorityMenu          = 903;
         public static int BaseDrawPriorityTooltip       = 1000;
-        public static int BaseDrawPrioritySurface       = 800;
-        public static int BaseDrawPriorityMessageBox    = 800;
-        public static int BaseDrawPriorityTextEntry     = 800;
-        public static int BaseDrawPriorityMenuContainer = 900;
+        public static int BaseDrawPrioritySurface       = 803;
+        public static int BaseDrawPriorityMessageBox    = 801;
+        public static int BaseDrawPriorityTextEntry     = 802;
+        public static int BaseDrawPriorityMenuContainer = 901;
         public static int BaseDrawPriorityButton        = 900;
         // public static int BaseDrawPriorityButton        = 1000;
         // public static int BaseDrawPriorityButton        = 1000;
@@ -166,7 +166,16 @@ namespace Orchid
         // or are. I'm not sure what I want just yet.
         private static void DrawGUIAll(List<GuiElement> elemList, GameTime gameTime)
         {
-            foreach (GuiElement elem in elemList)
+
+            //sort the list of elements, 
+            //TODO: sort list if differnet than last time
+            //elemList.OrderBy();
+            var elemList2 = from element in elemList
+                            orderby element.DrawPriority
+                            select element;
+
+            //draw all the elements
+            foreach (GuiElement elem in elemList2)
             {
                 elem.Draw();
             }

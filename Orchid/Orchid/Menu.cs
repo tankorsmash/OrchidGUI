@@ -19,7 +19,7 @@ namespace Orchid
     {
 
         //used to determine when this object will be drawn
-        public int DrawPriority = Orchid.BaseDrawPriorityMenuContainer;
+        public int _drawPriority1 = Orchid.BaseDrawPriorityMenuContainer;
 
 
         //list to hold the menu items on this menu level, a list of tuples that
@@ -61,6 +61,12 @@ namespace Orchid
             this.parent = parent;
 
 
+        }
+
+        public int DrawPriority
+        {
+            get { return _drawPriority1; }
+            set { _drawPriority1 = value; }
         }
 
         //TODO: fill with logic

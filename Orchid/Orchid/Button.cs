@@ -16,7 +16,7 @@ namespace Orchid
     {
 
         //used to determine when this object will be drawn
-        public int DrawPriority = Orchid.BaseDrawPriorityGeneral;
+        public int _drawPriority = Orchid.BaseDrawPriorityGeneral;
 
         public Game1 game;
         public SpriteBatch spriteBatch;
@@ -36,6 +36,12 @@ namespace Orchid
 
 
         public string name { get { return _name; } set { _name = value; } }
+
+        public virtual int DrawPriority
+        {
+            get { return _drawPriority; }
+            set { _drawPriority = value; }
+        }
 
         //protected string name = "DefaultUnchangedGUIELEMET";
 
@@ -152,7 +158,7 @@ namespace Orchid
     {
 
         //used to determine when this object will be drawn
-        public int DrawPriority = Orchid.BaseDrawPriorityButton;
+        public int _drawPriority1 = Orchid.BaseDrawPriorityButton;
 
         //texture
         //SpriteBatch spriteBatch;
@@ -239,6 +245,12 @@ namespace Orchid
 
             this.Initialize();
 
+        }
+
+        public override int DrawPriority
+        {
+            get { return _drawPriority1; }
+            set { _drawPriority1 = value; }
         }
 
         public int defaultCommand()
