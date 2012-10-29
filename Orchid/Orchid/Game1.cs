@@ -62,6 +62,9 @@ namespace Orchid
         public List<string> msgList = new List<string>();
         //public MessageWriter writer;
 
+        //FPSComponent
+        public FrameRateCounter FPSComp;
+
         public Game1()
         {
             //frame limit. change the last number to the frames per second
@@ -155,7 +158,11 @@ namespace Orchid
             // TODO: Add your initialization logic here
             this.currentGameState = this.playingGameState;
 
-            Components.Add(new FrameRateCounter(this, new Vector2(25, 25), Color.White, Color.Black));
+            //add in the FPS Counter component.
+            Window.Title = "UPDATE";
+            this.FPSComp = new FrameRateCounter(this, new Vector2(25, 25),
+                    Color.White, Color.Black);
+            Components.Add(this.FPSComp);
 
 
             base.Initialize();
@@ -296,6 +303,9 @@ namespace Orchid
             //inputHandler.CheckMouseAgainstElements(new List<GuiElement>{(GuiElement)this.resizingSurface});
             inputHandler.HandleKeys(this);
             // TODO: Add your update logic here
+
+            //change the title of the window 
+            Window.Title = "Orchid"+ " | " + FPSComp.text;
 
             base.Update(gameTime);
         }
