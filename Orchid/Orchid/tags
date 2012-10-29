@@ -1,0 +1,195 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AddMenuItem	.\Menu.cs	/^        public void AddMenuItem(CommandHandler command, List<String> msgList)$/;"	m	class:Orchid.MenuContainer
+BuildInnerRect	.\Button.cs	/^        public void BuildInnerRect()$/;"	m	class:Orchid.Button
+Button	.\Button.cs	/^        public Button(Rectangle buttonSize, string text, Game1 game, SpriteBatch spriteBatch, Func<int> command = null, Color innerColor = new Color(), Color? textColor = null)$/;"	m	class:Orchid.Button
+Button	.\Button.cs	/^    public class Button : GuiElement$/;"	c	namespace:Orchid
+CalculateBackgroundColor	.\MessageArea.cs	/^        public void CalculateBackgroundColor()$/;"	m	class:Orchid.Surface
+CalculateFontSizes	.\MessageArea.cs	/^        public void CalculateFontSizes()$/;"	m	class:Orchid.MessageBox
+CheckMouseAgainstElements	.\Input.cs	/^        public void CheckMouseAgainstElements(List<GuiElement> guiElementList)$/;"	m	class:Orchid.InputHandler
+CommandHandler	.\Game1.cs	/^    public delegate void CommandHandler();$/;"	m	namespace:Orchid
+CreateMenu	.\OrchidGUI.cs	/^        public static void CreateMenu(Rectangle rect, List<string> msgList, CommandHandler command, Menu parent, Color? colorBG)$/;"	m	class:Orchid.Orchid
+CreateMenuItem	.\Menu.cs	/^        public void CreateMenuItem(CommandHandler command, List<string> msgList)$/;"	m	class:Orchid.Menu
+CreateSubMenu	.\Menu.cs	/^        public void CreateSubMenu(CommandHandler command, List<String> msgList)$/;"	m	class:Orchid.Menu
+CreateTooltip	.\Button.cs	/^        public  virtual void CreateTooltip(Rectangle tt_rect)$/;"	m	class:Orchid.GuiElement
+CreateVisibleMenu	.\Menu.cs	/^        public  void CreateVisibleMenu()$/;"	m	class:Orchid.MenuContainer
+DefaultElement	.\Button.cs	/^        public  DefaultElement(Game1 game): base(game, game.spriteBatch)$/;"	m	class:Orchid.DefaultElement
+DefaultElement	.\Button.cs	/^    public class DefaultElement : GuiElement$/;"	c	namespace:Orchid
+Drag	.\MessageArea.cs	/^        public void Drag(MouseState currentMouseState, MouseState lastMouseState)$/;"	m	class:Orchid.Surface
+Draw	.\Button.cs	/^        public override void Draw(GameTime gameTime)$/;"	m	class:Orchid.Button
+Draw	.\Game1.cs	/^        protected override void Draw(GameTime gameTime)$/;"	m	class:Orchid.Game1
+Draw	.\MessageArea.cs	/^        public override void Draw() $/;"	m	class:Orchid.MessageBox
+Draw	.\MessageArea.cs	/^        public virtual void Draw()$/;"	m	class:Orchid.Surface
+DrawGUI	.\OrchidGUI.cs	/^        public static void DrawGUI(List<GuiElement> elemList, GameTime gameTime)$/;"	m	class:Orchid.Orchid
+DrawGUIButtons	.\OrchidGUI.cs	/^        public static void DrawGUIButtons(List<GuiElement> elemList, GameTime gameTime)$/;"	m	class:Orchid.Orchid
+DrawGUIMenus	.\OrchidGUI.cs	/^    private static void DrawGUIMenus(List<GuiElement> elemList, GameTime gameTime)$/;"	m	class:Orchid.Orchid	file:
+DrawGUIMessageBoxes	.\OrchidGUI.cs	/^        private static void DrawGUIMessageBoxes(List<GuiElement> elemList, GameTime gameTime)$/;"	m	class:Orchid.Orchid	file:
+DrawGUISurfaces	.\OrchidGUI.cs	/^        public static void DrawGUISurfaces(List<GuiElement> elemList, GameTime gameTime)$/;"	m	class:Orchid.Orchid
+DrawGUITextEntrys	.\OrchidGUI.cs	/^    private static void DrawGUITextEntrys(List<GuiElement> elemList, GameTime gameTime)$/;"	m	class:Orchid.Orchid	file:
+DrawGUITextTooltips	.\OrchidGUI.cs	/^        private static void DrawGUITextTooltips(List<GuiElement> elemList, GameTime gameTime)$/;"	m	class:Orchid.Orchid	file:
+DrawMessages	.\MessageArea.cs	/^        public virtual void DrawMessages()$/;"	m	class:Orchid.MessageBox
+DrawMessages	.\TextEntry.cs	/^        public override void DrawMessages()$/;"	m	class:Orchid.TextEntry
+DrawOutline	.\MessageArea.cs	/^        public  void DrawOutline()$/;"	m	class:Orchid.Surface
+FadeOut	.\MessageArea.cs	/^        public void FadeOut(float faderate)$/;"	m	class:Orchid.Surface
+FadeRate	.\MessageArea.cs	/^        public float FadeRate = .1f;$/;"	f	class:Orchid.Surface
+Game1	.\Game1.cs	/^        public Game1()$/;"	m	class:Orchid.Game1
+Game1	.\Game1.cs	/^    public class Game1 : Microsoft.Xna.Framework.Game$/;"	c	namespace:Orchid
+GameState	.\Input.cs	/^        public GameState(string stateName)$/;"	m	class:Orchid.GameState
+GameState	.\Input.cs	/^    public  class GameState$/;"	c	namespace:Orchid
+GuiElement	.\Button.cs	/^        public GuiElement(Game1 game, SpriteBatch spriteBatch)$/;"	m	class:Orchid.GuiElement
+GuiElement	.\Button.cs	/^    public class GuiElement : DrawableGameComponent$/;"	c	namespace:Orchid
+HandleKeys	.\Input.cs	/^        public void HandleKeys(Game1 game)$/;"	m	class:Orchid.InputHandler
+Initialize	.\Game1.cs	/^        protected override void Initialize()$/;"	m	class:Orchid.Game1
+InputHandler	.\Input.cs	/^        public InputHandler(Game1 game)$/;"	m	class:Orchid.InputHandler
+InputHandler	.\Input.cs	/^    public class InputHandler$/;"	c	namespace:Orchid
+IsFading	.\Button.cs	/^        public bool IsFading = false;$/;"	f	class:Orchid.GuiElement
+IsHidden	.\Button.cs	/^        public bool IsHidden = true;$/;"	f	class:Orchid.GuiElement
+KeyPressed	.\Input.cs	/^        public bool KeyPressed(Keys key)$/;"	m	class:Orchid.InputHandler
+LoadContent	.\Button.cs	/^        protected override void LoadContent()$/;"	m	class:Orchid.Button
+LoadContent	.\Game1.cs	/^        protected override void LoadContent()$/;"	m	class:Orchid.Game1
+Main	.\Program.cs	/^        static void Main(string[] args)$/;"	m	class:Orchid.Program	file:
+Menu	.\Menu.cs	/^        public Menu(Game1 game,$/;"	m	class:Orchid.Menu
+Menu	.\Menu.cs	/^    public class Menu : MessageBox$/;"	c	namespace:Orchid
+MenuContainer	.\Menu.cs	/^        public MenuContainer(Menu parent,$/;"	m	class:Orchid.MenuContainer
+MenuContainer	.\Menu.cs	/^    public class MenuContainer : GuiElement$/;"	c	namespace:Orchid
+MenuItems	.\Menu.cs	/^        public List<Tuple<List<string>, CommandHandler>> MenuItems;$/;"	f	class:Orchid.Menu
+MenuItems	.\Menu.cs	/^        public List<Tuple<List<string>, CommandHandler>> MenuItems;$/;"	f	class:Orchid.MenuContainer
+MenuName	.\Menu.cs	/^        public string MenuName;$/;"	f	class:Orchid.MenuContainer
+MessageBox	.\MessageArea.cs	/^        public MessageBox(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch,$/;"	m	class:Orchid.MessageBox
+MessageBox	.\MessageArea.cs	/^    public class MessageBox : Surface$/;"	c	namespace:Orchid
+OffMouseHover	.\Button.cs	/^        public override void OffMouseHover()$/;"	m	class:Orchid.Button
+OffMouseHover	.\Button.cs	/^        public virtual void OffMouseHover()$/;"	m	class:Orchid.GuiElement
+OnMouseDown	.\Button.cs	/^        public override void OnMouseDown() $/;"	m	class:Orchid.Button
+OnMouseDown	.\Button.cs	/^        public virtual void OnMouseDown()$/;"	m	class:Orchid.GuiElement
+OnMouseDown	.\TextEntry.cs	/^        public override void OnMouseDown()$/;"	m	class:Orchid.TextEntry
+OnMouseHover	.\Button.cs	/^        public override void OnMouseHover()$/;"	m	class:Orchid.Button
+OnMouseHover	.\Button.cs	/^        public virtual void OnMouseHover()$/;"	m	class:Orchid.GuiElement
+OnMouseUp	.\Button.cs	/^        public override void OnMouseUp()$/;"	m	class:Orchid.Button
+OnMouseUp	.\Button.cs	/^        public virtual void OnMouseUp()$/;"	m	class:Orchid.GuiElement
+OnMouseUp	.\Menu.cs	/^        public override void OnMouseUp()$/;"	m	class:Orchid.Menu
+Orchid	.\Button.cs	/^namespace Orchid$/;"	n
+Orchid	.\Game1.cs	/^namespace Orchid$/;"	n
+Orchid	.\Input.cs	/^namespace Orchid$/;"	n
+Orchid	.\Menu.cs	/^namespace Orchid$/;"	n
+Orchid	.\MessageArea.cs	/^namespace Orchid$/;"	n
+Orchid	.\OrchidGUI.cs	/^    public static class Orchid$/;"	c	namespace:Orchid
+Orchid	.\OrchidGUI.cs	/^namespace Orchid$/;"	n
+Orchid	.\Program.cs	/^namespace Orchid$/;"	n
+Orchid	.\TextEntry.cs	/^namespace Orchid$/;"	n
+Orchid	.\TextParser.cs	/^namespace Orchid$/;"	n
+Orchid	.\ToolTip.cs	/^namespace Orchid$/;"	n
+PauseMessageArea	.\MessageArea.cs	/^        public bool PauseMessageArea(bool startRealtime = false)$/;"	m	class:Orchid.MessageBox
+Program	.\Program.cs	/^    static class Program$/;"	c	namespace:Orchid
+Resize	.\MessageArea.cs	/^        public void Resize(MouseState currentMouseState, MouseState lastMouseState)$/;"	m	class:Orchid.Surface
+ScrollMessageArea	.\MessageArea.cs	/^        public int  ScrollMessageArea(int distance = -1)$/;"	m	class:Orchid.MessageBox
+Surface	.\MessageArea.cs	/^        public Surface(Game1 game, GraphicsDevice graphicsDevice,$/;"	m	class:Orchid.Surface
+Surface	.\MessageArea.cs	/^    public class Surface : GuiElement$/;"	c	namespace:Orchid
+TextEntry	.\TextEntry.cs	/^        public TextEntry(Game1 game, GraphicsDevice graphicsDevice,$/;"	m	class:Orchid.TextEntry
+TextEntry	.\TextEntry.cs	/^    class TextEntry : MessageBox$/;"	c	namespace:Orchid
+TextFormatter	.\MessageArea.cs	/^        public float TextFormatter(String html, Rectangle textAreaSize)$/;"	m	class:Orchid.Surface
+TextParser	.\TextParser.cs	/^    class TextParser$/;"	c	namespace:Orchid
+ToString	.\Button.cs	/^        public override string ToString()$/;"	m	class:Orchid.DefaultElement
+ToString	.\Button.cs	/^        public override string ToString()$/;"	m	class:Orchid.GuiElement
+Tooltip	.\ToolTip.cs	/^        public Tooltip(Game1 game, GraphicsDevice graphicsDevice, SpriteBatch spriteBatch,$/;"	m	class:Orchid.Tooltip
+Tooltip	.\ToolTip.cs	/^    public class Tooltip : MessageBox$/;"	c	namespace:Orchid
+UnloadContent	.\Game1.cs	/^        protected override void UnloadContent()$/;"	m	class:Orchid.Game1
+Update	.\Game1.cs	/^        protected override void Update(GameTime gameTime)$/;"	m	class:Orchid.Game1
+Update	.\MessageArea.cs	/^        public virtual void Update()$/;"	m	class:Orchid.Surface
+UpdateActiveMessages	.\MessageArea.cs	/^        public void UpdateActiveMessages()$/;"	m	class:Orchid.MessageBox
+UpdateGUI	.\OrchidGUI.cs	/^        public static void UpdateGUI(List<GuiElement> elemList, GameTime gameTime)$/;"	m	class:Orchid.Orchid
+UpdateGUIMenus	.\OrchidGUI.cs	/^        private static void UpdateGUIMenus(List<GuiElement> elemList, GameTime gameTime)$/;"	m	class:Orchid.Orchid	file:
+UpdateGUIMessageBoxes	.\OrchidGUI.cs	/^        private static void UpdateGUIMessageBoxes(List<GuiElement> elemList, GameTime gameTime)$/;"	m	class:Orchid.Orchid	file:
+UpdateGUISurfaces	.\OrchidGUI.cs	/^        private static void UpdateGUISurfaces(List<GuiElement> elemList, GameTime gameTime)$/;"	m	class:Orchid.Orchid	file:
+UpdateGUITextEntrys	.\OrchidGUI.cs	/^        private static void UpdateGUITextEntrys(List<GuiElement> elemList, GameTime gameTime)$/;"	m	class:Orchid.Orchid	file:
+UpdateGUITooltips	.\OrchidGUI.cs	/^        private static void UpdateGUITooltips(List<GuiElement> elemList, GameTime gameTime)$/;"	m	class:Orchid.Orchid	file:
+UpdateSurface	.\MessageArea.cs	/^        public override void UpdateSurface()$/;"	m	class:Orchid.MessageBox
+UpdateSurface	.\MessageArea.cs	/^        public virtual  void UpdateSurface()$/;"	m	class:Orchid.Surface
+_alpha	.\MessageArea.cs	/^        private float _alpha = 1F;$/;"	f	class:Orchid.Surface	file:
+_command	.\Menu.cs	/^        public event CommandHandler _command;$/;"	E	class:Orchid.Menu
+_command	.\Menu.cs	/^        public event CommandHandler _command;$/;"	E	class:Orchid.MenuContainer
+_image	.\MessageArea.cs	/^        private Texture2D _image;$/;"	f	class:Orchid.Surface	file:
+_name	.\Button.cs	/^        protected string _name;$/;"	f	class:Orchid.GuiElement
+activeElement	.\Input.cs	/^        public GuiElement activeElement;$/;"	f	class:Orchid.InputHandler
+activeMessages	.\MessageArea.cs	/^        public int[] activeMessages;$/;"	f	class:Orchid.MessageBox
+alpha	.\MessageArea.cs	/^        public float alpha$/;"	p	class:Orchid.Surface
+backgroundColor	.\MessageArea.cs	/^        public Color backgroundColor;$/;"	f	class:Orchid.Surface
+baseColor	.\MessageArea.cs	/^        public Color baseColor;$/;"	f	class:Orchid.Surface
+boldDifference	.\MessageArea.cs	/^        public float boldDifference;$/;"	f	class:Orchid.Surface
+boldFont	.\Game1.cs	/^        public static SpriteFont boldFont; $/;"	f	class:Orchid.Game1
+boldFontHeight	.\MessageArea.cs	/^        public float boldFontHeight;$/;"	f	class:Orchid.Surface
+borderColor	.\Button.cs	/^        Color borderColor;$/;"	f	class:Orchid.Button	file:
+button	.\Game1.cs	/^        Button button;$/;"	f	class:Orchid.Game1	file:
+button2	.\Game1.cs	/^        Button button2;$/;"	f	class:Orchid.Game1	file:
+buttonColor	.\Button.cs	/^        Color buttonColor = new Color(18, 64, 171);$/;"	f	class:Orchid.Button	file:
+clickedButtonColor	.\Button.cs	/^        Color clickedButtonColor = new Color(42, 68, 128);$/;"	f	class:Orchid.Button	file:
+command	.\Button.cs	/^        public Func<int> command;$/;"	f	class:Orchid.Button
+createImageSurface	.\Game1.cs	/^        public Surface createImageSurface(string content_name, Rectangle size_arg= new Rectangle() )$/;"	m	class:Orchid.Game1
+currentGameState	.\Game1.cs	/^        public  GameState currentGameState ;$/;"	f	class:Orchid.Game1
+currentKeyState	.\Input.cs	/^        KeyboardState currentKeyState = Keyboard.GetState();$/;"	f	class:Orchid.InputHandler	file:
+currentMouseState	.\Game1.cs	/^        MouseState currentMouseState = Mouse.GetState();$/;"	f	class:Orchid.Game1	file:
+currentMouseState	.\Input.cs	/^        MouseState currentMouseState = Mouse.GetState();$/;"	f	class:Orchid.InputHandler	file:
+defaultBG	.\Game1.cs	/^        Color defaultBG;$/;"	f	class:Orchid.Game1	file:
+defaultCommand	.\Button.cs	/^        public int defaultCommand()$/;"	m	class:Orchid.Button
+defaultFont	.\Game1.cs	/^        public static SpriteFont defaultFont;$/;"	f	class:Orchid.Game1
+defaultFont	.\MessageArea.cs	/^        public SpriteFont defaultFont;$/;"	f	class:Orchid.MessageBox
+defaultTextColor	.\Button.cs	/^        Color defaultTextColor = Color.Magenta;$/;"	f	class:Orchid.Button	file:
+dummyTexture	.\Button.cs	/^        Texture2D dummyTexture;$/;"	f	class:Orchid.Button	file:
+emptyElement	.\Input.cs	/^        public GuiElement emptyElement;$/;"	f	class:Orchid.InputHandler
+game	.\Button.cs	/^        public Game1 game;$/;"	f	class:Orchid.GuiElement
+game	.\OrchidGUI.cs	/^        public static Game1 game;$/;"	f	class:Orchid.Orchid
+gameBG	.\MessageArea.cs	/^        public Color gameBG;$/;"	f	class:Orchid.MessageBox
+graphics	.\Game1.cs	/^        GraphicsDeviceManager graphics;$/;"	f	class:Orchid.Game1	file:
+graphicsDevice	.\MessageArea.cs	/^        protected GraphicsDevice graphicsDevice;$/;"	f	class:Orchid.Surface
+graphicsDevice	.\OrchidGUI.cs	/^        public static GraphicsDevice graphicsDevice;$/;"	f	class:Orchid.Orchid
+height	.\Game1.cs	/^        public int height = 1024;$/;"	f	class:Orchid.Game1
+hiliteButtonColor	.\Button.cs	/^        Color hiliteButtonColor = new Color(108, 140, 213);$/;"	f	class:Orchid.Button	file:
+hoveredElement	.\Input.cs	/^        public GuiElement hoveredElement;$/;"	f	class:Orchid.InputHandler
+image	.\MessageArea.cs	/^        public Texture2D image$/;"	p	class:Orchid.Surface
+inactiveButtonColor	.\Button.cs	/^        Color inactiveButtonColor = new Color(70, 113, 213);$/;"	f	class:Orchid.Button	file:
+innerColor	.\Button.cs	/^        Color innerColor;$/;"	f	class:Orchid.Button	file:
+innerRectangle	.\Button.cs	/^        public Rectangle innerRectangle;$/;"	f	class:Orchid.Button
+inputHandler	.\Game1.cs	/^        public InputHandler inputHandler;$/;"	f	class:Orchid.Game1
+isMoveLocked	.\MessageArea.cs	/^        public bool isMoveLocked = false;$/;"	f	class:Orchid.MessageBox
+isbBeingDragged	.\MessageArea.cs	/^        public bool isbBeingDragged = false;$/;"	f	class:Orchid.MessageBox
+italicDifference	.\MessageArea.cs	/^        public float italicDifference;$/;"	f	class:Orchid.Surface
+italicFont	.\Game1.cs	/^        public static SpriteFont italicFont; $/;"	f	class:Orchid.Game1
+italicFontHeight	.\MessageArea.cs	/^        public float italicFontHeight;$/;"	f	class:Orchid.Surface
+largestFontHeight	.\MessageArea.cs	/^        public float largestFontHeight;$/;"	f	class:Orchid.Surface
+lastKeyState	.\Input.cs	/^        KeyboardState lastKeyState = Keyboard.GetState();$/;"	f	class:Orchid.InputHandler	file:
+lastMouseState	.\Game1.cs	/^        MouseState lastMouseState = Mouse.GetState();$/;"	f	class:Orchid.Game1	file:
+lastMouseState	.\Input.cs	/^        MouseState lastMouseState = Mouse.GetState();$/;"	f	class:Orchid.InputHandler	file:
+masterGuiElementList	.\OrchidGUI.cs	/^        public static List<GuiElement> masterGuiElementList = new List<GuiElement>();$/;"	f	class:Orchid.Orchid
+messageArea	.\Game1.cs	/^        public MessageBox messageArea;$/;"	f	class:Orchid.Game1
+messageLimit	.\MessageArea.cs	/^        public int messageLimit = 7;$/;"	f	class:Orchid.MessageBox
+min_height	.\MessageArea.cs	/^        int min_height;$/;"	f	class:Orchid.Surface	file:
+min_width	.\MessageArea.cs	/^        int min_width;$/;"	f	class:Orchid.Surface	file:
+msgList	.\Game1.cs	/^        public List<string> msgList = new List<string>();$/;"	f	class:Orchid.Game1
+msgList	.\MessageArea.cs	/^        public List<string> msgList;$/;"	f	class:Orchid.MessageBox
+name	.\Button.cs	/^        public string name { get { return _name; } set { _name = value; } }$/;"	p	class:Orchid.GuiElement
+name	.\Input.cs	/^        public string name;$/;"	f	class:Orchid.GameState
+parent	.\Menu.cs	/^        public Menu parent;$/;"	f	class:Orchid.Menu
+parent	.\Menu.cs	/^        public Menu parent;$/;"	f	class:Orchid.MenuContainer
+playingGameState	.\Game1.cs	/^        public  GameState playingGameState = new GameState("default GameState");$/;"	f	class:Orchid.Game1
+realtimeMsgs	.\MessageArea.cs	/^        public bool realtimeMsgs = true;$/;"	f	class:Orchid.MessageBox
+rect	.\Button.cs	/^        public Rectangle rect;$/;"	f	class:Orchid.GuiElement
+regularFontDifference	.\MessageArea.cs	/^        public float regularFontDifference;$/;"	f	class:Orchid.Surface
+regularFontHeight	.\MessageArea.cs	/^        public float regularFontHeight;$/;"	f	class:Orchid.Surface
+resizingSurface	.\Game1.cs	/^        public Surface resizingSurface;$/;"	f	class:Orchid.Game1
+spriteBatch	.\Button.cs	/^        public SpriteBatch spriteBatch;$/;"	f	class:Orchid.GuiElement
+spriteBatch	.\Game1.cs	/^        public SpriteBatch spriteBatch;$/;"	f	class:Orchid.Game1
+spriteBatch	.\OrchidGUI.cs	/^        public static SpriteBatch spriteBatch;$/;"	f	class:Orchid.Orchid
+subMenus	.\Menu.cs	/^        public List<Menu> subMenus;$/;"	f	class:Orchid.Menu
+surface	.\MessageArea.cs	/^        public RenderTarget2D surface;$/;"	f	class:Orchid.Surface
+testArea	.\Game1.cs	/^        public MessageBox testArea;$/;"	f	class:Orchid.Game1
+text	.\Button.cs	/^        string text;$/;"	f	class:Orchid.Button	file:
+textColor	.\MessageArea.cs	/^        public Color textColor;$/;"	f	class:Orchid.Surface
+textPos	.\Button.cs	/^        Vector2 textPos;$/;"	f	class:Orchid.Button	file:
+theGame	.\Input.cs	/^        Game1 theGame;$/;"	f	class:Orchid.InputHandler	file:
+tooltip	.\Button.cs	/^        public Tooltip tooltip;$/;"	f	class:Orchid.GuiElement
+typed	.\TextEntry.cs	/^        public List<string> typed = new List<string>();$/;"	f	class:Orchid.TextEntry
+typingGameState	.\Game1.cs	/^        public  GameState typingGameState = new GameState("typing GameState");$/;"	f	class:Orchid.Game1
+width	.\Game1.cs	/^        public int width = 1280;$/;"	f	class:Orchid.Game1

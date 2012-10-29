@@ -61,3 +61,8 @@ packages/
 
 #Test files
 *.testsettings
+
+#Vim stuff
+*.cs~
+*.un~
+*.swp
