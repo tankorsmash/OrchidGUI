@@ -116,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Button.cs" />
+    <Compile Include="FPSComponent.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MessageArea.cs" />

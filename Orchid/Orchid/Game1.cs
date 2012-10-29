@@ -130,14 +130,17 @@ namespace Orchid
         
 
         /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
+        /// Allows the game to perform any initialization it needs to before
+        /// starting to run.  This is where it can query for any required
+        /// services and load any non-graphic related content.  Calling
+        /// base.Initialize will enumerate through any components and initialize
+        /// them as well.
         /// </summary>
         protected override void Initialize()
         {
 
+            //set window title.
+            Window.Title = "Orchid GUI Test";
 
             //Where to spawn the XNA game screen
             //see here http://stackoverflow.com/questions/9726667/how-can-i-control-where-xna-positions-the-game-window-at-startup
@@ -151,7 +154,8 @@ namespace Orchid
             
             // TODO: Add your initialization logic here
             this.currentGameState = this.playingGameState;
-            
+
+            Components.Add(new FrameRateCounter(this, new Vector2(25, 25), Color.White, Color.Black));
 
 
             base.Initialize();
