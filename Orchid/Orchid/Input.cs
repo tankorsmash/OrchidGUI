@@ -43,12 +43,17 @@ namespace Orchid
         public GuiElement emptyElement;
         public GuiElement hoveredElement;
 
+        //which toplevel menu is currently active
+        public Menu activeMenu;
+        public Menu emptyMenu;
+
         //MouseStates cache
         MouseState currentMouseState = Mouse.GetState();
         MouseState lastMouseState = Mouse.GetState();
         //KeyboardStates cache
         KeyboardState currentKeyState = Keyboard.GetState();
         KeyboardState lastKeyState = Keyboard.GetState();
+
 
         //bool guiFound = false;
 
@@ -62,6 +67,15 @@ namespace Orchid
             emptyElement = new GuiElement(this.theGame, this.theGame.spriteBatch);
             hoveredElement = new GuiElement(this.theGame, this.theGame.spriteBatch);
             activeElement = new GuiElement(this.theGame, this.theGame.spriteBatch);
+
+            emptyMenu = new Menu(this.theGame, this.theGame.GraphicsDevice,
+                    this.theGame.spriteBatch, new Rectangle(10,10,10,10),
+                    Color.Black, Orchid.CreateMsgList("empty menu"), null, null,
+                    null, Color.White);
+            //so the emptyMenu is never seen
+            emptyMenu.IsHidden = true;
+            //so the other menus know that it's not normal
+            emptyMenu.name = "empty menu not a real one";
         }
 
 
@@ -77,10 +91,14 @@ namespace Orchid
             if (currentMouseState.LeftButton == ButtonState.Pressed &
                 lastMouseState.LeftButton  != ButtonState.Pressed)
             {
+
+                //for making sure an element is found
+                bool elem_found = false;
+
                 //loop over the elements in the gui list 
                 foreach (GuiElement elem in guiElementList)
                 {
-
+                    //if it's a Button or a child
                     if (elem is Button)
                     {
 
@@ -91,11 +109,14 @@ namespace Orchid
                             activeElement = elem;
                             castedElem.OnMouseDown();
 
+                            elem_found = true;
                         }
                     }
 
+                    //if it's a child of Surface
                     else if (elem is Surface)
                     {
+                        //if it's gotten clicked
                         if (elem.rect.Contains(mousePos))
                         {
                             Surface castedElem = elem as Surface;
@@ -104,11 +125,31 @@ namespace Orchid
 
                             //activate the pressed element
                             activeElement = castedElem;
-                            
 
+                            //set active menu if you've clicked a menu otherwise
+                            //reset it
+                            if (elem is Menu)
+                            {
+                                activeMenu = (Menu)elem;
+                            }
+                            else { activeMenu = emptyMenu;}
+
+                            elem_found = true;
                         }
                     }
+
                 }
+
+
+            //if no element was found to be clicked on reset em all to default
+            //empty
+            if (! elem_found)
+            {
+                activeElement = emptyElement;
+
+                activeMenu = emptyMenu;
+
+            }
             }
 
 
@@ -146,6 +187,7 @@ namespace Orchid
                 //Console.WriteLine("trying for a mouse up");
                 activeElement.OnMouseUp();
                 activeElement = emptyElement;
+
                 foreach (GuiElement elem in guiElementList)
                 {
                     if (elem is TextEntry)

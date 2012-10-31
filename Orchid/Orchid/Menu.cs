@@ -200,6 +200,21 @@ namespace Orchid
             }
         }
 
+        public override void Draw()
+        {
+            // Assumes that without a parent menu, it's a toplevel
+            if (this.parent == null)
+            {
+                base.Draw();
+            }
+            //make sure a menu is active. For now it doesn't matter if
+            //any menu is active.
+            // else if (game.inputHandler.activeElement.name == "Menu")
+            else if (game.inputHandler.activeMenu.name == "Menu")
+            {
+                base.Draw();
+            }
+        }
 
         public override void OnMouseUp()
         {

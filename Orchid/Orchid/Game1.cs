@@ -85,18 +85,6 @@ namespace Orchid
             //this better be a default XNA thing, because IDK what its for, beyond the obvios
             Content.RootDirectory = "Content";
             
-            //create an input handler
-            this.inputHandler = new InputHandler(this);
-
-            //a temp string list to make sure shit doesnt crash
-            string[] temp = { @"<b>this is my united states of whatever </b>", @"<b>blank2</b>", @"<b>blank3</b>", "blank4", "blank5", "blank6", "blank7", "blank8" };
-            foreach (string item in temp)
-            {
-                msgList.Add(item);
-            }
-
-            //adds the first proper string  to the msgList
-            msgList.Add("game init");
 
 
         }
@@ -186,6 +174,20 @@ namespace Orchid
             Orchid.spriteBatch = spriteBatch;
             Orchid.graphicsDevice = GraphicsDevice;
             Orchid.game = this;
+
+            //create an input handler
+            this.inputHandler = new InputHandler(this);
+
+            //a temp string list to make sure shit doesnt crash
+            string[] temp = { @"<b>this is my united states of whatever </b>", @"<b>blank2</b>", @"<b>blank3</b>", "blank4", "blank5", "blank6", "blank7", "blank8" };
+            foreach (string item in temp)
+            {
+                msgList.Add(item);
+            }
+
+            //adds the first proper string  to the msgList
+            msgList.Add("game init");
+
 
 
 
@@ -305,7 +307,10 @@ namespace Orchid
             // TODO: Add your update logic here
 
             //change the title of the window 
-            Window.Title = "Orchid"+ " | " + FPSComp.text;
+            string separator = " | ";
+            Window.Title = "Orchid"+ separator + FPSComp.text + separator +
+                                    inputHandler.activeElement.name + separator
+                                    + inputHandler.hoveredElement.name;
 
             base.Update(gameTime);
         }
