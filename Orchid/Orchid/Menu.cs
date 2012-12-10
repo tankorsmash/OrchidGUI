@@ -36,8 +36,6 @@ namespace Orchid
         public event CommandHandler _command;
 
         public GraphicsDevice graphicsDevice;
-        //public SpriteBatch spriteBatch;
-        //public Rectangle rect;
 
         //object to build all the menu items once the MenuContainer is told
         //to begin building
@@ -226,7 +224,7 @@ namespace Orchid
 
             catch (NullReferenceException ex)
             {
-                Console.WriteLine("Caught null for menu clicking");
+                Console.WriteLine("Caught null for menu clicking" +  ex);
             }
         }
 
@@ -255,19 +253,17 @@ namespace Orchid
             }
 
             //create a rect lower than the current
-                Rectangle new_rect = this.rect;
-                new_rect.Offset(this.rect.Width + 10, 0);
-                //create the child menu
-                Orchid.CreateMenu(new_rect, msgList, command, parent: this,
-                                  colorBG: this.backgroundColor);
+            Rectangle new_rect = this.rect;
+            new_rect.Offset(this.rect.Width + 10, 0);
+            //create the child menu
+            Orchid.CreateMenu(new_rect, msgList, command, parent: this,
+                        colorBG: this.backgroundColor);
             
         }
 
         /// <summary>
         /// give a command and message and it will create a menu entry for it inside itself.
         /// </summary>
-        /// <param name="command"></param>
-        /// <param name="msgList"></param>
         public void CreateMenuItem(CommandHandler command, List<string> msgList)
         {
             //create a tuple with a stringlist and a command in it to append the list of menu items
